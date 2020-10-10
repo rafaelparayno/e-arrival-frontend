@@ -8,8 +8,10 @@ const initialState = {
 
   loadingUsers: false,
   editUserDetails: null,
+
   // loadingNatCompany: false,
   // loadingAddressBook: false,
+  loadingSaving: false,
   isSuccess: false,
 };
 
@@ -37,6 +39,26 @@ const openModalEditUsers = (state, action) => {
   });
 };
 
+const SaveEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingSaving: true });
+};
+
+const SaveEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingSaving: false,
+    editUserDetails: null,
+    isSuccess: true,
+  });
+};
+
+const SaveEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingSaving: false });
+};
+
+const closeSuccessAlert = (state, action) => {
+  return updateObject(state, { isSuccess: action.CloseAlert });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_USER_LIST:
@@ -49,6 +71,15 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EDIT_USER_DETAIL_MODAL:
       return openModalEditUsers(state, action);
 
+    case actionTypes.SAVE_USERS_DETAILS:
+      return SaveEditDetailsStart(state, action);
+    case actionTypes.SAVE_USERS_DETAILS_SUCCESS:
+      return SaveEditDetailsSuccess(state, action);
+    case actionTypes.SAVE_USERS_DETAILS_FAIL:
+      return SaveEditDetailsFail(state, action);
+
+    case actionTypes.ALERT_MODALS_SHOW_USERS:
+      return closeSuccessAlert(state, action);
     default:
       return state;
   }

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Modal from "../UI/Modal/Modal";
-import { editUserDetailsModal } from "../../store/action/index";
+import {
+  editUserDetailsModal,
+  saveEditDetailsUser,
+} from "../../store/action/index";
 import SaveButton from "../UI/SaveButton/SaveButton";
 
 import classes from "./UserModal.module.css";
@@ -19,6 +22,11 @@ const UserModal = React.memo((props) => {
     const value = e.target.value;
 
     setUserDetailEdit({ ...userDetailEdit, [name]: value });
+  };
+
+  const save = (e) => {
+    e.preventDefault();
+    props.save(props.userToken, userDetailEdit);
   };
 
   return (
@@ -83,12 +91,12 @@ const UserModal = React.memo((props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-4">
-          <label className="font-size">Email</label>
+          <label className="font-size">Username</label>
 
           <div>
             <input
               className="form-control"
-              name="email"
+              name="username"
               value={userDetailEdit.username}
               type="text"
               onChange={editUserDetailHandler}
@@ -103,9 +111,9 @@ const UserModal = React.memo((props) => {
             <input
               className="form-control"
               name="password"
-              //   value={personelDetailEdit.email}
+              value={userDetailEdit.password}
               type="password"
-              //   onChange={editPersonelDetailEditTextHandler}
+              onChange={editUserDetailHandler}
               style={{ width: "100%" }}
             />
           </div>
@@ -129,7 +137,7 @@ const UserModal = React.memo((props) => {
                 onChange={editUserDetailHandler}
               />
               {/* <input type="radio" onChange={handleChange} name='role_id' value="M" data-bv-field="gender" /> */}
-              <i class="fa fa-user"></i> Admin{" "}
+              <i className="fa fa-user"></i> Admin{" "}
             </label>{" "}
             <label
               className={
@@ -154,10 +162,9 @@ const UserModal = React.memo((props) => {
       <div className="row">
         <div style={{ marginTop: "10px" }} className="col-lg-12">
           <SaveButton
-
-          // onClick={(e) => save(e)}
-          // loading={props.loadingSaving}
-          // disabled={!personelDetailEdit.company_name}
+            onClick={(e) => save(e)}
+            // loading={props.loadingSaving}
+            // disabled={!personelDetailEdit.company_name}
           />
 
           <button className="btn btn-sm btn-default">Cancel</button>
@@ -169,11 +176,13 @@ const UserModal = React.memo((props) => {
 
 const mapStateToProps = (state) => ({
   editUserDetails: state.user.editUserDetails,
+  userToken: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editUserDetailsModal(data)),
+    save: (token, data) => dispatch(saveEditDetailsUser(token, data)),
   };
 };
 

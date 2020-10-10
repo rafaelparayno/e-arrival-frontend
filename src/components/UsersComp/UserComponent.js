@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUserList, editUserDetailsModal } from "../../store/action/index";
+import {
+  fetchUserList,
+  editUserDetailsModal,
+  alertShowUsers,
+} from "../../store/action/index";
 
 import Table from "../UI/Table/Table";
-// import columns from "./UserColumnsHeader";
+import SweetAlert from "react-bootstrap-sweetalert";
 import UserModal from "./UserModal";
 import classes from "./UserHeader.module.css";
 
@@ -30,6 +34,14 @@ const UserHeader = (props) => {
     e.preventDefault();
     props.onFetchUser(props.userToken, searchHeader.searchKey);
   };
+
+  const closeSuccess = () => {
+    props.alertConfirm(false);
+  };
+
+  useEffect(() => {
+    props.isSuccess && props.onFetchUser(props.userToken);
+  }, [props.isSuccess]);
 
   const columns = [
     {
@@ -131,7 +143,15 @@ const UserHeader = (props) => {
           close={closeModal}
         />
       )}
-      {/* <UserModal show={true} /> */}
+
+      <SweetAlert
+        success
+        title="Success!"
+        show={props.isSuccess}
+        onConfirm={closeSuccess}
+      >
+        {"Success Saving User"}
+      </SweetAlert>
     </>
   );
 };
@@ -140,12 +160,14 @@ const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   userList: state.user.userList,
   editUserDetails: state.user.editUserDetails,
+  isSuccess: state.user.isSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchUser: (token, data) => dispatch(fetchUserList(token, data)),
     openModal: (data) => dispatch(editUserDetailsModal(data)),
+    alertConfirm: (data) => dispatch(alertShowUsers(data)),
   };
 };
 

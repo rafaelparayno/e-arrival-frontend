@@ -1,3 +1,8 @@
 export { auth, logout, setAuthRedirectPath, authCheckState } from "./auth";
 
-export { fetchUserList, editUserDetailsModal } from "./users";
+export {
+  fetchUserList,
+  editUserDetailsModal,
+  saveEditDetailsUser,
+  alertShowUsers,
+} from "./users";

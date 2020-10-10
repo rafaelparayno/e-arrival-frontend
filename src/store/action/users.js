@@ -62,104 +62,62 @@ export const editUserDetailsModal = (data) => {
   };
 };
 
-//UserList
+//saving
 
-// //Companynat
-// export const fetchCompanyNatureListSuccess = (companyNatlist) => {
-//     return {
-//         type: actionTypes.FETCH_COMPANY_NATURE_LIST_SUCCESS,
-//         companyNatlist: companyNatlist
-//     };
-// };
+export const SaveUsersDetailSuccess = (saveMessage) => {
+  return {
+    type: actionTypes.SAVE_USERS_DETAILS_SUCCESS,
+    saveMessage: saveMessage,
+  };
+};
 
-// export const fetchCompanyNatureListFail = (error) => {
-//     return {
-//         type: actionTypes.FETCH_COMPANY_NATURE_LIST_FAIL,
-//         error: error
-//     };
-// };
+export const SaveUsersDetailFail = (error) => {
+  return {
+    type: actionTypes.SAVE_USERS_DETAILS_FAIL,
+    error: error,
+  };
+};
 
-// export const fetchCompanyNatureListStart = () => {
-//     return {
-//         type: actionTypes.FETCH_COMPANY_NATURE_LIST
-//     };
-// };
+export const SaveUsersDetailStart = () => {
+  return {
+    type: actionTypes.SAVE_USERS_DETAILS,
+  };
+};
 
-// export const fetchCompanyNatlist = () => {
-//     return dispatch => {
-//         dispatch(fetchCompanyNatureListStart());
+export const saveEditDetailsUser = (access_token, Datas) => {
+  return (dispatch) => {
+    dispatch(SaveUsersDetailSuccess());
 
-//         axios.get('/params.php', {
-//             params: {
-//                 p: 'cmp_nature'
-//             },
-//         })
-//             .then(res => {
-//                 let fetchCompanyNatList = {};
-//                 fetchCompanyNatList = res.data;
-//                 dispatch(fetchCompanyNatureListSuccess(fetchCompanyNatList));
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//                 dispatch(fetchCompanyNatureListFail(err));
-//             });
-//     };
-// };
+    let url = "http://localhost:5000/users/add";
 
-// //Companynat
+    axios
+      .post(url, Datas, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let SaveUsersDetails = "";
 
-// //Address Book List
+        if (!res.data.error) {
+          SaveUsersDetails = res.data.msg;
+        } else {
+          SaveUsersDetails = "";
+        }
 
-// export const fetchAddressBookSuccess = (addressBook) => {
-//     return {
-//         type: actionTypes.FETCH_ADDRESS_BOOK_SUCCESS,
-//         addressBook: addressBook
-//     };
-// };
+        dispatch(SaveUsersDetailSuccess(SaveUsersDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(SaveUsersDetailFail(err));
+      });
+  };
+};
 
-// export const fetchAddressBookFail = (error) => {
-//     return {
-//         type: actionTypes.FETCH_ADDRESS_BOOK_FAIL,
-//         error: error
-//     };
-// };
-
-// export const fetchAddressBookStart = () => {
-//     return {
-//         type: actionTypes.FETCH_ADDRESS_BOOK
-//     };
-// };
-
-// export const fetchAddressBook = (data) => {
-//     return dispatch => {
-//         dispatch(fetchAddressBookStart());
-
-//         const formData = new FormData();
-//         if (data.company) {
-//             formData.set('company', data.company);
-//         } else {
-//             formData.set('company', "");
-//         }
-//         if (data.nature) {
-//             formData.set('nature', data.nature);
-//         } else {
-//             formData.set('nature', "");
-//         }
-
-//         axios.post('/company.php?p=display', formData)
-//             .then(res => {
-//                 let fetchAddressBook = {};
-//                 if (!res.data.error) {
-//                     fetchAddressBook = res.data;
-//                 } else {
-//                     fetchAddressBook = [];
-//                 }
-
-//                 dispatch(fetchAddressBookSuccess(fetchAddressBook));
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//                 dispatch(fetchAddressBookFail(err));
-//             });
-//     };
-// };
+export const alertShowUsers = (Data) => {
+  return {
+    type: actionTypes.ALERT_MODALS_SHOW_USERS,
+    CloseAlert: Data,
+  };
+};
