@@ -44,6 +44,13 @@ export const fetchUserList = (access_token) => {
   };
 };
 
+export const editUserDetailsModal = (data) => {
+  return {
+    type: actionTypes.EDIT_USER_DETAIL_MODAL,
+    data: data,
+  };
+};
+
 //UserList
 
 // //Companynat
