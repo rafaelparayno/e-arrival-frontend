@@ -16,7 +16,10 @@ const sideDrawer = (props) => {
       <div className={attachedClasses.join(" ")}>
         <div className={classes.Logo}>
           {/* <Logo /> */}
-          <h2>E-arrival</h2>
+          <h2>
+            {" "}
+            <i className="fa fa-lg fa-fw fa-ship"></i> E-arrival
+          </h2>
         </div>
         <div className={classes.info}>
           <img

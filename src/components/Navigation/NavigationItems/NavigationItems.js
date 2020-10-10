@@ -15,10 +15,10 @@ const navigationItems = () => {
         <span className="menu-item-parent">Users</span>
       </NavigationItems>
 
-      <NavigationItems link="/contacts">
+      {/* <NavigationItems link="/contacts">
         <i className="fa fa-lg fa-fw fa-table"></i>{" "}
         <span className="menu-item-parent">Conctacts</span>
-      </NavigationItems>
+      </NavigationItems> */}
     </ul>
   );
 };
