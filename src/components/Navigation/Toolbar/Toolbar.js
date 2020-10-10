@@ -9,9 +9,7 @@ import { NavLink } from "react-router-dom";
 const toolbar = props => (
     <header className={classes.Toolbar}>
         <DrawerToggler clicked={props.drawerOpen} />
-        <div className={classes.Logo}>
-          <h2> E-Arrival</h2> 
-        </div>
+        
         <nav >
             <ul className={classes.NavigationItems}>
                 <li className={classes.NavigationItem}>
