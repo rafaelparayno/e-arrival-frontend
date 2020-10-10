@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   fetchUserList,
   editUserDetailsModal,
+  deleteEditDetailsUser,
   alertShowUsers,
 } from "../../store/action/index";
 
@@ -13,6 +14,7 @@ import UserModal from "./UserModal";
 import classes from "./UserHeader.module.css";
 
 const UserHeader = (props) => {
+  const [deletingUser, setDeletingUser] = useState({ deleteMsg: false });
   const [searchHeader, EditSearchHeader] = useState("");
 
   useEffect(() => {
@@ -25,6 +27,15 @@ const UserHeader = (props) => {
     const value = e.target.value;
 
     EditSearchHeader({ ...searchHeader, [name]: value });
+  };
+
+  const warningDeleting = (id) => {
+    setDeletingUser({ deleteMsg: true, u_id: id });
+  };
+
+  const deleteUser = () => {
+    props.delete(props.userToken, deletingUser.u_id);
+    setDeletingUser({ deleteMsg: false });
   };
 
   const closeModal = () => {
@@ -80,7 +91,12 @@ const UserHeader = (props) => {
                 >
                   Edit
                 </button>{" "}
-                <button className="btn btn-md btn-danger">Delete</button>
+                <button
+                  onClick={() => warningDeleting(original.u_id)}
+                  className="btn btn-md btn-danger"
+                >
+                  Delete
+                </button>
               </>
             );
           },
@@ -155,7 +171,21 @@ const UserHeader = (props) => {
         show={props.isSuccess}
         onConfirm={closeSuccess}
       >
-        {"Success Saving User"}
+        {"Success Updating Data"}
+      </SweetAlert>
+
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText="Confirm"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="default"
+        title="Deleting Data"
+        show={deletingUser.deleteMsg}
+        onConfirm={() => deleteUser()}
+        onCancel={() => setDeletingUser({ deleteMsg: false })}
+      >
+        {"Do you want to delete this user"}
       </SweetAlert>
     </>
   );
@@ -174,6 +204,7 @@ const mapDispatchToProps = (dispatch) => {
     onFetchUser: (token, data) => dispatch(fetchUserList(token, data)),
     openModal: (data) => dispatch(editUserDetailsModal(data)),
     alertConfirm: (data) => dispatch(alertShowUsers(data)),
+    delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
 };
 

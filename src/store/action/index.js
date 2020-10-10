@@ -5,5 +5,6 @@ export {
   editUserDetailsModal,
   saveEditDetailsUser,
   UpdateEditDetailsUser,
+  deleteEditDetailsUser,
   alertShowUsers,
 } from "./users";

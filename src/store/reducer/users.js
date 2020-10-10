@@ -9,6 +9,7 @@ const initialState = {
   loadingUsers: false,
   editUserDetails: null,
   loadingSaving: false,
+  loadingDeleting: false,
   isSuccess: false,
 };
 
@@ -68,6 +69,21 @@ const UpdateEditDetailsFail = (state, action) => {
   return updateObject(state, { loadingSaving: false });
 };
 
+const DeleteEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingDeleting: true });
+};
+
+const DeleteEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingDeleting: false,
+    isSuccess: true,
+  });
+};
+
+const DeleteEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingDeleting: false });
+};
+
 const closeSuccessAlert = (state, action) => {
   return updateObject(state, { isSuccess: action.CloseAlert });
 };
@@ -97,6 +113,13 @@ const reducer = (state = initialState, action) => {
       return UpdateEditDetailsSuccess(state, action);
     case actionTypes.UPDATE_USERS_DETAILS_FAIL:
       return UpdateEditDetailsFail(state, action);
+
+    case actionTypes.DELETE_USERS_DETAILS:
+      return DeleteEditDetailsStart(state, action);
+    case actionTypes.DELETE_USERS_DETAILS_SUCCESS:
+      return DeleteEditDetailsSuccess(state, action);
+    case actionTypes.DELETE_USERS_DETAILS_FAIL:
+      return DeleteEditDetailsFail(state, action);
 
     case actionTypes.ALERT_MODALS_SHOW_USERS:
       return closeSuccessAlert(state, action);

@@ -174,3 +174,56 @@ export const UpdateEditDetailsUser = (access_token, Datas) => {
       });
   };
 };
+
+//deleting
+
+export const DeleteUsersDetailSuccess = (DeleteMessage) => {
+  return {
+    type: actionTypes.DELETE_USERS_DETAILS_SUCCESS,
+    DeleteMessage: DeleteMessage,
+  };
+};
+
+export const DeleteUsersDetailFail = (error) => {
+  return {
+    type: actionTypes.DELETE_USERS_DETAILS_FAIL,
+    error: error,
+  };
+};
+
+export const DeleteUsersDetailStart = () => {
+  return {
+    type: actionTypes.DELETE_USERS_DETAILS,
+  };
+};
+
+export const deleteEditDetailsUser = (access_token, u_id) => {
+  return (dispatch) => {
+    dispatch(DeleteUsersDetailSuccess());
+
+    const url = `http://localhost:5000/users/${u_id}`;
+
+    axios
+      .delete(url, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let DeleteUsersDetails = "";
+
+        if (!res.data.error) {
+          DeleteUsersDetails = res.data.msg;
+        } else {
+          DeleteUsersDetails = "";
+        }
+
+        dispatch(DeleteUsersDetailSuccess(DeleteUsersDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(DeleteUsersDetailFail(err));
+      });
+  };
+};
