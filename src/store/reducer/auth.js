@@ -3,6 +3,8 @@ import { updateObject } from "../utility";
 
 const initialState = {
   token: localStorage.getItem("accessToken"),
+  username: localStorage.getItem("username"),
+  role: localStorage.getItem("role"),
   touch: false,
   userId: null,
   error: null,
@@ -17,7 +19,8 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.idToken,
-    userCode: action.userCode,
+    username: action.username,
+    role: action.role,
     error: null,
     loading: false,
   });

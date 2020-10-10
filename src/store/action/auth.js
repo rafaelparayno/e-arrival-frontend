@@ -8,10 +8,12 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, username, role) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
+    username: username,
+    role: role,
   };
 };
 
@@ -24,8 +26,10 @@ export const authFail = (error) => {
 
 export const logout = () => {
   localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
   localStorage.removeItem("expirationDate");
-
+  localStorage.removeItem("username");
+  localStorage.removeItem("role");
   // localStorage.removeItem('userId');
   return {
     type: actionTypes.AUTH_LOGOUT,
@@ -59,7 +63,15 @@ export const auth = (username, password) => {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(authSuccess(response.data.accessToken));
+        localStorage.setItem("username", response.data.username);
+        localStorage.setItem("role", response.data.role);
+        dispatch(
+          authSuccess(
+            response.data.accessToken,
+            response.data.username,
+            response.data.role
+          )
+        );
       })
       .catch((err) => {
         dispatch(authFail(err.response.data.error));

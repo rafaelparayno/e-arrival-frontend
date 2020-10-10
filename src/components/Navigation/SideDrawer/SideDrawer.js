@@ -1,5 +1,6 @@
 import React from "react";
 // import Logo from "../../Logo/Logo";
+import { connect } from "react-redux";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from "./SideDrawer.module.css";
 import Backdrop from "../../UI/Backdrop/Backdrop";
@@ -29,8 +30,10 @@ const sideDrawer = (props) => {
             alt="user"
           />
           <div className={classes.personal}>
-            <span>Rafael Parayno</span>
-            <span>Administrator</span>
+            <span>{props.username}</span>
+            <span>
+              {Number(props.role) === 0 ? "Client" : "Administrator "}
+            </span>
           </div>
 
           <div className={classes.textSpan}></div>
@@ -44,4 +47,10 @@ const sideDrawer = (props) => {
   );
 };
 
-export default sideDrawer;
+const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
+  role: state.auth.role,
+  username: state.auth.username,
+});
+
+export default connect(mapStateToProps, null)(sideDrawer);
