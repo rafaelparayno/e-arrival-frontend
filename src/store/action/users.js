@@ -22,16 +22,27 @@ export const fetchUserListStart = () => {
   };
 };
 
-export const fetchUserList = (access_token) => {
+export const fetchUserList = (access_token, query) => {
   return (dispatch) => {
     dispatch(fetchUserListStart());
 
+    let options = query
+      ? {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+          params: {
+            q: query,
+          },
+        }
+      : {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        };
+
     axios
-      .get("http://localhost:5000/users", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
+      .get("http://localhost:5000/users", options)
       .then((res) => {
         let fetchUserList = {};
         fetchUserList = res.data;

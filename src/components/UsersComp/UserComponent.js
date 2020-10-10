@@ -8,13 +8,27 @@ import UserModal from "./UserModal";
 import classes from "./UserHeader.module.css";
 
 const UserHeader = (props) => {
+  const [searchHeader, EditSearchHeader] = useState("");
+
   useEffect(() => {
     props.onFetchUser(props.userToken);
     // console.log(props.userToken);
   }, []);
 
+  const editSearchHeaderHandler = (e) => {
+    const name = e.target.name ? e.target.name : e.target.props.name;
+    const value = e.target.value;
+
+    EditSearchHeader({ ...searchHeader, [name]: value });
+  };
+
   const closeModal = () => {
     props.openModal(null);
+  };
+
+  const searchQuery = (e) => {
+    e.preventDefault();
+    props.onFetchUser(props.userToken, searchHeader.searchKey);
   };
 
   const columns = [
@@ -74,10 +88,14 @@ const UserHeader = (props) => {
             <input
               placeholder="Type here...."
               className={classes.InputElement}
+              name="searchKey"
+              value={searchHeader.searchKey}
+              onChange={editSearchHeaderHandler}
+              style={{ width: "100%" }}
               type="text"
             />
           </div>
-          <button className={classes.btn}>
+          <button onClick={(e) => searchQuery(e)} className={classes.btn}>
             <i className="fa fa-search"></i>
           </button>
 
@@ -126,7 +144,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchUser: (token) => dispatch(fetchUserList(token)),
+    onFetchUser: (token, data) => dispatch(fetchUserList(token, data)),
     openModal: (data) => dispatch(editUserDetailsModal(data)),
   };
 };
