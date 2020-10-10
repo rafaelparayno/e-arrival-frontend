@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchUserList } from "../../store/action/index";
 import classes from "./UserHeader.module.css";
 
-const UserHeader = () => {
+const UserHeader = (props) => {
+  useEffect(() => {
+    props.onFetchUser(props.userToken);
+    // console.log(props.userToken);
+  }, []);
+
   return (
     <div className={classes.UsersHeader}>
       <header>
@@ -17,7 +24,7 @@ const UserHeader = () => {
           />
         </div>
         <button className={classes.btn} type="submit">
-          <i class="fa fa-search"></i>
+          <i className="fa fa-search"></i>
         </button>
       </div>
       <div className="row"></div>
@@ -25,4 +32,14 @@ const UserHeader = () => {
   );
 };
 
-export default UserHeader;
+const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchUser: (token) => dispatch(fetchUserList(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserHeader);
