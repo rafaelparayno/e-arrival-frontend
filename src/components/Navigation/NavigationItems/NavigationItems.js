@@ -10,17 +10,19 @@ const navigationItems = (props) => {
         <i className="fa fa-lg fa-fw fa-calendar"></i>{" "}
         <span className="menu-item-parent">Dashboard</span>
       </NavigationItems>
-      {Number(props.role) !== 0 && (
+      {Number(props.role) !== 0 ? (
         <NavigationItems link="/users">
           <i className="fa fa-lg fa-fw fa-table"></i>{" "}
           <span className="menu-item-parent">Users</span>
         </NavigationItems>
+      ) : (
+        <>
+          <NavigationItems link="/agent">
+            <i className="fa fa-lg fa-fw fa-table"></i>{" "}
+            <span className="menu-item-parent">Shipping Agent</span>
+          </NavigationItems>
+        </>
       )}
-
-      {/* <NavigationItems link="/contacts">
-        <i className="fa fa-lg fa-fw fa-table"></i>{" "}
-        <span className="menu-item-parent">Conctacts</span>
-      </NavigationItems> */}
     </ul>
   );
 };
