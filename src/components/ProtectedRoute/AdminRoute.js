@@ -6,7 +6,7 @@ const AdminRoute = ({ component: Component, role, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      Number(role) !== 0 ? <Component {...props} /> : <Redirect to="/" />
+      Number(role) !== 0 ? <Component {...props} /> : <Redirect to="/logout" />
     }
   />
 );
