@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./Toolbar.module.css";
 
-import Logo from "../../Logo/Logo";
+// import Logo from "../../Logo/Logo";
 import DrawerToggler from "../SideDrawer/DrawerToggler/DrawerToggler";
 import { NavLink } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const toolbar = props => (
     <header className={classes.Toolbar}>
         <DrawerToggler clicked={props.drawerOpen} />
         <div className={classes.Logo}>
-            <Logo />
+            E-Arrival
         </div>
         <nav >
             <ul className={classes.NavigationItems}>

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import classes from "./Layout.module.css"
 import { Redirect, Route, Switch } from "react-router-dom";
-// import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer.js";
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 // import Logout from "../../containers/Auth/Logout/Logout"
 // import CalendarCon from "../../containers/CalendarCon/CalendarCon"
 // import AddressBook from "../../containers/AddressBook/AddressBook"
@@ -21,7 +21,7 @@ const Layout = props => {
 
     return (
         <>
-            {/* <Toolbar drawerOpen={sideDrawerOpenHandler} /> */}
+            <Toolbar drawerOpen={sideDrawerOpenHandler} />
             <SideDrawer
                 open={showSideDrawer}
                 closed={sideDrawerCloseHandler}
