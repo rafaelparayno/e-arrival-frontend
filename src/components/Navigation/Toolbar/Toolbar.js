@@ -10,7 +10,7 @@ const toolbar = props => (
     <header className={classes.Toolbar}>
         <DrawerToggler clicked={props.drawerOpen} />
         <div className={classes.Logo}>
-            E-Arrival
+          <h2> E-Arrival</h2> 
         </div>
         <nav >
             <ul className={classes.NavigationItems}>

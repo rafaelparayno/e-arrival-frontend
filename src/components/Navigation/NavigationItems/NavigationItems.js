@@ -1,11 +1,11 @@
 import React from "react";
 
-//import classes from "./NavigationItems.module.css";
+import classes from "./NavigationItems.module.css";
 import NavigationItems from "./NavigationItem/NavigationItem";
 
 const navigationItems = () => {
   return (
-    <ul>
+    <ul className={classes.NavigationItems}>
       <NavigationItems link="/" exact>
         <i className="fa fa-lg fa-fw fa-calendar"></i>{" "}
         <span className="menu-item-parent">Calendar</span>
