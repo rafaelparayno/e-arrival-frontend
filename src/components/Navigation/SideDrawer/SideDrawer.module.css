@@ -21,7 +21,34 @@
   transform: translateX(-100%);
 }
 
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.info img {
+  border-radius: 50%;
+}
+
+.info .personal {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.info .personal span:nth-child(2) {
+  color: #5a616c;
+}
+
+.info .textSpan:after {
+  content: "\2807";
+  font-size: 1.5em;
+  color: #fff;
+}
+
 .Logo {
-  height: 11%;
-  margin-bottom: 32px;
+  height: 5%;
+  margin-bottom: 10px;
 }
