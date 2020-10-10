@@ -19,7 +19,7 @@ const fetchuserListStart = (state, action) => {
 
 const fetchuserListSuccess = (state, action) => {
   return updateObject(state, {
-    userList: action.userList,
+    userList: action.UserList,
     loadingUsers: false,
   });
 };
