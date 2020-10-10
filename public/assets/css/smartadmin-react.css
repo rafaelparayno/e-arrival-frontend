@@ -1,0 +1,198 @@
+html > body:not(.menu-on-top).desktop-detected {
+  min-height: 100vh !important;
+}
+
+#extr-page {
+  min-height: 100vh;
+}
+#main {
+  padding-bottom: 0 !important;
+}
+
+html > body:not(.menu-on-top) #main {
+  min-height: calc(100vh - (49px + 52px));
+}
+
+html > body.menu-on-top #main {
+  min-height: calc(100vh - (120px + 52px));
+}
+
+.page-footer {
+  position: relative;
+}
+
+.fx-fill {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#widgets-grid {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fx-fill > .jarviswidget {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.inbox-body {
+  flex: 1;
+}
+
+svg {
+  touch-action: none;
+}
+
+.big-breadcrumbs .page-title-separator {
+  margin: auto 0.4rem;
+}
+
+.login-info img {
+  margin-right: 0.8rem;
+}
+.login-info .fa.fa-angle-down {
+  margin-left: 0.4rem;
+}
+
+.bs-glyphicons {
+  padding-left: 0;
+  padding-bottom: 1px;
+  margin-bottom: 20px;
+  list-style: none;
+  overflow: hidden;
+}
+
+.bs-glyphicons li {
+  float: left;
+  width: 25%;
+  height: 115px;
+  padding: 10px;
+  margin: 0 -1px -1px 0;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.bs-glyphicons .glyphicon {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.bs-glyphicons .glyphicon-class {
+  display: block;
+  text-align: center;
+}
+
+.bs-glyphicons li:hover {
+  background-color: rgba(86, 61, 124, 0.1);
+}
+
+@media (min-width: 768px) {
+  .bs-glyphicons li {
+    width: 12.5%;
+  }
+}
+
+.dataTables_filter .input-group-addon {
+  height: 30px !important;
+}
+
+.bootstrap-timepicker-widget table td input {
+  width: 40px;
+  padding: 0;
+}
+
+.slider .tooltip.tooltip-main.top {
+  margin-top: -35px;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+/* fullcalendar */
+#calendar .fc-right,
+#calendar .fc-center {
+  display: none;
+}
+
+/* cropperjs demo */
+.cropper-preview-container {
+  overflow: hidden;
+}
+.cropper-preview {
+  float: left;
+  margin-right: 0.75rem;
+  overflow: hidden;
+}
+
+.cropper-preview > img {
+  max-width: 100%;
+}
+
+.cropper-preview-lg {
+  height: 9rem;
+  width: 16rem;
+}
+
+.cropper-preview-md {
+  height: 4.5rem;
+  width: 8rem;
+}
+
+.cropper-preview-sm {
+  height: 2.25rem;
+  width: 4rem;
+}
+
+.cropper-preview-xs {
+  height: 1.125rem;
+  margin-right: 0;
+  width: 2rem;
+}
+
+/* fading carousel */
+
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+.carousel-fade .carousel-inner .item {
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* widget tabs */
+.jarviswidget header .dashboard-widget-tabs.nav-tabs>li>a {
+  padding: 4px 15px 4px;
+}
