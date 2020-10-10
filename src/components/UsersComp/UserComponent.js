@@ -72,11 +72,23 @@ const UserHeader = (props) => {
             type="text"
           />
         </div>
-        <button className={classes.btn} type="submit">
+        <button className={classes.btn}>
           <i className="fa fa-search"></i>
         </button>
+
+        <button className={classes.btnAdd}>
+          <i className="fa fa-plus"></i>&nbsp; add user
+        </button>
       </div>
-      <div style={{ margin: "10px 5px" }} className="row">
+      <div
+        style={{
+          margin: "10px 5px",
+          padding: "0px 5px",
+          overflowX: "auto",
+          height: "70vh",
+        }}
+        className="row"
+      >
         <div className="table-responsive">
           <Table
             columns={columns}
