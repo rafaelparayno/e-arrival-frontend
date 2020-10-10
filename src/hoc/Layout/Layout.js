@@ -16,7 +16,7 @@ const Layout = props => {
     }
 
     const sideDrawerOpenHandler = () => {
-        setShowSideDrawer(!showSideDrawer);
+        setShowSideDrawer(side => !side);
     }
 
     return (
@@ -26,8 +26,6 @@ const Layout = props => {
                 open={showSideDrawer}
                 closed={sideDrawerCloseHandler}
             />
-
-
             <main className={classes.Content}>
                 <Switch>
                     <Route path="/logout" component={Logout} />
