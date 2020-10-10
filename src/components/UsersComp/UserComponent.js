@@ -6,6 +6,7 @@ import {
   alertShowUsers,
 } from "../../store/action/index";
 
+import Spinner from "../UI/Spinner/Spinner";
 import Table from "../UI/Table/Table";
 import SweetAlert from "react-bootstrap-sweetalert";
 import UserModal from "./UserModal";
@@ -128,12 +129,16 @@ const UserHeader = (props) => {
           className="row"
         >
           <div className="table-responsive">
-            <Table
-              columns={columns}
-              data={props.userList}
-              // selectedRows={props.selectedRows}
-              // setSelectedRows={props.setSelectedRows}
-            />
+            {props.loadingUsers ? (
+              <Spinner />
+            ) : (
+              <Table
+                columns={columns}
+                data={props.userList}
+                // selectedRows={props.selectedRows}
+                // setSelectedRows={props.setSelectedRows}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -160,6 +165,7 @@ const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   userList: state.user.userList,
   editUserDetails: state.user.editUserDetails,
+  loadingUsers: state.user.loadingUsers,
   isSuccess: state.user.isSuccess,
 });
 

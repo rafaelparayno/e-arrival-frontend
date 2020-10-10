@@ -4,5 +4,6 @@ export {
   fetchUserList,
   editUserDetailsModal,
   saveEditDetailsUser,
+  UpdateEditDetailsUser,
   alertShowUsers,
 } from "./users";

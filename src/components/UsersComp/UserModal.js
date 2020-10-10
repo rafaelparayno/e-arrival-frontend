@@ -4,6 +4,7 @@ import Modal from "../UI/Modal/Modal";
 import {
   editUserDetailsModal,
   saveEditDetailsUser,
+  UpdateEditDetailsUser,
 } from "../../store/action/index";
 import SaveButton from "../UI/SaveButton/SaveButton";
 
@@ -26,7 +27,9 @@ const UserModal = React.memo((props) => {
 
   const save = (e) => {
     e.preventDefault();
-    props.save(props.userToken, userDetailEdit);
+    userDetailEdit.u_id
+      ? props.update(props.userToken, userDetailEdit)
+      : props.save(props.userToken, userDetailEdit);
   };
 
   return (
@@ -104,20 +107,23 @@ const UserModal = React.memo((props) => {
             />
           </div>
         </div>
-        <div className="col-lg-4">
-          <label className="font-size">Password</label>
+        {!userDetailEdit.u_id && (
+          <div className="col-lg-4">
+            <label className="font-size">Password</label>
 
-          <div>
-            <input
-              className="form-control"
-              name="password"
-              value={userDetailEdit.password}
-              type="password"
-              onChange={editUserDetailHandler}
-              style={{ width: "100%" }}
-            />
+            <div>
+              <input
+                className="form-control"
+                name="password"
+                value={userDetailEdit.password}
+                type="password"
+                onChange={editUserDetailHandler}
+                style={{ width: "100%" }}
+              />
+            </div>
           </div>
-        </div>
+        )}
+
         <div className="col-lg-4">
           <label className="font-size">Role</label>
 
@@ -163,11 +169,18 @@ const UserModal = React.memo((props) => {
         <div style={{ marginTop: "10px" }} className="col-lg-12">
           <SaveButton
             onClick={(e) => save(e)}
-            // loading={props.loadingSaving}
-            // disabled={!personelDetailEdit.company_name}
+            loading={props.loadingSaving}
+            disabled={
+              !userDetailEdit.firstname ||
+              !userDetailEdit.lastname ||
+              !userDetailEdit.username ||
+              !userDetailEdit.role_id
+            }
           />
 
-          <button className="btn btn-sm btn-default">Cancel</button>
+          <button onClick={() => close()} className="btn btn-sm btn-default">
+            Cancel
+          </button>
         </div>
       </div>
     </Modal>
@@ -176,6 +189,7 @@ const UserModal = React.memo((props) => {
 
 const mapStateToProps = (state) => ({
   editUserDetails: state.user.editUserDetails,
+  loadingSaving: state.user.loadingSaving,
   userToken: state.auth.token,
 });
 
@@ -183,6 +197,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editUserDetailsModal(data)),
     save: (token, data) => dispatch(saveEditDetailsUser(token, data)),
+    update: (token, data) => dispatch(UpdateEditDetailsUser(token, data)),
   };
 };
 

@@ -88,7 +88,7 @@ export const saveEditDetailsUser = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveUsersDetailSuccess());
 
-    let url = "http://localhost:5000/users/add";
+    const url = "http://localhost:5000/users/add";
 
     axios
       .post(url, Datas, {
@@ -119,5 +119,58 @@ export const alertShowUsers = (Data) => {
   return {
     type: actionTypes.ALERT_MODALS_SHOW_USERS,
     CloseAlert: Data,
+  };
+};
+
+//updating
+
+export const UpdateUsersDetailSuccess = (UpdateMessage) => {
+  return {
+    type: actionTypes.UPDATE_USERS_DETAILS_SUCCESS,
+    UpdateMessage: UpdateMessage,
+  };
+};
+
+export const UpdateUsersDetailFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_USERS_DETAILS_FAIL,
+    error: error,
+  };
+};
+
+export const UpdateUsersDetailStart = () => {
+  return {
+    type: actionTypes.UPDATE_USERS_DETAILS,
+  };
+};
+
+export const UpdateEditDetailsUser = (access_token, Datas) => {
+  return (dispatch) => {
+    dispatch(UpdateUsersDetailSuccess());
+
+    const url = `http://localhost:5000/users/${Datas.u_id}`;
+
+    axios
+      .patch(url, Datas, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let UpdateUsersDetails = "";
+
+        if (!res.data.error) {
+          UpdateUsersDetails = res.data.msg;
+        } else {
+          UpdateUsersDetails = "";
+        }
+
+        dispatch(UpdateUsersDetailSuccess(UpdateUsersDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(UpdateUsersDetailFail(err));
+      });
   };
 };
