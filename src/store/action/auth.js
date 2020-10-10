@@ -8,12 +8,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userCode) => {
+export const authSuccess = (token) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
-        userCode: userCode,
-    };
+      };
 };
 
 export const authFail = (error) => {
@@ -49,23 +48,22 @@ export const auth = (username, password) => {
     return dispatch => {
         dispatch(authStart());
 
-        const formData = new FormData();
-        formData.set('username', username);
-        formData.set('passwd', password);
+            const authData = {
+                username: username,
+                password : password,
+            }
 
-        let url = '/login.php';
-        axios.post(url, formData)
+        const url = 'http://localhost:5000/users/login';
+        axios.post(url, authData)
             .then(response => {
 
                 const expiry = 3600;
                 //1800
                 const expirationDate = new Date(new Date().getTime() + expiry * 1000);
-                localStorage.setItem('token', response.data.auth_token);
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('USER_CODE', response.data.USER_CODE);
-                localStorage.setItem('USER_FULLNAME', response.data.USER_FULLNAME);
-
-                dispatch(authSuccess(response.data.auth_token, response.data.USER_CODE));
+                dispatch(authSuccess(response.data.auth_token));
                 //dispatch(checkAuthTimeout(expiry));
             })
             .catch(err => {

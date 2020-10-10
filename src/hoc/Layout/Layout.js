@@ -4,7 +4,7 @@ import classes from "./Layout.module.css"
 import { Redirect, Route, Switch } from "react-router-dom";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
-// import Logout from "../../containers/Auth/Logout/Logout"
+import Logout from "../../containers/Auth/Logout/Logout"
 // import CalendarCon from "../../containers/CalendarCon/CalendarCon"
 // import AddressBook from "../../containers/AddressBook/AddressBook"
 
@@ -30,8 +30,8 @@ const Layout = props => {
 
             <main className={classes.Content}>
                 <Switch>
-                    {/* <Route path="/logout" component={Logout} />
-                    <Route path="/calendars" component={CalendarCon} />
+                    <Route path="/logout" component={Logout} />
+                    {/* <Route path="/calendars" component={CalendarCon} />
                     <Route path="/address" component={AddressBook} /> */}
                     <Redirect to="/" />
                 </Switch>
