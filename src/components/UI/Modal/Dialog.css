@@ -1,0 +1,18 @@
+div.dialog-show{
+    animation : slideDown 0.3s ease-out;
+  }
+  
+  div.k-window-content{
+    overflow: hidden
+  }
+  
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-90%);
+      opacity: 0;
+    }		
+    100% {
+      opacity:1;
+      transform: translateY(0%);
+    }		
+  }
