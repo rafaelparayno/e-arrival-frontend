@@ -6,6 +6,7 @@ import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import Logout from "../../containers/Auth/Logout/Logout";
 import dashboard from "../../containers/dashboard/dashboard";
+import Users from "../../containers/Users/Users";
 // import CalendarCon from "../../containers/CalendarCon/CalendarCon"
 // import AddressBook from "../../containers/AddressBook/AddressBook"
 
@@ -26,6 +27,7 @@ const Layout = (props) => {
       <SideDrawer open={showSideDrawer} closed={sideDrawerCloseHandler} />
       <main className={classes.Content}>
         <Switch>
+          <Route path="/users" component={Users} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={dashboard} />
           {/* <Route path="/calendars" component={CalendarCon} />

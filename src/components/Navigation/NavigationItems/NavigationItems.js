@@ -10,7 +10,7 @@ const navigationItems = () => {
         <i className="fa fa-lg fa-fw fa-calendar"></i>{" "}
         <span className="menu-item-parent">Dashboard</span>
       </NavigationItems>
-      <NavigationItems link="/address">
+      <NavigationItems link="/users">
         <i className="fa fa-lg fa-fw fa-table"></i>{" "}
         <span className="menu-item-parent">Users</span>
       </NavigationItems>
