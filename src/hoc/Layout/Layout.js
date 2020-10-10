@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import classes from "./Layout.module.css";
+import AdminRoute from "../../components/ProtectedRoute/AdminRoute";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
@@ -27,7 +28,7 @@ const Layout = (props) => {
       <SideDrawer open={showSideDrawer} closed={sideDrawerCloseHandler} />
       <main className={classes.Content}>
         <Switch>
-          <Route path="/users" component={Users} />
+          <AdminRoute path="/users" component={Users} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={dashboard} />
           {/* <Route path="/calendars" component={CalendarCon} />

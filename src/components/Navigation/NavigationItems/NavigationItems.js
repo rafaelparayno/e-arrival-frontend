@@ -1,19 +1,21 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import classes from "./NavigationItems.module.css";
 import NavigationItems from "./NavigationItem/NavigationItem";
 
-const navigationItems = () => {
+const navigationItems = (props) => {
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItems link="/" exact>
         <i className="fa fa-lg fa-fw fa-calendar"></i>{" "}
         <span className="menu-item-parent">Dashboard</span>
       </NavigationItems>
-      <NavigationItems link="/users">
-        <i className="fa fa-lg fa-fw fa-table"></i>{" "}
-        <span className="menu-item-parent">Users</span>
-      </NavigationItems>
+      {Number(props.role) !== 0 && (
+        <NavigationItems link="/users">
+          <i className="fa fa-lg fa-fw fa-table"></i>{" "}
+          <span className="menu-item-parent">Users</span>
+        </NavigationItems>
+      )}
 
       {/* <NavigationItems link="/contacts">
         <i className="fa fa-lg fa-fw fa-table"></i>{" "}
@@ -23,4 +25,8 @@ const navigationItems = () => {
   );
 };
 
-export default navigationItems;
+const mapStateToProps = (state) => ({
+  role: state.auth.role,
+});
+
+export default connect(mapStateToProps, null)(navigationItems);
