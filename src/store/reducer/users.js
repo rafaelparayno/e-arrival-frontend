@@ -10,6 +10,7 @@ const initialState = {
   editUserDetails: null,
   // loadingNatCompany: false,
   // loadingAddressBook: false,
+  isSuccess: false,
 };
 
 //complist

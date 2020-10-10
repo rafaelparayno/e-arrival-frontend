@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUserList } from "../../store/action/index";
+import { fetchUserList, editUserDetailsModal } from "../../store/action/index";
 
 import Table from "../UI/Table/Table";
 // import columns from "./UserColumnsHeader";
@@ -13,9 +13,9 @@ const UserHeader = (props) => {
     // console.log(props.userToken);
   }, []);
 
-  // const closeModal = () => {
-  //   props.openModal(null);
-  // };
+  const closeModal = () => {
+    props.openModal(null);
+  };
 
   const columns = [
     {
@@ -42,14 +42,13 @@ const UserHeader = (props) => {
           Header: "Edit",
           Cell: (data) => {
             let {
-              row: {
-                original: { u_id },
-              },
+              row: { original },
             } = data;
+
             return (
               <>
                 <button
-                  onClick={() => console.log(u_id)}
+                  onClick={() => props.openModal(original)}
                   className="btn btn-md btn-primary"
                 >
                   Edit
@@ -82,7 +81,10 @@ const UserHeader = (props) => {
             <i className="fa fa-search"></i>
           </button>
 
-          <button className={classes.btnAdd}>
+          <button
+            onClick={() => props.openModal({})}
+            className={classes.btnAdd}
+          >
             <i className="fa fa-plus"></i>&nbsp; add user
           </button>
         </div>
@@ -105,13 +107,13 @@ const UserHeader = (props) => {
           </div>
         </div>
       </div>
-      {/* {props.editUsersDetails && (
+      {props.editUserDetails && (
         <UserModal
-          show={props.editUsersDetails ? true : false}
+          show={props.editUserDetails ? true : false}
           close={closeModal}
         />
-      )} */}
-      <UserModal show={true} />
+      )}
+      {/* <UserModal show={true} /> */}
     </>
   );
 };
@@ -119,11 +121,13 @@ const UserHeader = (props) => {
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   userList: state.user.userList,
+  editUserDetails: state.user.editUserDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchUser: (token) => dispatch(fetchUserList(token)),
+    openModal: (data) => dispatch(editUserDetailsModal(data)),
   };
 };
 
