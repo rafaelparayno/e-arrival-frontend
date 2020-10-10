@@ -1,0 +1,23 @@
+.btnGroup .btn {
+  padding: 6px 12px;
+  line-height: 28px;
+  height: 41px;
+}
+
+.btnGroup input {
+  visibility: hidden;
+}
+
+.btnGroup .btnDefault {
+  border-radius: 3px;
+  line-height: 42px;
+  height: 42px;
+  border-color: #f2f3f9;
+  background: rgb(224, 218, 218);
+}
+
+.btnGroup .btnDefault.active {
+  color: #fff;
+  background-color: #4ca1ff;
+  border-color: #4ca1ff;
+}

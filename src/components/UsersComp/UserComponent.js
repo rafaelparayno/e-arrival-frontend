@@ -4,6 +4,7 @@ import { fetchUserList } from "../../store/action/index";
 
 import Table from "../UI/Table/Table";
 // import columns from "./UserColumnsHeader";
+import UserModal from "./UserModal";
 import classes from "./UserHeader.module.css";
 
 const UserHeader = (props) => {
@@ -11,6 +12,10 @@ const UserHeader = (props) => {
     props.onFetchUser(props.userToken);
     // console.log(props.userToken);
   }, []);
+
+  // const closeModal = () => {
+  //   props.openModal(null);
+  // };
 
   const columns = [
     {
@@ -59,46 +64,55 @@ const UserHeader = (props) => {
   ];
 
   return (
-    <div className={classes.UsersHeader}>
-      <header>
-        <h3 style={{ marginLeft: "5px" }}>User Information</h3>
-      </header>
-      <div className={classes.searchBar}>
-        <div className={classes.Input}>
-          <label className={classes.Label}>Search:</label>
-          <input
-            placeholder="Type here...."
-            className={classes.InputElement}
-            type="text"
-          />
-        </div>
-        <button className={classes.btn}>
-          <i className="fa fa-search"></i>
-        </button>
+    <>
+      <div className={classes.UsersHeader}>
+        <header>
+          <h3 style={{ marginLeft: "5px" }}>User Information</h3>
+        </header>
+        <div className={classes.searchBar}>
+          <div className={classes.Input}>
+            <label className={classes.Label}>Search:</label>
+            <input
+              placeholder="Type here...."
+              className={classes.InputElement}
+              type="text"
+            />
+          </div>
+          <button className={classes.btn}>
+            <i className="fa fa-search"></i>
+          </button>
 
-        <button className={classes.btnAdd}>
-          <i className="fa fa-plus"></i>&nbsp; add user
-        </button>
-      </div>
-      <div
-        style={{
-          margin: "10px 5px",
-          padding: "0px 5px",
-          overflowX: "auto",
-          height: "70vh",
-        }}
-        className="row"
-      >
-        <div className="table-responsive">
-          <Table
-            columns={columns}
-            data={props.userList}
-            // selectedRows={props.selectedRows}
-            // setSelectedRows={props.setSelectedRows}
-          />
+          <button className={classes.btnAdd}>
+            <i className="fa fa-plus"></i>&nbsp; add user
+          </button>
+        </div>
+        <div
+          style={{
+            margin: "10px 5px",
+            padding: "0px 5px",
+            overflowX: "auto",
+            height: "70vh",
+          }}
+          className="row"
+        >
+          <div className="table-responsive">
+            <Table
+              columns={columns}
+              data={props.userList}
+              // selectedRows={props.selectedRows}
+              // setSelectedRows={props.setSelectedRows}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      {/* {props.editUsersDetails && (
+        <UserModal
+          show={props.editUsersDetails ? true : false}
+          close={closeModal}
+        />
+      )} */}
+      <UserModal show={true} />
+    </>
   );
 };
 
