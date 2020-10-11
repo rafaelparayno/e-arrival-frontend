@@ -146,7 +146,7 @@ export const UpdateUsersDetailStart = () => {
 
 export const UpdateEditDetailsUser = (access_token, Datas) => {
   return (dispatch) => {
-    dispatch(UpdateUsersDetailSuccess());
+    dispatch(UpdateUsersDetailStart());
 
     const url = `http://localhost:5000/users/${Datas.u_id}`;
 
@@ -174,6 +174,7 @@ export const UpdateEditDetailsUser = (access_token, Datas) => {
       });
   };
 };
+// axios.all(data.map(data=> axios.post('asdasd',data,)))
 
 //deleting
 
@@ -199,7 +200,7 @@ export const DeleteUsersDetailStart = () => {
 
 export const deleteEditDetailsUser = (access_token, u_id) => {
   return (dispatch) => {
-    dispatch(DeleteUsersDetailSuccess());
+    dispatch(DeleteUsersDetailStart());
 
     const url = `http://localhost:5000/users/${u_id}`;
 

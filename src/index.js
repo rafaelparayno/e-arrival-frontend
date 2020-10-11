@@ -7,11 +7,14 @@ import "./index.css";
 import App from "./App";
 import authReducer from "./store/reducer/auth";
 import userReducer from "./store/reducer/users";
+import shipReducer from "./store/reducer/shippingAgent";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
+  ship: shipReducer,
 });
 
 const store = createStore(

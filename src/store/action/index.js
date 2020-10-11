@@ -8,3 +8,12 @@ export {
   deleteEditDetailsUser,
   alertShowUsers,
 } from "./users";
+
+export {
+  fetchShippingAgent,
+  editShippingAgentDetailsModal,
+  saveEditDetailsShippingAgent,
+  UpdateEditDetailsShippingAgent,
+  deleteEditDetailsShippingAgent,
+  alertShowShippingAgents,
+} from "./shippingAgent";
