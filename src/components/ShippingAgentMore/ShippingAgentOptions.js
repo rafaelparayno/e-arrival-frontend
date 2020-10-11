@@ -13,7 +13,7 @@ const ShippingAgentOptions = React.memo((props) => {
     <>
       <div className={classes.ShippingAgentOptions}>
         <div className="row">
-          <div className="col-lg-12">
+          <div style={{ overflow: "auto" }} className="col-lg-12">
             <NavTabs
               isPill={true}
               activeTab={selectedTabOptions}
@@ -28,11 +28,6 @@ const ShippingAgentOptions = React.memo((props) => {
                 }
                 className="tab-pane"
               >
-                {/* <AddressDetails
-                code={props.code}
-                // details={props.AddressDetails}
-                // loading={props.companyDetailsLoading}
-              /> */}
                 <VesselDetails code={props.code} /> &nbsp; <Crews />
               </div>
 

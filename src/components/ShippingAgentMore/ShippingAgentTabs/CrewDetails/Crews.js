@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-// import {
-//   fetchVessel,
-//   editCrewsModal,
-//   deleteEditDetailsVessel,
-//   alertShowVessels,
-//   fetchCrewsList,
-// } from "../../../../store/action/index";
-
 import Spinner from "../../../UI/Spinner/Spinner";
 import Table from "../../../UI/Table/Table";
 import SweetAlert from "react-bootstrap-sweetalert";
+import Crew from "./Crew";
 import classes from "./Crews.module.css";
 
 const Crews = React.memo((props) => {
@@ -26,7 +19,7 @@ const Crews = React.memo((props) => {
     <>
       <div className={classes.Crews}>
         <header>
-          <h3 style={{ marginLeft: "5px" }}>Vessel</h3>
+          <h3 style={{ marginLeft: "5px" }}>Crew Mates</h3>
         </header>
         <div className={classes.searchBar}>
           <div className={classes.Input}>
@@ -47,23 +40,20 @@ const Crews = React.memo((props) => {
           >
             <i className="fa fa-search"></i>
           </button>
-
-          <button
-            // onClick={() => props.openModal({})}
-            className={classes.btnAdd}
-          >
-            <i className="fa fa-plus"></i>&nbsp; New Vessel Arriving
-          </button>
         </div>
         <div
           style={{
             margin: "10px 5px",
             padding: "0px 5px",
             overflowX: "auto",
-            height: "70vh",
+            height: "20vh",
           }}
           className="row"
-        ></div>
+        >
+          {props.CrewList.map((crew) => (
+            <Crew key={crew.id} details={crew} />
+          ))}
+        </div>
       </div>
     </>
   );

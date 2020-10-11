@@ -41,16 +41,4 @@ const Crew = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  //   CrewsList: state.Crews.CrewsList,
-  //   loadingCrew: state.Crews.loadingCrew,
-  //   editCrewsDetails: state.Crews.editCrewsDetails,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // openModal: (data) => dispatch(editCrewsDetailsModal(data)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Crew);
+export default Crew;
