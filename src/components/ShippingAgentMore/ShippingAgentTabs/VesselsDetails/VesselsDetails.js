@@ -8,6 +8,7 @@ import {
   alertShowVessels,
   fetchCrewList,
 } from "../../../../store/action/index";
+import ArrivingModal from "./ArrivingModal";
 
 import Spinner from "../../../UI/Spinner/Spinner";
 import Table from "../../../UI/Table/Table";
@@ -21,6 +22,10 @@ const VesselDetails = React.memo((props) => {
     const code = props.code;
     props.onFecthVessel(props.userToken, code);
   }, []);
+
+  const closeModal = () => {
+    props.openModal(null);
+  };
 
   useEffect(() => {
     selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
@@ -119,7 +124,7 @@ const VesselDetails = React.memo((props) => {
           </button>
 
           <button
-            // onClick={() => props.openModal({})}
+            onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
             <i className="fa fa-plus"></i>&nbsp; New Vessel Arriving
@@ -148,6 +153,13 @@ const VesselDetails = React.memo((props) => {
           </div>
         </div>
       </div>
+
+      {props.editVesselDetails && (
+        <ArrivingModal
+          show={props.editVesselDetails ? true : false}
+          close={closeModal}
+        />
+      )}
     </>
   );
 });
@@ -155,7 +167,7 @@ const VesselDetails = React.memo((props) => {
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   VesselList: state.vessels.VesselList,
-  //   editshipDetails: state.ship.editshipDetails,
+  editVesselDetails: state.vessels.editVesselDetails,
   loadingVessels: state.vessels.loadingVessels,
   //   isSuccess: state.ship.isSuccess,
 });
@@ -166,7 +178,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchVessel(token, data, query)),
     onFetchCrew: (token, data, query) =>
       dispatch(fetchCrewList(token, data, query)),
-    // openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
+    openModal: (data) => dispatch(editVesselDetailsModal(data)),
     // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
