@@ -4,6 +4,7 @@ import NavTabs from "../UI/NavTabs/Navtabs";
 import { connect } from "react-redux";
 import VesselDetails from "./ShippingAgentTabs/VesselsDetails/VesselsDetails";
 import Crews from "./ShippingAgentTabs/CrewDetails/Crews";
+import AgentAgenda from "./ShippingAgentTabs/AgendaDetails/AgentAgenda";
 import classes from "./ShippingAgentOption.module.css";
 
 const ShippingAgentOptions = React.memo((props) => {
@@ -35,7 +36,7 @@ const ShippingAgentOptions = React.memo((props) => {
                 label={
                   <>
                     {" "}
-                    Calendar &nbsp;{" "}
+                    Agency Calendar &nbsp;{" "}
                     <span className="badge bg-color-blue txt-color-white">
                       0
                     </span>
@@ -43,7 +44,7 @@ const ShippingAgentOptions = React.memo((props) => {
                 }
                 className="tab-pane"
               >
-                agenda
+                <AgentAgenda code={props.code} />
               </div>
             </NavTabs>
           </div>
