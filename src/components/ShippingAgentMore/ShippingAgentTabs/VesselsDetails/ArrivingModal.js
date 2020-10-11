@@ -51,12 +51,22 @@ const ArrivingModal = React.memo((props) => {
       }
 
       case 3: {
-        return (
-          <Departure
-            handler={editshippingAgencyDetailHandler}
-            prev={previous}
-          />
-        );
+        return <Departure next={next} prev={previous} />;
+      }
+    }
+  };
+
+  const headerNumberDetail = (stepFormProps) => {
+    switch (stepFormProps) {
+      case 1: {
+        return `${stepFormProps}. Vessel Detail`;
+      }
+      case 2: {
+        return `${stepFormProps}. Arrival Detail`;
+      }
+
+      case 3: {
+        return `${stepFormProps}. Departure Details`;
       }
     }
   };
@@ -72,10 +82,7 @@ const ArrivingModal = React.memo((props) => {
       modalClosed={close}
     >
       <div style={{ padding: "5px 15px" }} className="row">
-        <h3>
-          {" "}
-          {stepForm}. {stepForm === 1 ? " Vessel Detail" : " Arrival Detail"}
-        </h3>
+        <h3>{headerNumberDetail(stepForm)}</h3>
       </div>
       <div style={{ padding: "5px 15px" }} className="row">
         {multistepform(stepForm)}

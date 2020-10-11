@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: "Open Sans", sans-serif;
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 200px 200px 100px white inset;
+  box-shadow: 200px 200px 100px none inset;
+}
