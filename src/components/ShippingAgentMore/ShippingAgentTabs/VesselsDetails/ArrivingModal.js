@@ -4,6 +4,7 @@ import Modal from "../../../UI/Modal/Modal";
 import { editShippingAgentDetailsModal } from "../../../../store/action/index";
 import VesselInfo from "./MutliStep/VesselInfo";
 import ArrivalInfo from "./MutliStep/ArrivalInfo";
+import Departure from "./MutliStep/Departure";
 
 import SaveButton from "../../../UI/SaveButton/SaveButton";
 
@@ -41,35 +42,20 @@ const ArrivingModal = React.memo((props) => {
       case 1: {
         return (
           <>
-            <VesselInfo
-              details={arrivingEditDetails}
-              handler={editshippingAgencyDetailHandler}
-              prev={previous}
-              next={next}
-            />
+            <VesselInfo prev={previous} next={next} />
           </>
         );
       }
       case 2: {
-        return (
-          <ArrivalInfo
-            details={arrivingEditDetails}
-            handler={editshippingAgencyDetailHandler}
-            prev={previous}
-            next={next}
-          />
-        );
+        return <ArrivalInfo prev={previous} next={next} />;
       }
 
       case 3: {
         return (
-          <div
-            details={arrivingEditDetails}
+          <Departure
             handler={editshippingAgencyDetailHandler}
             prev={previous}
-          >
-            3
-          </div>
+          />
         );
       }
     }

@@ -30,7 +30,7 @@ const ArrivalInfo = (props) => {
   };
 
   const timeArrivalHandler = (time) => {
-    setArrivalEditDetails({ ...arrivalEditDetails, ["time_arrival"]: time });
+    setArrivalEditDetails({ ...arrivalEditDetails, ["time"]: time });
   };
 
   return (

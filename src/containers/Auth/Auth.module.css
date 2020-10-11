@@ -7,6 +7,12 @@
   width: 100vw;
 }
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(26, 25, 25);
+  opacity: 1; /* Firefox */
+}
+
 .loginBox {
   width: 280px;
   position: absolute;
@@ -27,6 +33,8 @@
   width: 100%;
   overflow: hidden;
   font-size: 20px;
+  background: #3f7d88;
+  border-radius: 0.5em;
   padding: 8px 0;
   margin: 8px 0;
   border-bottom: 3px solid #5ca4b1;
