@@ -1,6 +1,8 @@
 import React from "react";
+import ShippingAgentOptions from "../../components/ShippingAgentMore/ShippingAgentOptions";
 
-const ShippingAgentMore = () => {
+const ShippingAgentMore = (props) => {
+  const code = props.match.params.id;
   return (
     <div id="content">
       <div className="clearfix">
@@ -10,7 +12,7 @@ const ShippingAgentMore = () => {
           }}
           className="col-lg-12"
         >
-          {/* <AddressOptions code={code} /> */}
+          <ShippingAgentOptions code={code} />
         </div>
       </div>
     </div>

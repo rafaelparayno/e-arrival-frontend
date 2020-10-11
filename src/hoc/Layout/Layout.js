@@ -9,6 +9,7 @@ import Logout from "../../containers/Auth/Logout/Logout";
 import dashboard from "../../containers/dashboard/dashboard";
 import Users from "../../containers/Users/Users";
 import ShippingAgentCon from "../../containers/ShippingAgentCon/ShippingAgentCon";
+import ShippingAgentMore from "../../containers/ShippingAgentMore/ShippingAgentMore";
 // import CalendarCon from "../../containers/CalendarCon/CalendarCon"
 // import AddressBook from "../../containers/AddressBook/AddressBook"
 
@@ -30,7 +31,7 @@ const Layout = (props) => {
       <main className={classes.Content}>
         <Switch>
           <AdminRoute path="/users" exact component={Users} />
-          {/* <Route path="/agent/:id" exact component={AddressBookEdit} /> */}
+          <Route path="/agent/:id" exact component={ShippingAgentMore} />
           <Route path="/agent" exact component={ShippingAgentCon} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={dashboard} />
