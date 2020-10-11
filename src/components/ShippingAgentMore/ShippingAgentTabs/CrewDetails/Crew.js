@@ -12,9 +12,9 @@ const Crew = (props) => {
         <div className={classes.header}>
           <div>
             <img
-              style={{ maxWidth: "250px" }}
+              style={{ maxWidth: "350px" }}
               className="img-thumbnail img-fluid"
-              src={`/assets/img/judy.jpg`}
+              src={require("../../../../assets/images/judy.jpg")}
             />
           </div>
           <div>
