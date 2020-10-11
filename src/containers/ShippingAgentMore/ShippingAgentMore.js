@@ -1,4 +1,5 @@
 import React from "react";
+import ShippingAgentDetails from "../../components/ShippingAgentMore/ShippingAgentTabs/ShippingAgentDetails/ShippingAgentDetails";
 import ShippingAgentOptions from "../../components/ShippingAgentMore/ShippingAgentOptions";
 
 const ShippingAgentMore = (props) => {
@@ -6,6 +7,10 @@ const ShippingAgentMore = (props) => {
   return (
     <div id="content">
       <div className="clearfix">
+        {/* <div className="col-lg-4">
+          <ShippingAgentDetails code={code} />
+        </div> */}
+        &nbsp;
         <div
           style={{
             minHeight: "500px",

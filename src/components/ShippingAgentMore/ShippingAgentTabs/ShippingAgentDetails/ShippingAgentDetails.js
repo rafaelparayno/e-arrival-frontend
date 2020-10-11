@@ -2,87 +2,67 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
+import classes from "./ShippingAgentDetails.module.css";
+
 const ShippingAgentDetails = (props) => {
   const [shippingAgentDetailShow, editShippingAgentDetailShow] = useState("");
 
-  useEffect(async () => {
-    const code = props.code;
+  useEffect(() => {
     const access_token = props.userToken;
-    try {
-      const result = await axios.get(`http://localhost:5000/agents/${code}`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
+    const { code } = props;
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(`http://localhost:5000/agents/${code}`, {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
 
-      editShippingAgentDetailShow(result);
-    } catch (err) {
-      console.log(err.message);
-    }
+        editShippingAgentDetailShow(result);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <>
+      {console.log(shippingAgentDetailShow.id)},
       <div className="well well-light">
         <div className={classes.addressPrimaryInfo}>
           <div className="">
             <div className="address-code">
-              shippingAgentDetailShow.id:{" "}
+              ID:{" "}
               <strong className="address-code-data">
                 {" "}
-                {props.details.code}
+                {shippingAgentDetailShow.id}
               </strong>
             </div>
             <div className="company-name margin-top-5">
               <span className="company-name">
                 {" "}
-                Company Name :
+                Shipping Agent Name :
                 <strong className="address-code-data">
                   {" "}
-                  {/* {props.details.company_name} */}
+                  {shippingAgentDetailShow.shipping_agent_name}
                 </strong>
               </span>{" "}
             </div>
-            <div className="company-name margin-top-5">
-              <span className="company-name">
-                {" "}
-                Company Nature :
-                <strong className="address-code-data">
-                  {" "}
-                  {/* {props.details.cmp_nature && props.details.cmp_nature} */}
-                </strong>
-              </span>{" "}
-            </div>
+
             <div className="company-name margin-top-5">
               <span className="company-name"> Company Address :</span>{" "}
             </div>
-            <div className="company-name margin-top-5">
-              <span className="company-name">
-                {" "}
-                Phone :
-                <strong className="address-code-data">
-                  {" "}
-                  {/* {props.details.phones} */}
-                </strong>
-              </span>{" "}
-            </div>
-            <div className="company-name margin-top-5">
-              <span className="company-name">
-                {" "}
-                Fax :
-                <strong className="address-code-data">
-                  {" "}
-                  {/* {props.details.faxes} */}
-                </strong>
-              </span>{" "}
-            </div>
+
             <div className="company-name margin-top-5">
               <span className="company-name">
                 {" "}
                 Email :
                 <strong className="address-code-data">
                   {" "}
-                  {/* {props.details.emails && props.details.emails} */}
+                  {shippingAgentDetailShow.e_add &&
+                    shippingAgentDetailShow.e_add}
                 </strong>
               </span>{" "}
             </div>
@@ -99,10 +79,10 @@ const ShippingAgentDetails = (props) => {
             <div className="company-name margin-bottom-5">
               <span className="company-name">
                 {" "}
-                Notes :
+                Contact No :
                 <strong className="address-code-data">
                   {" "}
-                  {/* {props.details.notes && props.details.notes} */}
+                  {shippingAgentDetailShow.contact_no}
                 </strong>
               </span>{" "}
             </div>
