@@ -5,6 +5,7 @@ import { editShippingAgentDetailsModal } from "../../../../store/action/index";
 import VesselInfo from "./MutliStep/VesselInfo";
 import ArrivalInfo from "./MutliStep/ArrivalInfo";
 import Departure from "./MutliStep/Departure";
+import BookingInfo from "./MutliStep/BookingInfo";
 
 import SaveButton from "../../../UI/SaveButton/SaveButton";
 
@@ -53,6 +54,9 @@ const ArrivingModal = React.memo((props) => {
       case 3: {
         return <Departure next={next} prev={previous} />;
       }
+      case 4: {
+        return <BookingInfo next={next} prev={previous} />;
+      }
     }
   };
 
@@ -67,6 +71,9 @@ const ArrivingModal = React.memo((props) => {
 
       case 3: {
         return `${stepFormProps}. Departure Details`;
+      }
+      case 4: {
+        return `${stepFormProps}. Booking Details`;
       }
     }
   };
