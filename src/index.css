@@ -8,3 +8,15 @@ input:-webkit-autofill {
   -webkit-box-shadow: 200px 200px 100px white inset;
   box-shadow: 200px 200px 100px none inset;
 }
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #3f7d88;
+}

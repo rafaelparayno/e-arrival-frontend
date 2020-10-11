@@ -83,3 +83,15 @@
 .btnAdd:hover {
   background: #e7e7e7;
 }
+
+.ShippingAgent::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.ShippingAgent::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.ShippingAgent::-webkit-scrollbar-thumb {
+  background: #3f7d88;
+}

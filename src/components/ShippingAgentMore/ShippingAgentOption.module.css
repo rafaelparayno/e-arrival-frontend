@@ -6,3 +6,15 @@
   margin: 10px auto;
   box-sizing: border-box;
 }
+
+.ShippingAgentOptions::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.ShippingAgentOptions::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.ShippingAgentOptions::-webkit-scrollbar-thumb {
+  background: #3f7d88;
+}
