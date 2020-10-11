@@ -19,6 +19,10 @@ const ShippingAgent = React.memo((props) => {
     // console.log(props.userToken);
   }, []);
 
+  const viewHome = (id) => {
+    window.open(`/agent/${id}`, "_blank");
+  };
+
   const columns = [
     {
       Header: " ",
@@ -60,6 +64,12 @@ const ShippingAgent = React.memo((props) => {
                   className="btn btn-md btn-danger"
                 >
                   Delete
+                </button>{" "}
+                <button
+                  onClick={() => viewHome(original.id)}
+                  className="btn btn-md btn-info"
+                >
+                  View More
                 </button>
               </>
             );
