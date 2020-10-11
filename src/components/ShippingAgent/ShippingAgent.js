@@ -15,10 +15,26 @@ import classes from "./ShippingAgent.module.css";
 import ShippingAgentModal from "./ShippingAgentModal";
 
 const ShippingAgent = React.memo((props) => {
+  const [deletingAgency, setDeletingAgency] = useState({ deleteMsg: false });
+  const [searchHeader, EditSearchHeader] = useState("");
+
   useEffect(() => {
     props.onFecthShip(props.userToken);
     // console.log(props.userToken);
   }, []);
+
+  useEffect(() => {
+    props.isSuccess && props.onFecthShip(props.userToken);
+  }, [props.isSuccess]);
+
+  const warningDeleting = (id) => {
+    setDeletingAgency({ deleteMsg: true, id: id });
+  };
+
+  const deleteAgency = () => {
+    props.delete(props.userToken, deletingAgency.id);
+    setDeletingAgency({ deleteMsg: false });
+  };
 
   const closeModal = () => {
     props.openModal(null);
@@ -28,17 +44,21 @@ const ShippingAgent = React.memo((props) => {
     window.open(`/agent/${id}`, "_blank");
   };
 
+  const closeSuccess = () => {
+    props.alertConfirm(false);
+  };
+
   const columns = [
     {
       Header: " ",
       columns: [
         {
-          Header: "Email Address",
-          accessor: "e_add",
-        },
-        {
           Header: "Name",
           accessor: "shipping_agent_name",
+        },
+        {
+          Header: "Email Address",
+          accessor: "e_add",
         },
         {
           Header: "Contact Person",
@@ -59,13 +79,13 @@ const ShippingAgent = React.memo((props) => {
             return (
               <>
                 <button
-                  // onClick={() => props.openModal(original)}
+                  onClick={() => props.openModal(original)}
                   className="btn btn-md btn-primary"
                 >
                   Edit
                 </button>{" "}
                 <button
-                  // onClick={() => warningDeleting(original.u_id)}
+                  onClick={() => warningDeleting(original.id)}
                   className="btn btn-md btn-danger"
                 >
                   Delete
@@ -147,6 +167,29 @@ const ShippingAgent = React.memo((props) => {
           close={closeModal}
         />
       )}
+
+      <SweetAlert
+        success
+        title="Success!"
+        show={props.isSuccess}
+        onConfirm={closeSuccess}
+      >
+        {"Success Updating Data"}
+      </SweetAlert>
+
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText="Confirm"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="default"
+        title="Deleting Data"
+        show={deletingAgency.deleteMsg}
+        onConfirm={() => deleteAgency()}
+        onCancel={() => setDeletingAgency({ deleteMsg: false })}
+      >
+        {"Do you want to delete this Agency"}
+      </SweetAlert>
     </>
   );
 });
@@ -163,8 +206,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFecthShip: (token, data) => dispatch(fetchShippingAgent(token, data)),
     openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
-    // alertConfirm: (data) => dispatch(alertShowUsers(data)),
-    // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
+    alertConfirm: (data) => dispatch(alertShowShippingAgents(data)),
+    delete: (token, id) => dispatch(deleteEditDetailsShippingAgent(token, id)),
   };
 };
 

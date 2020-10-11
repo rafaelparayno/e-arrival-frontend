@@ -4,7 +4,7 @@ import Modal from "../UI/Modal/Modal";
 import {
   editShippingAgentDetailsModal,
   saveEditDetailsShippingAgent,
-  UpdateEditDetailsUser,
+  UpdateEditDetailsShippingAgent,
 } from "../../store/action/index";
 import SaveButton from "../UI/SaveButton/SaveButton";
 
@@ -15,9 +15,9 @@ const ShippingAgentModal = React.memo((props) => {
   const { close, code } = props;
 
   useEffect(() => {
-    props.editshippingAgencyDetails &&
-      setShippingAgencyDetailEdit(props.editshippingAgencyDetails);
-  }, [props.editshippingAgencyDetails]);
+    props.editShippingAgentDetails &&
+      setShippingAgencyDetailEdit(props.editShippingAgentDetails);
+  }, [props.editShippingAgentDetails]);
 
   const editshippingAgencyDetailHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
@@ -114,13 +114,13 @@ const ShippingAgentModal = React.memo((props) => {
         <div style={{ marginTop: "10px" }} className="col-lg-12">
           <SaveButton
             onClick={(e) => save(e)}
-            // loading={props.loadingSaving}
-            // disabled={
-            //   !shippingAgencyDetailEdit.firstname ||
-            //   !shippingAgencyDetailEdit.lastname ||
-            //   !shippingAgencyDetailEdit.username ||
-            //   !shippingAgencyDetailEdit.role_id
-            // }
+            loading={props.loadingSaving}
+            disabled={
+              !shippingAgencyDetailEdit.e_add ||
+              !shippingAgencyDetailEdit.shipping_agent_name ||
+              !shippingAgencyDetailEdit.contact_person ||
+              !shippingAgencyDetailEdit.contact_no
+            }
           />
 
           <button onClick={() => close()} className="btn btn-sm btn-default">
@@ -142,7 +142,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
     save: (token, data) => dispatch(saveEditDetailsShippingAgent(token, data)),
-    // update: (token, data) => dispatch(UpdateEditDetailsUser(token, data)),
+    update: (token, data) =>
+      dispatch(UpdateEditDetailsShippingAgent(token, data)),
   };
 };
 

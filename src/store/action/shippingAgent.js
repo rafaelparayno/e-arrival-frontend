@@ -148,7 +148,7 @@ export const UpdateEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateShippingAgentsDetailStart());
 
-    const url = `http://localhost:5000/agents/${Datas.u_id}`;
+    const url = `http://localhost:5000/agents/${Datas.id}`;
 
     axios
       .patch(url, Datas, {
