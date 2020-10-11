@@ -12,12 +12,17 @@ import Spinner from "../UI/Spinner/Spinner";
 import Table from "../UI/Table/Table";
 import SweetAlert from "react-bootstrap-sweetalert";
 import classes from "./ShippingAgent.module.css";
+import ShippingAgentModal from "./ShippingAgentModal";
 
 const ShippingAgent = React.memo((props) => {
   useEffect(() => {
     props.onFecthShip(props.userToken);
     // console.log(props.userToken);
   }, []);
+
+  const closeModal = () => {
+    props.openModal(null);
+  };
 
   const viewHome = (id) => {
     window.open(`/agent/${id}`, "_blank");
@@ -109,7 +114,7 @@ const ShippingAgent = React.memo((props) => {
             onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
-            <i className="fa fa-plus"></i>&nbsp; add Shipping Agent
+            <i className="fa fa-plus"></i>&nbsp; Add Shipping Agent
           </button>
         </div>
         <div
@@ -122,25 +127,26 @@ const ShippingAgent = React.memo((props) => {
           className="row"
         >
           <div className="table-responsive">
-            {/* {props.loadingUsers ? (
+            {props.loadingshippingAgents ? (
               <Spinner />
             ) : (
               <Table
                 columns={columns}
-                data={props.userList}
+                data={props.shippingAgentList}
                 // selectedRows={props.selectedRows}
                 // setSelectedRows={props.setSelectedRows}
               />
-            )} */}
-            <Table
-              columns={columns}
-              data={props.shippingAgentList}
-              // selectedRows={props.selectedRows}
-              // setSelectedRows={props.setSelectedRows}
-            />
+            )}
           </div>
         </div>
       </div>
+
+      {props.editShippingAgentDetails && (
+        <ShippingAgentModal
+          show={props.editShippingAgentDetails ? true : false}
+          close={closeModal}
+        />
+      )}
     </>
   );
 });
@@ -148,8 +154,8 @@ const ShippingAgent = React.memo((props) => {
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   shippingAgentList: state.ship.shippingAgentList,
-  editshipDetails: state.ship.editshipDetails,
-  loadingships: state.ship.loadingships,
+  editShippingAgentDetails: state.ship.editShippingAgentDetails,
+  loadingshippingAgents: state.ship.loadingshippingAgents,
   isSuccess: state.ship.isSuccess,
 });
 

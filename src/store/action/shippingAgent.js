@@ -88,7 +88,7 @@ export const saveEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveShippingAgentsDetailSuccess());
 
-    const url = "http://localhost:5000/agents/add";
+    const url = "http://localhost:5000/agents";
 
     axios
       .post(url, Datas, {
