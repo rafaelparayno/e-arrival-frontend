@@ -123,9 +123,9 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
+              name="breadth"
               value={vesselEditDetails.Breadth}
-              type="number"
+              type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
             />
@@ -138,8 +138,8 @@ const VesselInfo = (props) => {
             <input
               className="form-control"
               name="contact_no"
-              value={vesselEditDetails.GRT}
-              type="number"
+              value={vesselEditDetails.text}
+              type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
             />

@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
+import Select, { createFilter } from "react-select";
+import { eo, es, enUS } from "date-fns/locale";
+import DatePicker, { registerLocale } from "react-datepicker";
+import TimePicker from "react-time-picker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./ArrivalInfo.css";
 
 const ArrivalInfo = (props) => {
   const [arrivalEditDetails, setArrivalEditDetails] = useState({});
   const { next, prev } = props;
+  const locales = {
+    "en-US": enUS,
+    es: es,
+    eo: eo,
+    // ...
+  };
+
+  registerLocale(locales);
+
   const arrivalEditDetailHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
     const value = e.target.value;
@@ -10,136 +25,112 @@ const ArrivalInfo = (props) => {
     setArrivalEditDetails({ ...arrivalEditDetails, [name]: value });
   };
 
+  const dateArrivalHandler = (date, name) => {
+    setArrivalEditDetails({ ...arrivalEditDetails, [name]: date });
+  };
+
+  const timeArrivalHandler = (time) => {
+    setArrivalEditDetails({ ...arrivalEditDetails, ["time_arrival"]: time });
+  };
+
   return (
     <>
       {" "}
       <div className="row">
-        <div className="col-lg-4">
+        <div className="col-lg-3">
           <label className="font-size">Arrival Draft FWD</label>
 
           <div>
             <input
               className="form-control"
-              name="name"
-              value={arrivalEditDetails.arrival_draft}
+              name="draft"
+              value={arrivalEditDetails.draft}
               type="text"
-              onChange={props.handler}
+              onChange={arrivalEditDetailHandler}
               style={{ width: "100%" }}
             />
           </div>
         </div>
-        <div className="col-lg-4">
-          <label className="font-size">Vessel Flag </label>
+        <div className="col-lg-3">
+          <label className="font-size">Berth Requested Anchorage </label>
 
           <div>
             <input
               className="form-control"
-              name="e_add"
-              value={arrivalEditDetails.berth_req}
+              name="berth"
+              value={arrivalEditDetails.berth}
               type="text"
-              onChange={props.handler}
+              onChange={arrivalEditDetailHandler}
               style={{ width: "100%" }}
             />
           </div>
         </div>
-        <div className="col-lg-4">
-          <label className="font-size">IMO Number</label>
-
-          <div>
-            <input
+        <div className="col-lg-3">
+          <label className="font-size">Date Arrival Approximately:</label>
+          <div className="input-group">
+            <DatePicker
+              dateFormat="dd/MM/yyyy"
+              selected={arrivalEditDetails.date}
+              onChange={(date) => dateArrivalHandler(date, "date")}
+              locale={es}
+              style={{ width: "400px" }}
               className="form-control"
-              name="contact_person"
-              value={arrivalEditDetails.imonumber}
-              type="text"
-              onChange={props.handler}
-              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-3">
+          <label className="font-size">Time Arrival Approximately:</label>
+          <div className="input-group">
+            <TimePicker
+              onChange={timeArrivalHandler}
+              clockIcon={null}
+              value={arrivalEditDetails.time}
+              style={{ width: "100%", fontSize: "1.5rem" }}
             />
           </div>
         </div>
       </div>
       <div style={{ marginTop: "20px" }} className="row">
-        <div className="col-lg-3">
-          <label className="font-size">GRT</label>
-
-          <div>
-            <input
-              className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.GRT}
-              type="number"
-              onChange={props.handler}
-              style={{ width: "100%" }}
-            />
-          </div>
-        </div>
-        <div className="col-lg-3">
-          <label className="font-size">DWT</label>
-
-          <div>
-            <input
-              className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.DWT}
-              type="number"
-              onChange={props.handler}
-              style={{ width: "100%" }}
-            />
-          </div>
-        </div>
-        <div className="col-lg-3">
-          <label className="font-size">NRT</label>
-
-          <div>
-            <input
-              className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.NRT}
-              type="number"
-              onChange={props.handler}
-              style={{ width: "100%" }}
-            />
-          </div>
-        </div>
-        <div className="col-lg-3">
-          <label className="font-size">LOA</label>
-
-          <div>
-            <input
-              className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.LOA}
-              type="number"
-              onChange={props.handler}
-              style={{ width: "100%" }}
-            />
-          </div>
-        </div>
-      </div>
-      <div style={{ marginBottom: "10px" }} className="row">
         <div className="col-lg-6">
-          <label className="font-size">Breadth</label>
+          <label className="font-size">Cargoes Discharged</label>
 
           <div>
             <input
               className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.Breadth}
+              name="discharged"
+              value={arrivalEditDetails.discharged}
               type="number"
-              onChange={props.handler}
+              onChange={arrivalEditDetailHandler}
               style={{ width: "100%" }}
             />
           </div>
         </div>
         <div className="col-lg-6">
-          <label className="font-size">Call Sign</label>
+          <label className="font-size">Cargoes Loaded</label>
 
           <div>
             <input
               className="form-control"
-              name="contact_no"
-              value={arrivalEditDetails.GRT}
+              name="loaded"
+              value={arrivalEditDetails.loaded}
               type="number"
-              onChange={props.handler}
+              onChange={arrivalEditDetailHandler}
+              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+
+        <div className="col-lg-3">
+          <label className="font-size">Purpose call</label>
+
+          <div>
+            <input
+              className="form-control"
+              name="purpose"
+              value={arrivalEditDetails.purpose}
+              type="text"
+              onChange={arrivalEditDetailHandler}
               style={{ width: "100%" }}
             />
           </div>

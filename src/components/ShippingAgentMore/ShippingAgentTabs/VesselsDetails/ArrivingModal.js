@@ -4,6 +4,7 @@ import Modal from "../../../UI/Modal/Modal";
 import { editShippingAgentDetailsModal } from "../../../../store/action/index";
 import VesselInfo from "./MutliStep/VesselInfo";
 import ArrivalInfo from "./MutliStep/ArrivalInfo";
+
 import SaveButton from "../../../UI/SaveButton/SaveButton";
 
 const ArrivingModal = React.memo((props) => {
@@ -84,6 +85,12 @@ const ArrivingModal = React.memo((props) => {
       show={props.show}
       modalClosed={close}
     >
+      <div style={{ padding: "5px 15px" }} className="row">
+        <h3>
+          {" "}
+          {stepForm}. {stepForm === 1 ? " Vessel Detail" : " Arrival Detail"}
+        </h3>
+      </div>
       <div style={{ padding: "5px 15px" }} className="row">
         {multistepform(stepForm)}
       </div>
