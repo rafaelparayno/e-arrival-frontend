@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { editVesselDetailsModal } from "../../../../../store/action/index";
+import { connect } from "react-redux";
 
 const VesselInfo = (props) => {
   const [vesselEditDetails, setVesselEditDetails] = useState({});
   const { next } = props;
+
+  useEffect(() => {
+    props.editVesselDetails && setVesselEditDetails(props.editVesselDetails);
+  }, [props.editVesselDetails]);
 
   const editVesselDetailsHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
     const value = e.target.value;
 
     setVesselEditDetails({ ...vesselEditDetails, [name]: value });
+  };
+
+  const goToSecond = () => {
+    props.openModal(vesselEditDetails);
+    next();
   };
 
   return (
@@ -35,7 +46,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="e_add"
+              name="vessel_flag"
               value={vesselEditDetails.vessel_flag}
               type="text"
               onChange={editVesselDetailsHandler}
@@ -49,7 +60,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_person"
+              name="imonumber"
               value={vesselEditDetails.imonumber}
               type="text"
               onChange={editVesselDetailsHandler}
@@ -65,7 +76,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
+              name="GRT"
               value={vesselEditDetails.GRT}
               type="number"
               onChange={editVesselDetailsHandler}
@@ -79,7 +90,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
+              name="DWT"
               value={vesselEditDetails.DWT}
               type="number"
               onChange={editVesselDetailsHandler}
@@ -93,7 +104,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
+              name="NRT"
               value={vesselEditDetails.NRT}
               type="number"
               onChange={editVesselDetailsHandler}
@@ -107,7 +118,7 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
+              name="LOA"
               value={vesselEditDetails.LOA}
               type="number"
               onChange={editVesselDetailsHandler}
@@ -124,7 +135,7 @@ const VesselInfo = (props) => {
             <input
               className="form-control"
               name="breadth"
-              value={vesselEditDetails.Breadth}
+              value={vesselEditDetails.breadth}
               type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -137,8 +148,8 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="contact_no"
-              value={vesselEditDetails.text}
+              name="callsign"
+              value={vesselEditDetails.callsign}
               type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -151,11 +162,25 @@ const VesselInfo = (props) => {
           style={{
             marginTop: "10px",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
           }}
           className="col-lg-12"
         >
-          <button onClick={(e) => next()} className="btn btn-lg btn-primary">
+          <button
+            onClick={() => props.openModal(null)}
+            className="btn btn-lg btn-default"
+          >
+            Exit
+          </button>
+          <button
+            disabled={
+              !vesselEditDetails.name ||
+              !vesselEditDetails.vessel_flag ||
+              !vesselEditDetails.imonumber
+            }
+            onClick={(e) => goToSecond()}
+            className="btn btn-lg btn-primary"
+          >
             Next
           </button>
         </div>
@@ -164,4 +189,14 @@ const VesselInfo = (props) => {
   );
 };
 
-export default VesselInfo;
+const mapStateToProps = (state) => ({
+  editVesselDetails: state.vessels.editVesselDetails,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: (data) => dispatch(editVesselDetailsModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VesselInfo);

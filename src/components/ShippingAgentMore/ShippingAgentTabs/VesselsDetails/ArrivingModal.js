@@ -12,7 +12,6 @@ import SaveButton from "../../../UI/SaveButton/SaveButton";
 const ArrivingModal = React.memo((props) => {
   const [stepForm, setStepForm] = useState(0);
   const [arrivingEditDetails, setArrivingEditDetails] = useState([]);
-  const { close, code } = props;
 
   useEffect(() => {
     setStepForm((step) => step + 1);
@@ -86,7 +85,7 @@ const ArrivingModal = React.memo((props) => {
         </span>
       }
       show={props.show}
-      modalClosed={close}
+      // modalClosed={close}
     >
       <div style={{ padding: "5px 15px" }} className="row">
         <h3>{headerNumberDetail(stepForm)}</h3>

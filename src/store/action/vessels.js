@@ -88,7 +88,7 @@ export const saveEditDetailsVessel = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveVesselsDetailStart());
 
-    const url = "http://localhost:5000/agents/add";
+    const url = "http://localhost:5000/vessels";
 
     axios
       .post(url, Datas, {
@@ -148,7 +148,7 @@ export const UpdateEditDetailsVessel = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateVesselsDetailStart());
 
-    const url = `http://localhost:5000/agents/${Datas.u_id}`;
+    const url = `http://localhost:5000/patch/${Datas.vessel_id}`;
 
     axios
       .patch(url, Datas, {
@@ -202,7 +202,7 @@ export const deleteEditDetailsVessel = (access_token, u_id) => {
   return (dispatch) => {
     dispatch(DeleteVesselsDetailStart());
 
-    const url = `http://localhost:5000/agents/${u_id}`;
+    const url = `http://localhost:5000/vessels/${u_id}`;
 
     axios
       .delete(url, {
