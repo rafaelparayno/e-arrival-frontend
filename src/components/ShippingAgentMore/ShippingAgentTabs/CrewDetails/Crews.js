@@ -2,18 +2,27 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import Spinner from "../../../UI/Spinner/Spinner";
-import Table from "../../../UI/Table/Table";
+import Pagination from "../../../UI/Pagination/Pagination";
 import SweetAlert from "react-bootstrap-sweetalert";
+
 import Crew from "./Crew";
 import classes from "./Crews.module.css";
 
 const Crews = React.memo((props) => {
-  const [crews, EditCrews] = useState({});
-  const { crewsListState } = props.CrewList;
+  // const [crews, EditCrews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage] = useState(4);
+  // const { crewsListState } = props.CrewList;
 
-  useEffect(() => {
-    crewsListState && EditCrews(crewsListState);
-  }, [crewsListState]);
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = props.CrewList.slice(indexOfFirstRow, indexOfLastRow);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // useEffect(() => {
+  //   crewsListState && EditCrews(crewsListState);
+  // }, [crewsListState]);
 
   return (
     <>
@@ -50,9 +59,18 @@ const Crews = React.memo((props) => {
           }}
           className="row"
         >
-          {props.CrewList.map((crew) => (
-            <Crew key={crew.id} details={crew} />
-          ))}
+          {props.loadingCrews ? (
+            <Spinner />
+          ) : (
+            currentRows.map((crew) => <Crew key={crew.id} details={crew} />)
+          )}
+        </div>
+        <div style={{ zIndex: 0, background: "#f0f0f0" }}>
+          <Pagination
+            rowsPerPage={rowsPerPage}
+            total={props.CrewList.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     </>
@@ -61,6 +79,7 @@ const Crews = React.memo((props) => {
 
 const mapStateToProps = (state) => ({
   CrewList: state.crew.CrewList,
+  loadingCrews: state.crew.loadingCrews,
   //   isSuccess: state.ship.isSuccess,
 });
 
