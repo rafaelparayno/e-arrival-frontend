@@ -26,3 +26,10 @@ export {
   deleteEditDetailsVessel,
   alertShowVessels,
 } from "./vessels";
+
+export { fetchCrewList } from // editVesselDetailsModal,
+// saveEditDetailsVessel,
+// UpdateEditDetailsVessel,
+// deleteEditDetailsVessel,
+// alertShowVessels,
+"./crew";

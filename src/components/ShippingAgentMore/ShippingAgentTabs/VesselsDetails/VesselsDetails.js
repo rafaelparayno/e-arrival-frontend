@@ -6,6 +6,7 @@ import {
   editVesselDetailsModal,
   deleteEditDetailsVessel,
   alertShowVessels,
+  fetchCrewList,
 } from "../../../../store/action/index";
 
 import Spinner from "../../../UI/Spinner/Spinner";
@@ -14,11 +15,16 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import classes from "./VesselDetails.module.css";
 
 const VesselDetails = React.memo((props) => {
+  const [selectedRows, setSelectedRows] = useState("");
+
   useEffect(() => {
-    const code = { props };
+    const code = props.code;
     props.onFecthVessel(props.userToken, code);
-    // console.log(props.userToken);
   }, []);
+
+  useEffect(() => {
+    selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
+  }, [selectedRows]);
 
   const columns = [
     {
@@ -116,7 +122,7 @@ const VesselDetails = React.memo((props) => {
             // onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
-            <i className="fa fa-plus"></i>&nbsp; New Arrive
+            <i className="fa fa-plus"></i>&nbsp; New Vessel Arriving
           </button>
         </div>
         <div
@@ -129,22 +135,16 @@ const VesselDetails = React.memo((props) => {
           className="row"
         >
           <div className="table-responsive">
-            {/* {props.loadingUsers ? (
+            {props.loadingVessels ? (
               <Spinner />
             ) : (
               <Table
                 columns={columns}
-                data={props.userList}
-                // selectedRows={props.selectedRows}
-                // setSelectedRows={props.setSelectedRows}
+                data={props.VesselList}
+                selectedRows={selectedRows}
+                setSelectedRows={setSelectedRows}
               />
-            )} */}
-            <Table
-              columns={columns}
-              data={props.VesselList}
-              // selectedRows={props.selectedRows}
-              // setSelectedRows={props.setSelectedRows}
-            />
+            )}
           </div>
         </div>
       </div>
@@ -156,7 +156,7 @@ const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   VesselList: state.vessels.VesselList,
   //   editshipDetails: state.ship.editshipDetails,
-  //   loadingships: state.ship.loadingships,
+  loadingVessels: state.vessels.loadingVessels,
   //   isSuccess: state.ship.isSuccess,
 });
 
@@ -164,6 +164,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFecthVessel: (token, data, query) =>
       dispatch(fetchVessel(token, data, query)),
+    onFetchCrew: (token, data, query) =>
+      dispatch(fetchCrewList(token, data, query)),
     // openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
     // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),

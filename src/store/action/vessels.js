@@ -25,7 +25,7 @@ export const fetchVesselStart = () => {
 export const fetchVessel = (access_token, code, query) => {
   return (dispatch) => {
     dispatch(fetchVesselStart());
-    const data = { vessel_id: code };
+
     let options = query
       ? {
           headers: {
@@ -42,7 +42,7 @@ export const fetchVessel = (access_token, code, query) => {
         };
 
     axios
-      .post("http://localhost:5000/vessels/agent", data, options)
+      .post("http://localhost:5000/vessels/agent", { vessel_id: code }, options)
       .then((res) => {
         let fetchVessel = {};
         fetchVessel = res.data;

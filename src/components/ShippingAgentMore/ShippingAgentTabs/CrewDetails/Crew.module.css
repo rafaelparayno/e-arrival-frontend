@@ -1,0 +1,30 @@
+.Crew {
+  display: flex;
+  flex-direction: column;
+  max-height: 250px;
+  overflow: auto;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 24px;
+}
+
+.CrewInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 18px;
+}
+
+.profession {
+  font-weight: bold;
+}
