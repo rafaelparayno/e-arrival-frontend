@@ -8,6 +8,7 @@ import App from "./App";
 import authReducer from "./store/reducer/auth";
 import userReducer from "./store/reducer/users";
 import shipReducer from "./store/reducer/shippingAgent";
+import vesselReducer from "./store/reducer/vessels";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   ship: shipReducer,
+  vessels: vesselReducer,
 });
 
 const store = createStore(

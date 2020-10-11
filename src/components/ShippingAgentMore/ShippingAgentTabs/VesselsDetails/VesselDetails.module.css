@@ -1,8 +1,8 @@
 .VesselDetails {
-  width: 90%;
+  width: 95%;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
-  height: 80vh;
+  height: 40vh;
   margin: 10px auto;
   box-sizing: border-box;
 }

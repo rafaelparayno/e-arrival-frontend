@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import {
-  fetchShippingAgent,
-  editShippingAgentDetailsModal,
-  deleteEditDetailsShippingAgent,
-  alertShowShippingAgents,
-} from "../../store/action/index";
+  fetchVessel,
+  editVesselDetailsModal,
+  deleteEditDetailsVessel,
+  alertShowVessels,
+} from "../../../../store/action/index";
 
-import Spinner from "../UI/Spinner/Spinner";
-import Table from "../UI/Table/Table";
+import Spinner from "../../../UI/Spinner/Spinner";
+import Table from "../../../UI/Table/Table";
 import SweetAlert from "react-bootstrap-sweetalert";
-import classes from "./ShippingAgent.module.css";
+import classes from "./VesselDetails.module.css";
 
 const VesselDetails = React.memo((props) => {
   useEffect(() => {
-    props.onFecthShip(props.userToken);
+    const code = { props };
+    props.onFecthVessel(props.userToken, code);
     // console.log(props.userToken);
   }, []);
 
@@ -55,41 +56,41 @@ const VesselDetails = React.memo((props) => {
           Header: "Call Sign",
           accessor: "callsign",
         },
-        {
-          width: 150,
-          Header: "Edit",
-          Cell: (data) => {
-            let {
-              row: { original },
-            } = data;
+        // {
+        //   width: 150,
+        //   Header: "Edit",
+        //   Cell: (data) => {
+        //     let {
+        //       row: { original },
+        //     } = data;
 
-            return (
-              <>
-                <button
-                  // onClick={() => props.openModal(original)}
-                  className="btn btn-md btn-primary"
-                >
-                  Edit
-                </button>{" "}
-                <button
-                  // onClick={() => warningDeleting(original.u_id)}
-                  className="btn btn-md btn-danger"
-                >
-                  Delete
-                </button>{" "}
-              </>
-            );
-          },
-        },
+        //     return (
+        //       <>
+        //         <button
+        //           // onClick={() => props.openModal(original)}
+        //           className="btn btn-md btn-primary"
+        //         >
+        //           Edit
+        //         </button>{" "}
+        //         <button
+        //           // onClick={() => warningDeleting(original.u_id)}
+        //           className="btn btn-md btn-danger"
+        //         >
+        //           Delete
+        //         </button>{" "}
+        //       </>
+        //     );
+        //   },
+        // },
       ],
     },
   ];
 
   return (
     <>
-      <div className={classes.ShippingAgent}>
+      <div className={classes.VesselDetails}>
         <header>
-          <h3 style={{ marginLeft: "5px" }}>Shipping Agent</h3>
+          <h3 style={{ marginLeft: "5px" }}>Vessel</h3>
         </header>
         <div className={classes.searchBar}>
           <div className={classes.Input}>
@@ -112,10 +113,10 @@ const VesselDetails = React.memo((props) => {
           </button>
 
           <button
-            onClick={() => props.openModal({})}
+            // onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
-            <i className="fa fa-plus"></i>&nbsp; add Shipping Agent
+            <i className="fa fa-plus"></i>&nbsp; New Arrive
           </button>
         </div>
         <div
@@ -140,7 +141,7 @@ const VesselDetails = React.memo((props) => {
             )} */}
             <Table
               columns={columns}
-              data={props.shippingAgentList}
+              data={props.VesselList}
               // selectedRows={props.selectedRows}
               // setSelectedRows={props.setSelectedRows}
             />
@@ -152,8 +153,8 @@ const VesselDetails = React.memo((props) => {
 });
 
 const mapStateToProps = (state) => ({
-  //   userToken: state.auth.token,
-  //   shippingAgentList: state.ship.shippingAgentList,
+  userToken: state.auth.token,
+  VesselList: state.vessels.VesselList,
   //   editshipDetails: state.ship.editshipDetails,
   //   loadingships: state.ship.loadingships,
   //   isSuccess: state.ship.isSuccess,
@@ -161,7 +162,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onFecthShip: (token, data) => dispatch(fetchShippingAgent(token, data)),
+    onFecthVessel: (token, data, query) =>
+      dispatch(fetchVessel(token, data, query)),
     // openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
     // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),

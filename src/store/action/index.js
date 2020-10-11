@@ -17,3 +17,12 @@ export {
   deleteEditDetailsShippingAgent,
   alertShowShippingAgents,
 } from "./shippingAgent";
+
+export {
+  fetchVessel,
+  editVesselDetailsModal,
+  saveEditDetailsVessel,
+  UpdateEditDetailsVessel,
+  deleteEditDetailsVessel,
+  alertShowVessels,
+} from "./vessels";

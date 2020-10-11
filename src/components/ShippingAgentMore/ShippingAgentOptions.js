@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import NavTabs from "../UI/NavTabs/Navtabs";
 import { connect } from "react-redux";
+import VesselDetails from "./ShippingAgentTabs/VesselsDetails/VesselsDetails";
 import classes from "./ShippingAgentOption.module.css";
 
 const ShippingAgentOptions = React.memo((props) => {
@@ -31,7 +32,7 @@ const ShippingAgentOptions = React.memo((props) => {
                 // details={props.AddressDetails}
                 // loading={props.companyDetailsLoading}
               /> */}
-                Vessels &nbsp; Personels
+                <VesselDetails code={props.code} /> &nbsp; Personels
               </div>
 
               <div
