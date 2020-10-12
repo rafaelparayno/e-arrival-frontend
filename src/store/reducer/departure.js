@@ -2,12 +2,12 @@ import * as actionTypes from "../action/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
-  ArrivalList: [],
+  DepartureList: [],
   // companyNatureList: [],
   // addressBook: [],
 
-  loadingArrivals: false,
-  editArrivalDetails: null,
+  loadingDepartures: false,
+  editDepartureDetails: null,
   loadingSaving: false,
   loadingDeleting: false,
   isSuccess: false,
@@ -15,24 +15,24 @@ const initialState = {
 
 //complist
 
-// const fetchArrivalListStart = (state, action) => {
-//   return updateObject(state, { loadingArrivals: true });
+// const fetchDepartureListStart = (state, action) => {
+//   return updateObject(state, { loadingDepartures: true });
 // };
 
-// const fetchArrivalListSuccess = (state, action) => {
+// const fetchDepartureListSuccess = (state, action) => {
 //   return updateObject(state, {
-//     ArrivalList: action.Arrival,
-//     loadingArrivals: false,
+//     DepartureList: action.Departure,
+//     loadingDepartures: false,
 //   });
 // };
 
-// const fetchArrivalListFail = (state, action) => {
-//   return updateObject(state, { loadingArrivals: false });
+// const fetchDepartureListFail = (state, action) => {
+//   return updateObject(state, { loadingDepartures: false });
 // };
 
-const openModalEditArrivals = (state, action) => {
+const openModalEditDepartures = (state, action) => {
   return updateObject(state, {
-    editArrivalDetails: action.data,
+    editDepartureDetails: action.data,
     isSuccess: false,
   });
 };
@@ -44,7 +44,7 @@ const SaveEditDetailsStart = (state, action) => {
 const SaveEditDetailsSuccess = (state, action) => {
   return updateObject(state, {
     loadingSaving: false,
-    editArrivalDetails: null,
+    editDepartureDetails: null,
     isSuccess: true,
   });
 };
@@ -60,7 +60,7 @@ const SaveEditDetailsFail = (state, action) => {
 // const UpdateEditDetailsSuccess = (state, action) => {
 //   return updateObject(state, {
 //     loadingSaving: false,
-//     editArrivalDetails: null,
+//     editDepartureDetails: null,
 //     isSuccess: true,
 //   });
 // };
@@ -91,20 +91,20 @@ const SaveEditDetailsFail = (state, action) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     // case actionTypes.FETCH_VESSEL_LIST:
-    //   return fetchArrivalListStart(state, action);
+    //   return fetchDepartureListStart(state, action);
     // case actionTypes.FETCH_VESSEL_LIST_SUCCESS:
-    //   return fetchArrivalListSuccess(state, action);
+    //   return fetchDepartureListSuccess(state, action);
     // case actionTypes.FETCH_VESSEL_LIST_FAIL:
-    //   return fetchArrivalListFail(state, action);
+    //   return fetchDepartureListFail(state, action);
 
-    case actionTypes.EDIT_ARRIVAL_DETAIL_MODAL:
-      return openModalEditArrivals(state, action);
+    case actionTypes.EDIT_DEPARTURE_DETAIL_MODAL:
+      return openModalEditDepartures(state, action);
 
-    case actionTypes.SAVE_ARRIVAL_DETAILS:
+    case actionTypes.SAVE_DEPARTURE_DETAILS:
       return SaveEditDetailsStart(state, action);
-    case actionTypes.SAVE_ARRIVAL_DETAILS_SUCCESS:
+    case actionTypes.SAVE_DEPARTURE_DETAILS_SUCCESS:
       return SaveEditDetailsSuccess(state, action);
-    case actionTypes.SAVE_ARRIVAL_DETAILS_FAIL:
+    case actionTypes.SAVE_DEPARTURE_DETAILS_FAIL:
       return SaveEditDetailsFail(state, action);
 
     // case actionTypes.UPDATE_VESSELS_DETAILS:

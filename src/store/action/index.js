@@ -30,4 +30,7 @@ export {
 export {
   fetchCrewList, //
 } from "./crew";
+
 export { editArrivalDetailsModal } from "./arrival";
+
+export { editDepartureDetailsModal } from "./departure";

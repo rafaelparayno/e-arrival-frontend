@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Select, { createFilter } from "react-select";
+import { connect } from "react-redux";
+import { editDepartureDetailsModal } from "../../../../../store/action/index";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -16,6 +17,11 @@ const Departure = (props) => {
     // ...
   };
 
+  useEffect(() => {
+    props.editDepartureDetails &&
+      setDepartureEditDetails(props.editDepartureDetails);
+  }, [props.editDepartureDetails]);
+
   registerLocale(locales);
 
   const departureEditDetailsHandler = (e) => {
@@ -31,6 +37,11 @@ const Departure = (props) => {
 
   const timeArrivalHandler = (time) => {
     setDepartureEditDetails({ ...departureEditDetails, ["time"]: time });
+  };
+
+  const goToFourth = () => {
+    props.getData(departureEditDetails);
+    next();
   };
 
   return (
@@ -89,7 +100,10 @@ const Departure = (props) => {
           <button onClick={(e) => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <button onClick={(e) => next()} className="btn btn-lg btn-primary">
+          <button
+            onClick={(e) => goToFourth()}
+            className="btn btn-lg btn-primary"
+          >
             Next
           </button>
         </div>
@@ -98,4 +112,14 @@ const Departure = (props) => {
   );
 };
 
-export default Departure;
+const mapStateToProps = (state) => ({
+  editDepartureDetails: state.departure.editDepartureDetails,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getData: (data) => dispatch(editDepartureDetailsModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Departure);
