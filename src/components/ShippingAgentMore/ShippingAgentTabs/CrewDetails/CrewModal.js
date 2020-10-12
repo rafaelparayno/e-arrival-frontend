@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Modal from "../../../UI/Modal/Modal";
 import SaveButton from "../../../UI/SaveButton/SaveButton";
-
+import { saveEditDetailsCrew } from "../../../../store/action/index";
 import classes from "./CrewModal.module.css";
 
 const CrewModal = React.memo((props) => {
   const [crewDetailEdit, setCrewDetailEdit] = useState({});
-  const { close, code } = props;
+  const { close, vesselsid } = props;
 
   useEffect(() => {
     props.editCrewDetails && setCrewDetailEdit(props.editCrewDetails);
@@ -18,6 +18,11 @@ const CrewModal = React.memo((props) => {
     const value = e.target.value;
 
     setCrewDetailEdit({ ...crewDetailEdit, [name]: value });
+  };
+
+  const save = (e) => {
+    e.preventDefault();
+    props.onSave(props.userToken, { ...crewDetailEdit, vessels_id: vesselsid });
   };
 
   return (
@@ -94,7 +99,7 @@ const CrewModal = React.memo((props) => {
               onChange={editCrewDetailHandler}
             />
             {/* <input type="radio" onChange={handleChange} name='is_fil' value="M" data-bv-field="gender" /> */}
-            <i className="fas fa-flag"></i> Filipino{" "}
+            <i className="fas fa-flag"></i> &nbsp;Filipino{" "}
           </label>{" "}
           <label
             className={
@@ -110,7 +115,7 @@ const CrewModal = React.memo((props) => {
               checked={crewDetailEdit.is_fil == "0"}
               onChange={editCrewDetailHandler}
             />
-            <i className="fas fa-flag-usa"></i>Foreigner{" "}
+            <i className="fas fa-flag-usa"></i> &nbsp;Foreigner{" "}
           </label>
         </div>
       </div>
@@ -134,7 +139,7 @@ const CrewModal = React.memo((props) => {
               onChange={editCrewDetailHandler}
             />
             {/* <input type="radio" onChange={handleChange} name='status' value="M" data-bv-field="gender" /> */}
-            <i className="fas fa-sign-out-alt"></i> Off Signers{" "}
+            <i className="fas fa-sign-in-alt"></i> off Signers{" "}
           </label>{" "}
           <label
             className={
@@ -150,21 +155,21 @@ const CrewModal = React.memo((props) => {
               checked={crewDetailEdit.status == "0"}
               onChange={editCrewDetailHandler}
             />
-            <i className="fas fa-sign-in-alt"></i> OnSigners{" "}
+            <i className="fas fa-sign-out-alt"></i> on Signers{" "}
           </label>
         </div>
       </div>
       <div className="row">
         <div style={{ marginTop: "20px" }} className="col-lg-12">
           <SaveButton
-          // onClick={(e) => save(e)}
-          // loading={props.loadingSaving}
-          // disabled={
-          //   !userDetailEdit.firstname ||
-          //   !userDetailEdit.lastname ||
-          //   !userDetailEdit.username ||
-          //   !userDetailEdit.role_id
-          // }
+            onClick={(e) => save(e)}
+            // loading={props.loadingSaving}
+            // disabled={
+            //   !userDetailEdit.firstname ||
+            //   !userDetailEdit.lastname ||
+            //   !userDetailEdit.username ||
+            //   !userDetailEdit.role_id
+            // }
           />
 
           <button onClick={() => close()} className="btn btn-sm btn-default">
@@ -177,14 +182,16 @@ const CrewModal = React.memo((props) => {
 });
 
 const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
   editCrewDetails: state.crew.editCrewDetails,
-  selectedVessel: state.vessels.selectedVessel,
+  isSuccess: state.crew.isSuccess,
   // loadingSaving: state.ship.loadingSaving,
   // userToken: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onSave: (token, data) => dispatch(saveEditDetailsCrew(token, data)),
     //   openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
   };
 };

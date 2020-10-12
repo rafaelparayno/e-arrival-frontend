@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   editCrewDetailsModal,
   fetchCrewList,
+  alertShowCrews,
 } from "../../../../store/action/index";
 import Spinner from "../../../UI/Spinner/Spinner";
 import Pagination from "../../../UI/Pagination/Pagination";
@@ -22,6 +23,12 @@ const Crews = React.memo((props) => {
     props.selectedVessel &&
       props.onFetchCrew(props.userToken, props.selectedVessel.vessels_id);
   }, [props.selectedVessel]);
+
+  useEffect(() => {
+    props.selectedVessel &&
+      props.onFetchCrew(props.userToken, props.selectedVessel.vessels_id);
+  }, [props.isSuccess]);
+
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = props.CrewList.slice(indexOfFirstRow, indexOfLastRow);
@@ -32,9 +39,9 @@ const Crews = React.memo((props) => {
     props.openModal(null);
   };
 
-  // useEffect(() => {
-  //   crewsListState && EditCrews(crewsListState);
-  // }, [crewsListState]);
+  const closeSuccess = () => {
+    props.alertConfirm(false);
+  };
 
   return (
     <>
@@ -95,10 +102,20 @@ const Crews = React.memo((props) => {
 
       {props.editCrewDetails && (
         <CrewModal
+          vesselsid={props.selectedVessel.vessels_id}
           show={props.editCrewDetails ? true : false}
           close={closeModal}
         />
       )}
+
+      <SweetAlert
+        success
+        title="Success!"
+        show={props.isSuccess}
+        onConfirm={closeSuccess}
+      >
+        {"Success Updating Data"}
+      </SweetAlert>
     </>
   );
 });
@@ -109,7 +126,7 @@ const mapStateToProps = (state) => ({
   loadingCrews: state.crew.loadingCrews,
   editCrewDetails: state.crew.editCrewDetails,
   selectedVessel: state.vessels.selectedVessel,
-  //   isSuccess: state.ship.isSuccess,
+  isSuccess: state.crew.isSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -121,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
     openModal: (data) => dispatch(editCrewDetailsModal(data)),
     onFetchCrew: (token, data, query) =>
       dispatch(fetchCrewList(token, data, query)),
-    // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
+    alertConfirm: (data) => dispatch(alertShowCrews(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
 };

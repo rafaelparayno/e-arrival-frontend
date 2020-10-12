@@ -37,21 +37,21 @@ const openModalEditCrews = (state, action) => {
   });
 };
 
-// const SaveEditDetailsStart = (state, action) => {
-//   return updateObject(state, { loadingSaving: true });
-// };
+const SaveEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingSaving: true });
+};
 
-// const SaveEditDetailsSuccess = (state, action) => {
-//   return updateObject(state, {
-//     loadingSaving: false,
-//     editCrewDetails: null,
-//     isSuccess: true,
-//   });
-// };
+const SaveEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingSaving: false,
+    editCrewDetails: null,
+    isSuccess: true,
+  });
+};
 
-// const SaveEditDetailsFail = (state, action) => {
-//   return updateObject(state, { loadingSaving: false });
-// };
+const SaveEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingSaving: false });
+};
 
 // const UpdateEditDetailsStart = (state, action) => {
 //   return updateObject(state, { loadingSaving: true });
@@ -84,9 +84,9 @@ const openModalEditCrews = (state, action) => {
 //   return updateObject(state, { loadingDeleting: false });
 // };
 
-// const closeSuccessAlert = (state, action) => {
-//   return updateObject(state, { isSuccess: action.CloseAlert });
-// };
+const closeSuccessAlert = (state, action) => {
+  return updateObject(state, { isSuccess: action.CloseAlert });
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -100,12 +100,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EDIT_CREW_DETAIL_MODAL:
       return openModalEditCrews(state, action);
 
-    // case actionTypes.SAVE_CrewS_DETAILS:
-    //   return SaveEditDetailsStart(state, action);
-    // case actionTypes.SAVE_CrewS_DETAILS_SUCCESS:
-    //   return SaveEditDetailsSuccess(state, action);
-    // case actionTypes.SAVE_CrewS_DETAILS_FAIL:
-    //   return SaveEditDetailsFail(state, action);
+    case actionTypes.SAVE_CREWS_DETAILS:
+      return SaveEditDetailsStart(state, action);
+    case actionTypes.SAVE_CREWS_DETAILS_SUCCESS:
+      return SaveEditDetailsSuccess(state, action);
+    case actionTypes.SAVE_CREWS_DETAILS_FAIL:
+      return SaveEditDetailsFail(state, action);
 
     // case actionTypes.UPDATE_CrewS_DETAILS:
     //   return UpdateEditDetailsStart(state, action);
@@ -121,8 +121,8 @@ const reducer = (state = initialState, action) => {
     // case actionTypes.DELETE_CrewS_DETAILS_FAIL:
     //   return DeleteEditDetailsFail(state, action);
 
-    // case actionTypes.ALERT_MODALS_SHOW_CrewS:
-    //   return closeSuccessAlert(state, action);
+    case actionTypes.ALERT_MODALS_SHOW_CREW:
+      return closeSuccessAlert(state, action);
     default:
       return state;
   }
