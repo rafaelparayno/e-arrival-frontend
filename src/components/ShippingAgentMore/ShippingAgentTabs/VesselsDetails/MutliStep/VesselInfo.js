@@ -45,8 +45,8 @@ const VesselInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="name"
-              value={vesselEditDetails.name}
+              name="vessel_name"
+              value={vesselEditDetails.vessel_name}
               type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -187,7 +187,7 @@ const VesselInfo = (props) => {
           </button>
           <button
             disabled={
-              !vesselEditDetails.name ||
+              !vesselEditDetails.vessel_name ||
               !vesselEditDetails.vessel_flag ||
               !vesselEditDetails.imonumber
             }
@@ -207,7 +207,7 @@ const VesselInfo = (props) => {
         title="Clearing Data"
         show={exitModal}
         onConfirm={() => exitModalEvent()}
-        onCancel={() => exitModal}
+        onCancel={() => setEditExitModal(false)}
       >
         {"Exiting this modal will clear the data."}
       </SweetAlert>

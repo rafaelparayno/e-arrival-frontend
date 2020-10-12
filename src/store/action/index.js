@@ -31,6 +31,11 @@ export {
   fetchCrewList, //
 } from "./crew";
 
-export { editArrivalDetailsModal } from "./arrival";
+export { editArrivalDetailsModal, saveEditDetailsArrival } from "./arrival";
 
-export { editDepartureDetailsModal } from "./departure";
+export {
+  editDepartureDetailsModal,
+  saveEditDetailsDeparture,
+} from "./departure";
+
+export { editBookingDetailsModal, saveEditDetailsBooking } from "./booking";

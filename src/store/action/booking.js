@@ -1,30 +1,30 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
-//Departure
-// export const fetchDepartureSuccess = (Departure) => {
+//Booking
+// export const fetchBookingSuccess = (Booking) => {
 //   return {
 //     type: actionTypes.FETCH_VESSEL_LIST_SUCCESS,
-//     Departure: Departure,
+//     Booking: Booking,
 //   };
 // };
 
-// export const fetchDepartureFail = (error) => {
+// export const fetchBookingFail = (error) => {
 //   return {
 //     type: actionTypes.FETCH_VESSEL_LIST_FAIL,
 //     error: error,
 //   };
 // };
 
-// export const fetchDepartureStart = () => {
+// export const fetchBookingStart = () => {
 //   return {
 //     type: actionTypes.FETCH_VESSEL_LIST,
 //   };
 // };
 
-// export const fetchDeparture = (access_token, code, query) => {
+// export const fetchBooking = (access_token, code, query) => {
 //   return (dispatch) => {
-//     dispatch(fetchDepartureStart());
+//     dispatch(fetchBookingStart());
 
 //     let options = query
 //       ? {
@@ -44,51 +44,51 @@ import axios from "axios";
 //     axios
 //       .post("http://localhost:5000/vessels/agent", { vessel_id: code }, options)
 //       .then((res) => {
-//         let fetchDeparture = {};
-//         fetchDeparture = res.data;
-//         dispatch(fetchDepartureSuccess(fetchDeparture));
+//         let fetchBooking = {};
+//         fetchBooking = res.data;
+//         dispatch(fetchBookingSuccess(fetchBooking));
 //       })
 //       .catch((err) => {
 //         console.log(err);
-//         dispatch(fetchDepartureFail(err));
+//         dispatch(fetchBookingFail(err));
 //       });
 //   };
 // };
 
-export const editDepartureDetailsModal = (data) => {
+export const editBookingDetailsModal = (data) => {
   return {
-    type: actionTypes.EDIT_DEPARTURE_DETAIL_MODAL,
+    type: actionTypes.EDIT_BOOKING_DETAIL_MODAL,
     data: data,
   };
 };
 
 //saving
 
-export const SaveDepartureDetailSuccess = (saveMessage) => {
+export const SaveBookingDetailSuccess = (saveMessage) => {
   return {
-    type: actionTypes.SAVE_DEPARTURE_DETAILS_SUCCESS,
+    type: actionTypes.SAVE_BOOKING_DETAILS_SUCCESS,
     saveMessage: saveMessage,
   };
 };
 
-export const SaveDepartureDetailFail = (error) => {
+export const SaveBookingDetailFail = (error) => {
   return {
-    type: actionTypes.SAVE_DEPARTURE_DETAILS_FAIL,
+    type: actionTypes.SAVE_BOOKING_DETAILS_FAIL,
     error: error,
   };
 };
 
-export const SaveDepartureDetailStart = () => {
+export const SaveBookingDetailStart = () => {
   return {
-    type: actionTypes.SAVE_DEPARTURE_DETAILS,
+    type: actionTypes.SAVE_BOOKING_DETAILS,
   };
 };
 
-export const saveEditDetailsDeparture = (access_token, Datas) => {
+export const saveEditDetailsBooking = (access_token, Datas) => {
   return (dispatch) => {
-    dispatch(SaveDepartureDetailStart());
+    dispatch(SaveBookingDetailStart());
 
-    const url = "http://localhost:5000/departure";
+    const url = "http://localhost:5000/bookings";
 
     axios
       .post(url, Datas, {
@@ -98,24 +98,24 @@ export const saveEditDetailsDeparture = (access_token, Datas) => {
         },
       })
       .then((res) => {
-        let SaveDepartureDetails = "";
+        let SaveBookingDetails = "";
 
         if (!res.data.error) {
-          SaveDepartureDetails = res.data.msg;
+          SaveBookingDetails = res.data.msg;
         } else {
-          SaveDepartureDetails = "";
+          SaveBookingDetails = "";
         }
 
-        dispatch(SaveDepartureDetailSuccess(SaveDepartureDetails));
+        dispatch(SaveBookingDetailSuccess(SaveBookingDetails));
       })
       .catch((err) => {
         console.log(err);
-        dispatch(SaveDepartureDetailFail(err));
+        dispatch(SaveBookingDetailFail(err));
       });
   };
 };
 
-export const alertShowDeparture = (Data) => {
+export const alertShowBooking = (Data) => {
   return {
     type: actionTypes.ALERT_MODALS_SHOW_VESSELS,
     CloseAlert: Data,
@@ -124,29 +124,29 @@ export const alertShowDeparture = (Data) => {
 
 //updating
 
-// export const UpdateDepartureDetailSuccess = (UpdateMessage) => {
+// export const UpdateBookingDetailSuccess = (UpdateMessage) => {
 //   return {
 //     type: actionTypes.UPDATE_VESSELS_DETAILS_SUCCESS,
 //     saveMessage: UpdateMessage,
 //   };
 // };
 
-// export const UpdateDepartureDetailFail = (error) => {
+// export const UpdateBookingDetailFail = (error) => {
 //   return {
 //     type: actionTypes.UPDATE_VESSELS_DETAILS_FAIL,
 //     error: error,
 //   };
 // };
 
-// export const UpdateDepartureDetailStart = () => {
+// export const UpdateBookingDetailStart = () => {
 //   return {
 //     type: actionTypes.UPDATE_VESSELS_DETAILS,
 //   };
 // };
 
-// export const UpdateEditDetailsDeparture = (access_token, Datas) => {
+// export const UpdateEditDetailsBooking = (access_token, Datas) => {
 //   return (dispatch) => {
-//     dispatch(UpdateDepartureDetailStart());
+//     dispatch(UpdateBookingDetailStart());
 
 //     const url = `http://localhost:5000/patch/${Datas.vessel_id}`;
 
@@ -158,19 +158,19 @@ export const alertShowDeparture = (Data) => {
 //         },
 //       })
 //       .then((res) => {
-//         let UpdateDepartureDetails = "";
+//         let UpdateBookingDetails = "";
 
 //         if (!res.data.error) {
-//           UpdateDepartureDetails = res.data.msg;
+//           UpdateBookingDetails = res.data.msg;
 //         } else {
-//           UpdateDepartureDetails = "";
+//           UpdateBookingDetails = "";
 //         }
 
-//         dispatch(UpdateDepartureDetailSuccess(UpdateDepartureDetails));
+//         dispatch(UpdateBookingDetailSuccess(UpdateBookingDetails));
 //       })
 //       .catch((err) => {
 //         console.log(err);
-//         dispatch(UpdateDepartureDetailFail(err));
+//         dispatch(UpdateBookingDetailFail(err));
 //       });
 //   };
 // };
@@ -178,29 +178,29 @@ export const alertShowDeparture = (Data) => {
 
 // //deleting
 
-// export const DeleteDepartureDetailSuccess = (DeleteMessage) => {
+// export const DeleteBookingDetailSuccess = (DeleteMessage) => {
 //   return {
 //     type: actionTypes.DELETE_VESSELS_DETAILS_SUCCESS,
 //     DeleteMessage: DeleteMessage,
 //   };
 // };
 
-// export const DeleteDepartureDetailFail = (error) => {
+// export const DeleteBookingDetailFail = (error) => {
 //   return {
 //     type: actionTypes.DELETE_VESSELS_DETAILS_FAIL,
 //     error: error,
 //   };
 // };
 
-// export const DeleteDepartureDetailStart = () => {
+// export const DeleteBookingDetailStart = () => {
 //   return {
 //     type: actionTypes.DELETE_VESSELS_DETAILS,
 //   };
 // };
 
-// export const deleteEditDetailsDeparture = (access_token, u_id) => {
+// export const deleteEditDetailsBooking = (access_token, u_id) => {
 //   return (dispatch) => {
-//     dispatch(DeleteDepartureDetailStart());
+//     dispatch(DeleteBookingDetailStart());
 
 //     const url = `http://localhost:5000/vessels/${u_id}`;
 
@@ -212,19 +212,19 @@ export const alertShowDeparture = (Data) => {
 //         },
 //       })
 //       .then((res) => {
-//         let DeleteDepartureDetails = "";
+//         let DeleteBookingDetails = "";
 
 //         if (!res.data.error) {
-//           DeleteDepartureDetails = res.data.msg;
+//           DeleteBookingDetails = res.data.msg;
 //         } else {
-//           DeleteDepartureDetails = "";
+//           DeleteBookingDetails = "";
 //         }
 
-//         dispatch(DeleteDepartureDetailSuccess(DeleteDepartureDetails));
+//         dispatch(DeleteBookingDetailSuccess(DeleteBookingDetails));
 //       })
 //       .catch((err) => {
 //         console.log(err);
-//         dispatch(DeleteDepartureDetailFail(err));
+//         dispatch(DeleteBookingDetailFail(err));
 //       });
 //   };
 // };

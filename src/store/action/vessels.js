@@ -85,33 +85,55 @@ export const SaveVesselsDetailStart = () => {
 };
 
 export const saveEditDetailsVessel = (access_token, Datas) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(SaveVesselsDetailStart());
-
     const url = "http://localhost:5000/vessels";
 
-    axios
-      .post(url, Datas, {
+    try {
+      const vessel = await axios.post(url, Datas, {
         headers: {
           Authorization: `Bearer ${access_token}`,
           "content-type": "application/json",
         },
-      })
-      .then((res) => {
-        let SaveVesselsDetails = "";
-
-        if (!res.data.error) {
-          SaveVesselsDetails = res.data.msg;
-        } else {
-          SaveVesselsDetails = "";
-        }
-
-        dispatch(SaveVesselsDetailSuccess(SaveVesselsDetails));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(SaveVesselsDetailFail(err));
       });
+
+      let SaveVesselsDetails = "";
+
+      if (!vessel.data.error) {
+        SaveVesselsDetails = vessel.data.msg;
+      } else {
+        SaveVesselsDetails = "";
+      }
+
+      dispatch(SaveVesselsDetailSuccess(SaveVesselsDetails));
+      return vessel.data;
+    } catch (err) {
+      console.log(err);
+      dispatch(SaveVesselsDetailFail(err));
+    }
+
+    // axios
+    //   .post(url, Datas, {
+    //     headers: {
+    //       Authorization: `Bearer ${access_token}`,
+    //       "content-type": "application/json",
+    //     },
+    //   })
+    //   .then((res) => {
+    //     let SaveVesselsDetails = "";
+
+    //     if (!res.data.error) {
+    //       SaveVesselsDetails = res.data.msg;
+    //     } else {
+    //       SaveVesselsDetails = "";
+    //     }
+
+    //     dispatch(SaveVesselsDetailSuccess(SaveVesselsDetails));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     dispatch(SaveVesselsDetailFail(err));
+    //   });
   };
 };
 
@@ -144,34 +166,32 @@ export const UpdateVesselsDetailStart = () => {
   };
 };
 
-export const UpdateEditDetailsVessel = (access_token, Datas) => {
+export const UpdateEditDetailsVessel = async (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateVesselsDetailStart());
 
     const url = `http://localhost:5000/patch/${Datas.vessel_id}`;
-
-    axios
-      .patch(url, Datas, {
+    try {
+      const vessel = axios.patch(url, Datas, {
         headers: {
           Authorization: `Bearer ${access_token}`,
           "content-type": "application/json",
         },
-      })
-      .then((res) => {
-        let UpdateVesselsDetails = "";
-
-        if (!res.data.error) {
-          UpdateVesselsDetails = res.data.msg;
-        } else {
-          UpdateVesselsDetails = "";
-        }
-
-        dispatch(UpdateVesselsDetailSuccess(UpdateVesselsDetails));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(UpdateVesselsDetailFail(err));
       });
+
+      let UpdateVesselsDetails = "";
+
+      if (!vessel.data.error) {
+        UpdateVesselsDetails = vessel.data.msg;
+      } else {
+        UpdateVesselsDetails = "";
+      }
+
+      dispatch(UpdateVesselsDetailSuccess(UpdateVesselsDetails));
+    } catch (err) {
+      console.log(err);
+      dispatch(UpdateVesselsDetailFail(err));
+    }
   };
 };
 // axios.all(data.map(data=> axios.post('asdasd',data,)))

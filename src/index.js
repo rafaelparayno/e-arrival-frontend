@@ -12,6 +12,7 @@ import vesselReducer from "./store/reducer/vessels";
 import crewReducer from "./store/reducer/crew";
 import arrivalReducer from "./store/reducer/arrival";
 import departureReducer from "./store/reducer/departure";
+import bookingReducer from "./store/reducer/booking";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   crew: crewReducer,
   arrival: arrivalReducer,
   departure: departureReducer,
+  booking: bookingReducer,
 });
 
 const store = createStore(

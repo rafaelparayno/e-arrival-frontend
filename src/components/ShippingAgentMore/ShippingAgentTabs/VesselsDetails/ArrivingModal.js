@@ -54,7 +54,7 @@ const ArrivingModal = React.memo((props) => {
         return <Departure next={next} prev={previous} />;
       }
       case 4: {
-        return <BookingInfo next={next} prev={previous} />;
+        return <BookingInfo code={props.code} next={next} prev={previous} />;
       }
     }
   };

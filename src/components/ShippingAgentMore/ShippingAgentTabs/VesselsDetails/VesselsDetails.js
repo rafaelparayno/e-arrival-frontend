@@ -156,6 +156,7 @@ const VesselDetails = React.memo((props) => {
 
       {props.editVesselDetails && (
         <ArrivingModal
+          code={props.code}
           show={props.editVesselDetails ? true : false}
           close={closeModal}
         />

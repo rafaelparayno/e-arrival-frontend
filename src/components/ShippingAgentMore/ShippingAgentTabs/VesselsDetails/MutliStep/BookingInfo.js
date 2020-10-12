@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import {
+  saveEditDetailsVessel,
+  saveEditDetailsArrival,
+  saveEditDetailsBooking,
+  saveEditDetailsDeparture,
+} from "../../../../../store/action/index";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -9,7 +15,8 @@ import "./ArrivalInfo.css";
 
 const BookingInfo = (props) => {
   const [bookingEditDetails, setBookingEditDetails] = useState({});
-  const { next, prev } = props;
+  const { prev, code } = props;
+
   const locales = {
     "en-US": enUS,
     es: es,
@@ -18,7 +25,7 @@ const BookingInfo = (props) => {
   };
 
   const {
-    editVesselDetails: { name },
+    editVesselDetails: { vessel_name },
   } = props;
 
   registerLocale(locales);
@@ -29,6 +36,32 @@ const BookingInfo = (props) => {
 
   const timeArrivalHandler = (time) => {
     setBookingEditDetails({ ...bookingEditDetails, ["time"]: time });
+  };
+
+  const saveData = async () => {
+    try {
+      const vessels = await props.onSaveVessel(props.userToken, {
+        ...props.editVesselDetails,
+        shipping_agent_id: code,
+      });
+
+      await Promise.all([
+        props.onSaveArrival(props.userToken, {
+          ...props.editArrivalDetails,
+          vessels_id: vessels.vessels_id,
+        }),
+        props.onSaveDeparture(props.userToken, {
+          ...props.editDepartureDetails,
+          vessels_id: vessels.vessels_id,
+        }),
+        props.onSaveBooking(props.userToken, {
+          ...bookingEditDetails,
+          vessels_id: vessels.vessels_id,
+        }),
+      ]);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -42,7 +75,7 @@ const BookingInfo = (props) => {
             <input
               className="form-control"
               readOnly
-              value={name}
+              value={vessel_name}
               type="text"
               style={{ width: "100%" }}
             />
@@ -86,7 +119,7 @@ const BookingInfo = (props) => {
           <button onClick={(e) => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <SaveButton />
+          <SaveButton onClick={() => saveData()} />
         </div>
       </div>
     </>
@@ -94,12 +127,21 @@ const BookingInfo = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
   editVesselDetails: state.vessels.editVesselDetails,
+  editArrivalDetails: state.arrival.editArrivalDetails,
+  editDepartureDetails: state.departure.editDepartureDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // openModal: (data) => dispatch(editVesselDetailsModal(data)),
+    onSaveVessel: (token, data) => dispatch(saveEditDetailsVessel(token, data)),
+    onSaveArrival: (token, data) =>
+      dispatch(saveEditDetailsArrival(token, data)),
+    onSaveDeparture: (token, data) =>
+      dispatch(saveEditDetailsDeparture(token, data)),
+    onSaveBooking: (token, data) =>
+      dispatch(saveEditDetailsBooking(token, data)),
   };
 };
 

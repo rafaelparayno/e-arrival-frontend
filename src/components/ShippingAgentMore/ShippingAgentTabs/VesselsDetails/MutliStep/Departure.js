@@ -74,13 +74,13 @@ const Departure = (props) => {
           </div>
         </div>
         <div className="col-lg-7">
-          <label className="font-size">Purpose call</label>
+          <label className="font-size">Port of call</label>
 
           <div>
             <input
               className="form-control"
-              name="purpose"
-              value={departureEditDetails.purpose}
+              name="portcall"
+              value={departureEditDetails.portcall}
               type="text"
               onChange={departureEditDetailsHandler}
               style={{ width: "100%" }}
