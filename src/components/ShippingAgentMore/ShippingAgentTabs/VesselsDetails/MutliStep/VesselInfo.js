@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { editVesselDetailsModal } from "../../../../../store/action/index";
+import {
+  editVesselDetailsModal,
+  editDepartureDetailsModal,
+  editArrivalDetailsModal,
+} from "../../../../../store/action/index";
 import { connect } from "react-redux";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 const VesselInfo = (props) => {
   const [vesselEditDetails, setVesselEditDetails] = useState({});
+  const [exitModal, setEditExitModal] = useState(false);
   const { next } = props;
 
   useEffect(() => {
@@ -20,6 +26,13 @@ const VesselInfo = (props) => {
   const goToSecond = () => {
     props.openModal(vesselEditDetails);
     next();
+  };
+
+  const exitModalEvent = () => {
+    props.openModal(null);
+    props.setDataDeparture(null);
+    props.setDataArrival(null);
+    setEditExitModal(false);
   };
 
   return (
@@ -167,7 +180,7 @@ const VesselInfo = (props) => {
           className="col-lg-12"
         >
           <button
-            onClick={() => props.openModal(null)}
+            onClick={() => setEditExitModal(true)}
             className="btn btn-lg btn-default"
           >
             Exit
@@ -185,6 +198,19 @@ const VesselInfo = (props) => {
           </button>
         </div>
       </div>
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText="Confirm"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="default"
+        title="Clearing Data"
+        show={exitModal}
+        onConfirm={() => exitModalEvent()}
+        onCancel={() => exitModal}
+      >
+        {"Exiting this modal will clear the data."}
+      </SweetAlert>
     </>
   );
 };
@@ -196,6 +222,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editVesselDetailsModal(data)),
+    setDataArrival: (data) => dispatch(editArrivalDetailsModal(data)),
+    setDataDeparture: (data) => dispatch(editDepartureDetailsModal(data)),
   };
 };
 

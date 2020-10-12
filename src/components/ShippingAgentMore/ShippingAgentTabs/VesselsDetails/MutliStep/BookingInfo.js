@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Select, { createFilter } from "react-select";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
+import SaveButton from "../../../../UI/SaveButton/SaveButton";
 import "./ArrivalInfo.css";
 
 const BookingInfo = (props) => {
@@ -86,7 +86,7 @@ const BookingInfo = (props) => {
           <button onClick={(e) => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <button className="btn btn-lg btn-primary">Submit</button>
+          <SaveButton />
         </div>
       </div>
     </>
