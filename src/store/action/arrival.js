@@ -29,7 +29,7 @@ export const fetchArrival = (access_token, code) => {
     axios
       .post(
         "/arrivals/vessel",
-        { vessel_id: code },
+        { shipping_id: code },
         {
           headers: {
             Authorization: `Bearer ${access_token}`,

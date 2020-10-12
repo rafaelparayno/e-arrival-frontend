@@ -26,9 +26,11 @@ const AgentAgenda = React.memo((props) => {
   //     };
   //   };
 
-  // useEffect(() => {
-  //   props.onFetchAr(userToken);
-  // }, []);
+  useEffect(() => {
+    const code = props.code;
+
+    props.onFetchAr(props.userToken, code);
+  }, []);
 
   return (
     <>

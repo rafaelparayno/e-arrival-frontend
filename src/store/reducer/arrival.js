@@ -90,12 +90,12 @@ const SaveEditDetailsFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.FETCH_VESSEL_LIST:
-    //   return fetchArrivalListStart(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_SUCCESS:
-    //   return fetchArrivalListSuccess(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_FAIL:
-    //   return fetchArrivalListFail(state, action);
+    case actionTypes.FETCH_ARRIVAL_LIST:
+      return fetchArrivalListStart(state, action);
+    case actionTypes.FETCH_ARRIVAL_LIST_SUCCESS:
+      return fetchArrivalListSuccess(state, action);
+    case actionTypes.FETCH_ARRIVAL_LIST_FAIL:
+      return fetchArrivalListFail(state, action);
 
     case actionTypes.EDIT_ARRIVAL_DETAIL_MODAL:
       return openModalEditArrivals(state, action);
