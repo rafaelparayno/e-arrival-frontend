@@ -53,7 +53,7 @@ export const auth = (username, password) => {
       password: password,
     };
 
-    const url = "http://localhost:5000/users/login";
+    const url = "/users/login";
     axios
       .post(url, authData)
       .then((response) => {

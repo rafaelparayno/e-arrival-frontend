@@ -2,58 +2,51 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
 //Arrival
-// export const fetchArrivalSuccess = (Arrival) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_SUCCESS,
-//     Arrival: Arrival,
-//   };
-// };
+export const fetchArrivalSuccess = (Arrival) => {
+  return {
+    type: actionTypes.FETCH_ARRIVAL_LIST_SUCCESS,
+    Arrival: Arrival,
+  };
+};
 
-// export const fetchArrivalFail = (error) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_FAIL,
-//     error: error,
-//   };
-// };
+export const fetchArrivalFail = (error) => {
+  return {
+    type: actionTypes.FETCH_ARRIVAL_LIST_FAIL,
+    error: error,
+  };
+};
 
-// export const fetchArrivalStart = () => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST,
-//   };
-// };
+export const fetchArrivalStart = () => {
+  return {
+    type: actionTypes.FETCH_ARRIVAL_LIST,
+  };
+};
 
-// export const fetchArrival = (access_token, code, query) => {
-//   return (dispatch) => {
-//     dispatch(fetchArrivalStart());
+export const fetchArrival = (access_token, code) => {
+  return (dispatch) => {
+    dispatch(fetchArrivalStart());
 
-//     let options = query
-//       ? {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//           params: {
-//             q: query,
-//           },
-//         }
-//       : {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//         };
-
-//     axios
-//       .post("http://localhost:5000/vessels/agent", { vessel_id: code }, options)
-//       .then((res) => {
-//         let fetchArrival = {};
-//         fetchArrival = res.data;
-//         dispatch(fetchArrivalSuccess(fetchArrival));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         dispatch(fetchArrivalFail(err));
-//       });
-//   };
-// };
+    axios
+      .post(
+        "/arrivals/vessel",
+        { vessel_id: code },
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      )
+      .then((res) => {
+        let fetchArrival = {};
+        fetchArrival = res.data;
+        dispatch(fetchArrivalSuccess(fetchArrival));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchArrivalFail(err));
+      });
+  };
+};
 
 export const editArrivalDetailsModal = (data) => {
   return {
@@ -88,7 +81,7 @@ export const saveEditDetailsArrival = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveArrivalDetailStart());
 
-    const url = "http://localhost:5000/arrivals";
+    const url = "/arrivals";
 
     axios
       .post(url, Datas, {

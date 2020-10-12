@@ -88,7 +88,7 @@ export const saveEditDetailsBooking = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveBookingDetailStart());
 
-    const url = "http://localhost:5000/bookings";
+    const url = "/bookings";
 
     axios
       .post(url, Datas, {

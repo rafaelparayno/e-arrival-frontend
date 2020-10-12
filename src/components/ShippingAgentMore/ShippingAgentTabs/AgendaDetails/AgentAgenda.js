@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { fetchArrival } from "../../../../store/action/index";
 import CalendarUi from "../../../UI/Calendar/CalendarUi";
 import Spinner from "../../../UI/Spinner/Spinner";
 // import Pagination from "../../../UI/Pagination/Pagination";
@@ -25,6 +25,10 @@ const AgentAgenda = React.memo((props) => {
   //       style: newStyle,
   //     };
   //   };
+
+  // useEffect(() => {
+  //   props.onFetchAr(userToken);
+  // }, []);
 
   return (
     <>
@@ -53,6 +57,7 @@ const AgentAgenda = React.memo((props) => {
 });
 
 const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
   //   CrewList: state.crew.CrewList,
   //   loadingAgentAgenda: state.crew.loadingAgentAgenda,
   //   isSuccess: state.ship.isSuccess,
@@ -60,13 +65,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onFecthVessel: (token, data, query) =>
-    //   dispatch(fetchVessel(token, data, query)),
-    // onFetchAgentAgenda: (token, data, query) =>
-    //   dispatch(fetchAgentAgendaList(token, data, query)),
-    // openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
-    // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
-    // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
+    onFetchAr: (token, auth) => dispatch(fetchArrival(token, auth)),
   };
 };
 

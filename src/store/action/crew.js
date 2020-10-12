@@ -42,7 +42,7 @@ export const fetchCrewList = (access_token, code, query) => {
         };
 
     axios
-      .post("http://localhost:5000/crews/vessel", { vessel_id: code }, options)
+      .post("/crews/vessel", { vessel_id: code }, options)
       .then((res) => {
         let fetchCrewList = {};
         fetchCrewList = res.data;
@@ -87,7 +87,7 @@ export const saveEditDetailsCrew = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveCrewDetailSuccess());
 
-    const url = "http://localhost:5000/crews/";
+    const url = "/crews/";
 
     axios
       .post(url, Datas, {
@@ -145,7 +145,7 @@ export const UpdateEditDetailsCrew = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateCrewsDetailStart());
 
-    const url = `http://localhost:5000/crews/${Datas.id}`;
+    const url = `/crews/${Datas.id}`;
     // console.log(url);
     axios
       .patch(url, Datas, {
@@ -199,7 +199,7 @@ export const deleteEditDetailsCrew = (access_token, u_id) => {
   return (dispatch) => {
     dispatch(DeleteCrewsDetailStart());
 
-    const url = `http://localhost:5000/crews/${u_id}`;
+    const url = `/crews/${u_id}`;
 
     axios
       .delete(url, {

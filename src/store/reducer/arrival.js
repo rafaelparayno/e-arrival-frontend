@@ -15,20 +15,20 @@ const initialState = {
 
 //complist
 
-// const fetchArrivalListStart = (state, action) => {
-//   return updateObject(state, { loadingArrivals: true });
-// };
+const fetchArrivalListStart = (state, action) => {
+  return updateObject(state, { loadingArrivals: true });
+};
 
-// const fetchArrivalListSuccess = (state, action) => {
-//   return updateObject(state, {
-//     ArrivalList: action.Arrival,
-//     loadingArrivals: false,
-//   });
-// };
+const fetchArrivalListSuccess = (state, action) => {
+  return updateObject(state, {
+    ArrivalList: action.Arrival,
+    loadingArrivals: false,
+  });
+};
 
-// const fetchArrivalListFail = (state, action) => {
-//   return updateObject(state, { loadingArrivals: false });
-// };
+const fetchArrivalListFail = (state, action) => {
+  return updateObject(state, { loadingArrivals: false });
+};
 
 const openModalEditArrivals = (state, action) => {
   return updateObject(state, {

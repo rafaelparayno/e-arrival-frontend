@@ -37,7 +37,11 @@ export {
   deleteEditDetailsCrew,
 } from "./crew";
 
-export { editArrivalDetailsModal, saveEditDetailsArrival } from "./arrival";
+export {
+  editArrivalDetailsModal,
+  saveEditDetailsArrival,
+  fetchArrival,
+} from "./arrival";
 
 export {
   editDepartureDetailsModal,
