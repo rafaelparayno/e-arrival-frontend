@@ -20,12 +20,6 @@ const CrewModal = React.memo((props) => {
     setCrewDetailEdit({ ...crewDetailEdit, [name]: value });
   };
 
-  //   const save = (e) => {
-  //     e.preventDefault();
-  //     crewDetailEdit.u_id
-  //       ? props.update(props.crewToken, crewDetailEdit)
-  //       : props.save(props.crewToken, crewDetailEdit);
-  //   };
   return (
     <Modal
       title={
@@ -100,7 +94,7 @@ const CrewModal = React.memo((props) => {
               onChange={editCrewDetailHandler}
             />
             {/* <input type="radio" onChange={handleChange} name='is_fil' value="M" data-bv-field="gender" /> */}
-            <i class="fas fa-flag"></i> Filipino{" "}
+            <i className="fas fa-flag"></i> Filipino{" "}
           </label>{" "}
           <label
             className={
@@ -116,7 +110,7 @@ const CrewModal = React.memo((props) => {
               checked={crewDetailEdit.is_fil == "0"}
               onChange={editCrewDetailHandler}
             />
-            <i class="fas fa-flag-usa"></i>Foreigner{" "}
+            <i className="fas fa-flag-usa"></i>Foreigner{" "}
           </label>
         </div>
       </div>
@@ -140,7 +134,7 @@ const CrewModal = React.memo((props) => {
               onChange={editCrewDetailHandler}
             />
             {/* <input type="radio" onChange={handleChange} name='status' value="M" data-bv-field="gender" /> */}
-            <i class="fas fa-sign-out-alt"></i> Off Signers{" "}
+            <i className="fas fa-sign-out-alt"></i> Off Signers{" "}
           </label>{" "}
           <label
             className={
@@ -156,7 +150,7 @@ const CrewModal = React.memo((props) => {
               checked={crewDetailEdit.status == "0"}
               onChange={editCrewDetailHandler}
             />
-            <i class="fas fa-sign-in-alt"></i> OnSigners{" "}
+            <i className="fas fa-sign-in-alt"></i> OnSigners{" "}
           </label>
         </div>
       </div>
@@ -183,7 +177,8 @@ const CrewModal = React.memo((props) => {
 });
 
 const mapStateToProps = (state) => ({
-  // editShippingAgentDetails: state.ship.editShippingAgentDetails,
+  editCrewDetails: state.crew.editCrewDetails,
+  selectedVessel: state.vessels.selectedVessel,
   // loadingSaving: state.ship.loadingSaving,
   // userToken: state.auth.token,
 });

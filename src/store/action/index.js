@@ -25,6 +25,7 @@ export {
   UpdateEditDetailsVessel,
   deleteEditDetailsVessel,
   alertShowVessels,
+  selectedVesselDetails,
 } from "./vessels";
 
 export {

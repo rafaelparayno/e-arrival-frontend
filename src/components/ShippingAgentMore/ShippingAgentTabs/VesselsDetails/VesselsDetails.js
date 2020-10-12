@@ -5,8 +5,8 @@ import {
   fetchVessel,
   editVesselDetailsModal,
   deleteEditDetailsVessel,
+  selectedVesselDetails,
   alertShowVessels,
-  fetchCrewList,
 } from "../../../../store/action/index";
 import ArrivingModal from "./ArrivingModal";
 
@@ -33,7 +33,8 @@ const VesselDetails = React.memo((props) => {
   };
 
   useEffect(() => {
-    selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
+    // selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
+    selectedRows && props.onSelectData(selectedRows);
   }, [selectedRows]);
 
   const closeSuccess = () => {
@@ -190,6 +191,7 @@ const mapStateToProps = (state) => ({
   isSuccess: state.vessels.isSuccess,
   editVesselDetails: state.vessels.editVesselDetails,
   loadingVessels: state.vessels.loadingVessels,
+  selectedVessel: state.vessels.selectedVessel,
   //   isSuccess: state.ship.isSuccess,
 });
 
@@ -197,10 +199,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFecthVessel: (token, data, query) =>
       dispatch(fetchVessel(token, data, query)),
-    onFetchCrew: (token, data, query) =>
-      dispatch(fetchCrewList(token, data, query)),
+
     openModal: (data) => dispatch(editVesselDetailsModal(data)),
     alertConfirm: (data) => dispatch(alertShowVessels(data)),
+    onSelectData: (data) => dispatch(selectedVesselDetails(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
 };

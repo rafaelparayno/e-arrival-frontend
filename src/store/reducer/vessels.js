@@ -1,12 +1,11 @@
+import { actions } from "react-table";
 import * as actionTypes from "../action/actionTypes";
 import { updateObject } from "../utility";
 
 const initialState = {
   VesselList: [],
-  // companyNatureList: [],
-  // addressBook: [],
-
   loadingVessels: false,
+  selectedVessel: null,
   editVesselDetails: null,
   loadingSaving: false,
   loadingDeleting: false,
@@ -34,6 +33,12 @@ const openModalEditVessels = (state, action) => {
   return updateObject(state, {
     editVesselDetails: action.data,
     isSuccess: false,
+  });
+};
+
+const selectedVessels = (state, action) => {
+  return updateObject(state, {
+    selectedVessel: action.data,
   });
 };
 
@@ -97,6 +102,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FETCH_VESSEL_LIST_FAIL:
       return fetchVesselListFail(state, action);
 
+    case actionTypes.SELECTED_VESSEL_DETAIL:
+      return selectedVessels(state, action);
+
     case actionTypes.EDIT_VESSEL_DETAIL_MODAL:
       return openModalEditVessels(state, action);
 
@@ -123,6 +131,7 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.ALERT_MODALS_SHOW_VESSELS:
       return closeSuccessAlert(state, action);
+
     default:
       return state;
   }

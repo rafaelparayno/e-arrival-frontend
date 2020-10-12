@@ -62,6 +62,13 @@ export const editVesselDetailsModal = (data) => {
   };
 };
 
+export const selectedVesselDetails = (data) => {
+  return {
+    type: actionTypes.SELECTED_VESSEL_DETAIL,
+    data: data,
+  };
+};
+
 //saving
 
 export const SaveVesselsDetailSuccess = (saveMessage) => {

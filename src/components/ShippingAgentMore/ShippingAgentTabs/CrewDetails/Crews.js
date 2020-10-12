@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { editCrewDetailsModal } from "../../../../store/action/index";
+import {
+  editCrewDetailsModal,
+  fetchCrewList,
+} from "../../../../store/action/index";
 import Spinner from "../../../UI/Spinner/Spinner";
 import Pagination from "../../../UI/Pagination/Pagination";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -14,7 +17,11 @@ const Crews = React.memo((props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(4);
   // const { crewsListState } = props.CrewList;
-
+  useEffect(() => {
+    // selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
+    props.selectedVessel &&
+      props.onFetchCrew(props.userToken, props.selectedVessel.vessels_id);
+  }, [props.selectedVessel]);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = props.CrewList.slice(indexOfFirstRow, indexOfLastRow);
@@ -24,6 +31,7 @@ const Crews = React.memo((props) => {
   const closeModal = () => {
     props.openModal(null);
   };
+
   // useEffect(() => {
   //   crewsListState && EditCrews(crewsListState);
   // }, [crewsListState]);
@@ -54,6 +62,7 @@ const Crews = React.memo((props) => {
             <i className="fa fa-search"></i>
           </button>
           <button
+            disabled={!props.selectedVessel}
             onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
@@ -95,9 +104,11 @@ const Crews = React.memo((props) => {
 });
 
 const mapStateToProps = (state) => ({
+  userToken: state.auth.token,
   CrewList: state.crew.CrewList,
   loadingCrews: state.crew.loadingCrews,
   editCrewDetails: state.crew.editCrewDetails,
+  selectedVessel: state.vessels.selectedVessel,
   //   isSuccess: state.ship.isSuccess,
 });
 
@@ -108,6 +119,8 @@ const mapDispatchToProps = (dispatch) => {
     // onFetchCrews: (token, data, query) =>
     //   dispatch(fetchCrewsList(token, data, query)),
     openModal: (data) => dispatch(editCrewDetailsModal(data)),
+    onFetchCrew: (token, data, query) =>
+      dispatch(fetchCrewList(token, data, query)),
     // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
