@@ -7,27 +7,12 @@ import ArrivalInfo from "./MutliStep/ArrivalInfo";
 import Departure from "./MutliStep/Departure";
 import BookingInfo from "./MutliStep/BookingInfo";
 
-import SaveButton from "../../../UI/SaveButton/SaveButton";
-
 const ArrivingModal = React.memo((props) => {
   const [stepForm, setStepForm] = useState(0);
-  const [arrivingEditDetails, setArrivingEditDetails] = useState([]);
 
   useEffect(() => {
     setStepForm((step) => step + 1);
   }, []);
-
-  const editshippingAgencyDetailHandler = (e) => {
-    const name = e.target.name ? e.target.name : e.target.props.name;
-    const value = e.target.value;
-
-    setArrivingEditDetails({ ...arrivingEditDetails, [name]: value });
-  };
-
-  const save = (e) => {
-    e.preventDefault();
-    props.save(props.userToken, arrivingEditDetails);
-  };
 
   const next = () => {
     setStepForm((step) => step + 1);

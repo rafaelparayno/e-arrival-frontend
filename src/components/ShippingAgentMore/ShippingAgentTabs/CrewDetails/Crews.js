@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { editCrewDetailsModal } from "../../../../store/action/index";
 import Spinner from "../../../UI/Spinner/Spinner";
 import Pagination from "../../../UI/Pagination/Pagination";
 import SweetAlert from "react-bootstrap-sweetalert";
+import CrewModal from "./CrewModal";
 
 import Crew from "./Crew";
 import classes from "./Crews.module.css";
@@ -20,6 +21,9 @@ const Crews = React.memo((props) => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const closeModal = () => {
+    props.openModal(null);
+  };
   // useEffect(() => {
   //   crewsListState && EditCrews(crewsListState);
   // }, [crewsListState]);
@@ -50,7 +54,7 @@ const Crews = React.memo((props) => {
             <i className="fa fa-search"></i>
           </button>
           <button
-            // onClick={() => props.openModal({})}
+            onClick={() => props.openModal({})}
             className={classes.btnAdd}
           >
             <i className="fa fa-plus"></i>&nbsp; Add Crewmate
@@ -79,6 +83,13 @@ const Crews = React.memo((props) => {
           />
         </div>
       </div>
+
+      {props.editCrewDetails && (
+        <CrewModal
+          show={props.editCrewDetails ? true : false}
+          close={closeModal}
+        />
+      )}
     </>
   );
 });
@@ -86,6 +97,7 @@ const Crews = React.memo((props) => {
 const mapStateToProps = (state) => ({
   CrewList: state.crew.CrewList,
   loadingCrews: state.crew.loadingCrews,
+  editCrewDetails: state.crew.editCrewDetails,
   //   isSuccess: state.ship.isSuccess,
 });
 
@@ -95,7 +107,7 @@ const mapDispatchToProps = (dispatch) => {
     //   dispatch(fetchVessel(token, data, query)),
     // onFetchCrews: (token, data, query) =>
     //   dispatch(fetchCrewsList(token, data, query)),
-    // openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
+    openModal: (data) => dispatch(editCrewDetailsModal(data)),
     // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };

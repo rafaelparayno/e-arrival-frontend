@@ -54,3 +54,10 @@ export const fetchCrewList = (access_token, code, query) => {
       });
   };
 };
+
+export const editCrewDetailsModal = (data) => {
+  return {
+    type: actionTypes.EDIT_CREW_DETAIL_MODAL,
+    data: data,
+  };
+};

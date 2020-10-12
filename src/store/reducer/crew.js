@@ -30,12 +30,12 @@ const fetchCrewListFail = (state, action) => {
   return updateObject(state, { loadingCrews: false });
 };
 
-// const openModalEditCrews = (state, action) => {
-//   return updateObject(state, {
-//     editCrewDetails: action.data,
-//     isSuccess: false,
-//   });
-// };
+const openModalEditCrews = (state, action) => {
+  return updateObject(state, {
+    editCrewDetails: action.data,
+    isSuccess: false,
+  });
+};
 
 // const SaveEditDetailsStart = (state, action) => {
 //   return updateObject(state, { loadingSaving: true });
@@ -97,8 +97,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FETCH_CREW_LIST_FAIL:
       return fetchCrewListFail(state, action);
 
-    // case actionTypes.EDIT_Crew_DETAIL_MODAL:
-    //   return openModalEditCrews(state, action);
+    case actionTypes.EDIT_CREW_DETAIL_MODAL:
+      return openModalEditCrews(state, action);
 
     // case actionTypes.SAVE_CrewS_DETAILS:
     //   return SaveEditDetailsStart(state, action);

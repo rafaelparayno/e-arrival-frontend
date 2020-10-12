@@ -28,7 +28,8 @@ export {
 } from "./vessels";
 
 export {
-  fetchCrewList, //
+  fetchCrewList,
+  editCrewDetailsModal, //
 } from "./crew";
 
 export { editArrivalDetailsModal, saveEditDetailsArrival } from "./arrival";
