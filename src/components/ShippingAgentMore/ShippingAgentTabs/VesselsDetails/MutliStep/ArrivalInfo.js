@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Select, { createFilter } from "react-select";
+import { editArrivalDetailsModal } from "../../../../../store/action/index";
+import { connect } from "react-redux";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -14,6 +15,15 @@ const ArrivalInfo = (props) => {
     es: es,
     eo: eo,
     // ...
+  };
+
+  useEffect(() => {
+    props.editArrivalDetails && setArrivalEditDetails(props.editArrivalDetails);
+  }, [props.editArrivalDetails]);
+
+  const goToThird = () => {
+    props.getData(arrivalEditDetails);
+    next();
   };
 
   registerLocale(locales);
@@ -145,10 +155,13 @@ const ArrivalInfo = (props) => {
           }}
           className="col-lg-12"
         >
-          <button onClick={(e) => prev()} className="btn btn-lg btn-default">
+          <button onClick={() => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <button onClick={(e) => next()} className="btn btn-lg btn-primary">
+          <button
+            onClick={() => goToThird()}
+            className="btn btn-lg btn-primary"
+          >
             Next
           </button>
         </div>
@@ -157,4 +170,14 @@ const ArrivalInfo = (props) => {
   );
 };
 
-export default ArrivalInfo;
+const mapStateToProps = (state) => ({
+  editArrivalDetails: state.arrival.editArrivalDetails,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getData: (data) => dispatch(editArrivalDetailsModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArrivalInfo);

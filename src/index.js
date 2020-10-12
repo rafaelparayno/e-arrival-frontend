@@ -10,6 +10,7 @@ import userReducer from "./store/reducer/users";
 import shipReducer from "./store/reducer/shippingAgent";
 import vesselReducer from "./store/reducer/vessels";
 import crewReducer from "./store/reducer/crew";
+import arrivalReducer from "./store/reducer/arrival";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   ship: shipReducer,
   vessels: vesselReducer,
   crew: crewReducer,
+  arrival: arrivalReducer,
 });
 
 const store = createStore(

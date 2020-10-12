@@ -27,9 +27,7 @@ export {
   alertShowVessels,
 } from "./vessels";
 
-export { fetchCrewList } from // editVesselDetailsModal,
-// saveEditDetailsVessel,
-// UpdateEditDetailsVessel,
-// deleteEditDetailsVessel,
-// alertShowVessels,
-"./crew";
+export {
+  fetchCrewList, //
+} from "./crew";
+export { editArrivalDetailsModal } from "./arrival";
