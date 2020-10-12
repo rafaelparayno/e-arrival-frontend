@@ -27,7 +27,7 @@ const VesselInfo = (props) => {
       {" "}
       <div className="row">
         <div className="col-lg-4">
-          <label className="font-size">Vessl Name</label>
+          <label className="font-size">Vessel Name</label>
 
           <div>
             <input

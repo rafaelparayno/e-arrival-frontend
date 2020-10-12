@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import Select, { createFilter } from "react-select";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -15,6 +16,10 @@ const BookingInfo = (props) => {
     eo: eo,
     // ...
   };
+
+  const {
+    editVesselDetails: { name },
+  } = props;
 
   registerLocale(locales);
 
@@ -37,7 +42,7 @@ const BookingInfo = (props) => {
             <input
               className="form-control"
               readOnly
-              //   value={bookingEditDetails.purpose}
+              value={name}
               type="text"
               style={{ width: "100%" }}
             />
@@ -81,13 +86,21 @@ const BookingInfo = (props) => {
           <button onClick={(e) => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <button onClick={(e) => next()} className="btn btn-lg btn-primary">
-            Submit
-          </button>
+          <button className="btn btn-lg btn-primary">Submit</button>
         </div>
       </div>
     </>
   );
 };
 
-export default BookingInfo;
+const mapStateToProps = (state) => ({
+  editVesselDetails: state.vessels.editVesselDetails,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // openModal: (data) => dispatch(editVesselDetailsModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingInfo);
