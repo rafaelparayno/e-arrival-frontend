@@ -2,58 +2,51 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
 //Departure
-// export const fetchDepartureSuccess = (Departure) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_SUCCESS,
-//     Departure: Departure,
-//   };
-// };
+export const fetchDepartureSuccess = (Departure) => {
+  return {
+    type: actionTypes.FETCH_DEPARTURE_LIST_SUCCESS,
+    Departure: Departure,
+  };
+};
 
-// export const fetchDepartureFail = (error) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_FAIL,
-//     error: error,
-//   };
-// };
+export const fetchDepartureFail = (error) => {
+  return {
+    type: actionTypes.FETCH_DEPARTURE_LIST_FAIL,
+    error: error,
+  };
+};
 
-// export const fetchDepartureStart = () => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST,
-//   };
-// };
+export const fetchDepartureStart = () => {
+  return {
+    type: actionTypes.FETCH_DEPARTURE_LIST,
+  };
+};
 
-// export const fetchDeparture = (access_token, code, query) => {
-//   return (dispatch) => {
-//     dispatch(fetchDepartureStart());
+export const fetchDeparture = (access_token, code) => {
+  return (dispatch) => {
+    dispatch(fetchDepartureStart());
 
-//     let options = query
-//       ? {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//           params: {
-//             q: query,
-//           },
-//         }
-//       : {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//         };
-
-//     axios
-//       .post("http://localhost:5000/vessels/agent", { vessel_id: code }, options)
-//       .then((res) => {
-//         let fetchDeparture = {};
-//         fetchDeparture = res.data;
-//         dispatch(fetchDepartureSuccess(fetchDeparture));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         dispatch(fetchDepartureFail(err));
-//       });
-//   };
-// };
+    axios
+      .post(
+        "/departure/vessel",
+        { shipping_id: code },
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      )
+      .then((res) => {
+        let fetchDeparture = {};
+        fetchDeparture = res.data;
+        dispatch(fetchDepartureSuccess(fetchDeparture));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchDepartureFail(err));
+      });
+  };
+};
 
 export const editDepartureDetailsModal = (data) => {
   return {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchArrival } from "../../../../store/action/index";
+import { fetchArrival, fetchDeparture } from "../../../../store/action/index";
 import CalendarUi from "../../../UI/Calendar/CalendarUi";
 import Spinner from "../../../UI/Spinner/Spinner";
 // import Pagination from "../../../UI/Pagination/Pagination";
@@ -27,9 +27,16 @@ const AgentAgenda = React.memo((props) => {
   //   };
 
   useEffect(() => {
-    const code = props.code;
+    async function loadData() {
+      const code = props.code;
 
-    props.onFetchAr(props.userToken, code);
+      await Promise.all([
+        props.onFetchAr(props.userToken, code),
+        props.onFetchDp(props.userToken, code),
+      ]);
+    }
+
+    loadData();
   }, []);
 
   return (
@@ -68,6 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchAr: (token, auth) => dispatch(fetchArrival(token, auth)),
+    onFetchDp: (token, auth) => dispatch(fetchDeparture(token, auth)),
   };
 };
 

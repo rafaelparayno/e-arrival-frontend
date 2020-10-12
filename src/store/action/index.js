@@ -44,6 +44,7 @@ export {
 } from "./arrival";
 
 export {
+  fetchDeparture,
   editDepartureDetailsModal,
   saveEditDetailsDeparture,
 } from "./departure";

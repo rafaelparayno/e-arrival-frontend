@@ -15,20 +15,20 @@ const initialState = {
 
 //complist
 
-// const fetchDepartureListStart = (state, action) => {
-//   return updateObject(state, { loadingDepartures: true });
-// };
+const fetchDepartureListStart = (state, action) => {
+  return updateObject(state, { loadingDepartures: true });
+};
 
-// const fetchDepartureListSuccess = (state, action) => {
-//   return updateObject(state, {
-//     DepartureList: action.Departure,
-//     loadingDepartures: false,
-//   });
-// };
+const fetchDepartureListSuccess = (state, action) => {
+  return updateObject(state, {
+    DepartureList: action.Departure,
+    loadingDepartures: false,
+  });
+};
 
-// const fetchDepartureListFail = (state, action) => {
-//   return updateObject(state, { loadingDepartures: false });
-// };
+const fetchDepartureListFail = (state, action) => {
+  return updateObject(state, { loadingDepartures: false });
+};
 
 const openModalEditDepartures = (state, action) => {
   return updateObject(state, {
@@ -90,12 +90,12 @@ const SaveEditDetailsFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.FETCH_VESSEL_LIST:
-    //   return fetchDepartureListStart(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_SUCCESS:
-    //   return fetchDepartureListSuccess(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_FAIL:
-    //   return fetchDepartureListFail(state, action);
+    case actionTypes.FETCH_DEPARTURE_LIST:
+      return fetchDepartureListStart(state, action);
+    case actionTypes.FETCH_DEPARTURE_LIST_SUCCESS:
+      return fetchDepartureListSuccess(state, action);
+    case actionTypes.FETCH_DEPARTURE_LIST_FAIL:
+      return fetchDepartureListFail(state, action);
 
     case actionTypes.EDIT_DEPARTURE_DETAIL_MODAL:
       return openModalEditDepartures(state, action);
