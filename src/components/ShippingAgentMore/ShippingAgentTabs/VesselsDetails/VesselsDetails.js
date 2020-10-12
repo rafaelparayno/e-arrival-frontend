@@ -143,8 +143,9 @@ const VesselDetails = React.memo((props) => {
           style={{
             margin: "10px 5px",
             padding: "0px 5px",
-            overflowX: "auto",
-            height: "70vh",
+            overflow: "auto",
+            // height: "70vh",
+            maxHeight: "23vh",
           }}
           className="row"
         >

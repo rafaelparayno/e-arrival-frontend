@@ -49,6 +49,12 @@ const Crews = React.memo((props) => {
           >
             <i className="fa fa-search"></i>
           </button>
+          <button
+            // onClick={() => props.openModal({})}
+            className={classes.btnAdd}
+          >
+            <i className="fa fa-plus"></i>&nbsp; Add Crewmate
+          </button>
         </div>
         <div
           style={{

@@ -139,8 +139,8 @@ const UserHeader = (props) => {
           style={{
             margin: "10px 5px",
             padding: "0px 5px",
-            overflowX: "auto",
-            height: "70vh",
+            overflow: "auto",
+            maxHeight: "70vh",
           }}
           className="row"
         >
