@@ -120,3 +120,108 @@ export const alertShowCrews = (Data) => {
     CloseAlert: Data,
   };
 };
+
+export const UpdateCrewsDetailSuccess = (UpdateMessage) => {
+  return {
+    type: actionTypes.UPDATE_CREWS_DETAILS_SUCCESS,
+    UpdateMessage: UpdateMessage,
+  };
+};
+
+export const UpdateCrewsDetailFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_CREWS_DETAILS_FAIL,
+    error: error,
+  };
+};
+
+export const UpdateCrewsDetailStart = () => {
+  return {
+    type: actionTypes.UPDATE_CREWS_DETAILS,
+  };
+};
+
+export const UpdateEditDetailsCrew = (access_token, Datas) => {
+  return (dispatch) => {
+    dispatch(UpdateCrewsDetailStart());
+
+    const url = `http://localhost:5000/crews/${Datas.id}`;
+    // console.log(url);
+    axios
+      .patch(url, Datas, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let UpdateCrewsDetails = "";
+
+        if (!res.data.error) {
+          UpdateCrewsDetails = res.data.msg;
+        } else {
+          UpdateCrewsDetails = "";
+        }
+
+        dispatch(UpdateCrewsDetailSuccess(UpdateCrewsDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(UpdateCrewsDetailFail(err));
+      });
+  };
+};
+// axios.all(data.map(data=> axios.post('asdasd',data,)))
+
+//deleting
+
+export const DeleteCrewsDetailSuccess = (DeleteMessage) => {
+  return {
+    type: actionTypes.DELETE_CREWS_DETAILS_SUCCESS,
+    DeleteMessage: DeleteMessage,
+  };
+};
+
+export const DeleteCrewsDetailFail = (error) => {
+  return {
+    type: actionTypes.DELETE_CREWS_DETAILS_FAIL,
+    error: error,
+  };
+};
+
+export const DeleteCrewsDetailStart = () => {
+  return {
+    type: actionTypes.DELETE_CREWS_DETAILS,
+  };
+};
+
+export const deleteEditDetailsCrew = (access_token, u_id) => {
+  return (dispatch) => {
+    dispatch(DeleteCrewsDetailStart());
+
+    const url = `http://localhost:5000/crews/${u_id}`;
+
+    axios
+      .delete(url, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let DeleteCrewsDetails = "";
+
+        if (!res.data.error) {
+          DeleteCrewsDetails = res.data.msg;
+        } else {
+          DeleteCrewsDetails = "";
+        }
+
+        dispatch(DeleteCrewsDetailSuccess(DeleteCrewsDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(DeleteCrewsDetailFail(err));
+      });
+  };
+};

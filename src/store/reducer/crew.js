@@ -53,36 +53,36 @@ const SaveEditDetailsFail = (state, action) => {
   return updateObject(state, { loadingSaving: false });
 };
 
-// const UpdateEditDetailsStart = (state, action) => {
-//   return updateObject(state, { loadingSaving: true });
-// };
+const UpdateEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingSaving: true });
+};
 
-// const UpdateEditDetailsSuccess = (state, action) => {
-//   return updateObject(state, {
-//     loadingSaving: false,
-//     editCrewDetails: null,
-//     isSuccess: true,
-//   });
-// };
+const UpdateEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingSaving: false,
+    editCrewDetails: null,
+    isSuccess: true,
+  });
+};
 
-// const UpdateEditDetailsFail = (state, action) => {
-//   return updateObject(state, { loadingSaving: false });
-// };
+const UpdateEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingSaving: false });
+};
 
-// const DeleteEditDetailsStart = (state, action) => {
-//   return updateObject(state, { loadingDeleting: true });
-// };
+const DeleteEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingDeleting: true });
+};
 
-// const DeleteEditDetailsSuccess = (state, action) => {
-//   return updateObject(state, {
-//     loadingDeleting: false,
-//     isSuccess: true,
-//   });
-// };
+const DeleteEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingDeleting: false,
+    isSuccess: true,
+  });
+};
 
-// const DeleteEditDetailsFail = (state, action) => {
-//   return updateObject(state, { loadingDeleting: false });
-// };
+const DeleteEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingDeleting: false });
+};
 
 const closeSuccessAlert = (state, action) => {
   return updateObject(state, { isSuccess: action.CloseAlert });
@@ -107,19 +107,19 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SAVE_CREWS_DETAILS_FAIL:
       return SaveEditDetailsFail(state, action);
 
-    // case actionTypes.UPDATE_CrewS_DETAILS:
-    //   return UpdateEditDetailsStart(state, action);
-    // case actionTypes.UPDATE_CrewS_DETAILS_SUCCESS:
-    //   return UpdateEditDetailsSuccess(state, action);
-    // case actionTypes.UPDATE_CrewS_DETAILS_FAIL:
-    //   return UpdateEditDetailsFail(state, action);
+    case actionTypes.UPDATE_CREWS_DETAILS:
+      return UpdateEditDetailsStart(state, action);
+    case actionTypes.UPDATE_CREWS_DETAILS_SUCCESS:
+      return UpdateEditDetailsSuccess(state, action);
+    case actionTypes.UPDATE_CREWS_DETAILS_FAIL:
+      return UpdateEditDetailsFail(state, action);
 
-    // case actionTypes.DELETE_CrewS_DETAILS:
-    //   return DeleteEditDetailsStart(state, action);
-    // case actionTypes.DELETE_CrewS_DETAILS_SUCCESS:
-    //   return DeleteEditDetailsSuccess(state, action);
-    // case actionTypes.DELETE_CrewS_DETAILS_FAIL:
-    //   return DeleteEditDetailsFail(state, action);
+    case actionTypes.DELETE_CREWS_DETAILS:
+      return DeleteEditDetailsStart(state, action);
+    case actionTypes.DELETE_CREWS_DETAILS_SUCCESS:
+      return DeleteEditDetailsSuccess(state, action);
+    case actionTypes.DELETE_CREWS_DETAILS_FAIL:
+      return DeleteEditDetailsFail(state, action);
 
     case actionTypes.ALERT_MODALS_SHOW_CREW:
       return closeSuccessAlert(state, action);

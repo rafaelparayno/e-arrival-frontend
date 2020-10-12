@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Modal from "../../../UI/Modal/Modal";
 import SaveButton from "../../../UI/SaveButton/SaveButton";
-import { saveEditDetailsCrew } from "../../../../store/action/index";
+import {
+  saveEditDetailsCrew,
+  UpdateEditDetailsCrew,
+} from "../../../../store/action/index";
 import classes from "./CrewModal.module.css";
 
 const CrewModal = React.memo((props) => {
@@ -22,15 +25,33 @@ const CrewModal = React.memo((props) => {
 
   const save = (e) => {
     e.preventDefault();
-    props.onSave(props.userToken, { ...crewDetailEdit, vessels_id: vesselsid });
+    crewDetailEdit.id
+      ? props.onUpdate(props.userToken, {
+          is_fil: crewDetailEdit.is_fil,
+          firstname: crewDetailEdit.firstname,
+          lastname: crewDetailEdit.lastname,
+          middlename: crewDetailEdit.crewDetailEdit,
+          id: crewDetailEdit.id,
+          status: crewDetailEdit.status,
+        })
+      : props.onSave(props.userToken, {
+          ...crewDetailEdit,
+          vessels_id: vesselsid,
+        });
   };
 
   return (
     <Modal
       title={
-        <span>
-          <i className="fa fa-plus-square"></i>&nbsp;New Crew
-        </span>
+        crewDetailEdit.id ? (
+          <span>
+            <i className="fa fa-edit"></i>&nbsp;Edit Crew
+          </span>
+        ) : (
+          <span>
+            <i className="fa fa-plus-square"></i>&nbsp;New Crew
+          </span>
+        )
       }
       show={props.show}
       modalClosed={props.close}
@@ -139,7 +160,7 @@ const CrewModal = React.memo((props) => {
               onChange={editCrewDetailHandler}
             />
             {/* <input type="radio" onChange={handleChange} name='status' value="M" data-bv-field="gender" /> */}
-            <i className="fas fa-sign-in-alt"></i> off Signers{" "}
+            <i className="fas fa-sign-in-alt"></i> on Signers{" "}
           </label>{" "}
           <label
             className={
@@ -155,7 +176,7 @@ const CrewModal = React.memo((props) => {
               checked={crewDetailEdit.status == "0"}
               onChange={editCrewDetailHandler}
             />
-            <i className="fas fa-sign-out-alt"></i> on Signers{" "}
+            <i className="fas fa-sign-out-alt"></i> Off Signers{" "}
           </label>
         </div>
       </div>
@@ -192,6 +213,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onSave: (token, data) => dispatch(saveEditDetailsCrew(token, data)),
+    onUpdate: (token, data) => dispatch(UpdateEditDetailsCrew(token, data)),
     //   openModal: (data) => dispatch(editShippingAgentDetailsModal(data)),
   };
 };

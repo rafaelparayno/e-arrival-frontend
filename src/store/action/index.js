@@ -33,6 +33,8 @@ export {
   editCrewDetailsModal, //
   saveEditDetailsCrew,
   alertShowCrews,
+  UpdateEditDetailsCrew,
+  deleteEditDetailsCrew,
 } from "./crew";
 
 export { editArrivalDetailsModal, saveEditDetailsArrival } from "./arrival";
