@@ -23,6 +23,11 @@ const VesselDetails = React.memo((props) => {
     props.onFecthVessel(props.userToken, code);
   }, []);
 
+  useEffect(() => {
+    const code = props.code;
+    props.isSuccess && props.onFecthVessel(props.userToken, code);
+  }, [props.isSuccess]);
+
   const closeModal = () => {
     props.openModal(null);
   };
@@ -30,6 +35,10 @@ const VesselDetails = React.memo((props) => {
   useEffect(() => {
     selectedRows && props.onFetchCrew(props.userToken, selectedRows.vessels_id);
   }, [selectedRows]);
+
+  const closeSuccess = () => {
+    props.alertConfirm(false);
+  };
 
   const columns = [
     {
@@ -161,6 +170,15 @@ const VesselDetails = React.memo((props) => {
           close={closeModal}
         />
       )}
+
+      <SweetAlert
+        success
+        title="Success!"
+        show={props.isSuccess}
+        onConfirm={closeSuccess}
+      >
+        {"Success Updating Data"}
+      </SweetAlert>
     </>
   );
 });
@@ -168,6 +186,7 @@ const VesselDetails = React.memo((props) => {
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
   VesselList: state.vessels.VesselList,
+  isSuccess: state.vessels.isSuccess,
   editVesselDetails: state.vessels.editVesselDetails,
   loadingVessels: state.vessels.loadingVessels,
   //   isSuccess: state.ship.isSuccess,
@@ -180,7 +199,7 @@ const mapDispatchToProps = (dispatch) => {
     onFetchCrew: (token, data, query) =>
       dispatch(fetchCrewList(token, data, query)),
     openModal: (data) => dispatch(editVesselDetailsModal(data)),
-    // // alertConfirm: (data) => dispatch(alertShowUsers(data)),
+    alertConfirm: (data) => dispatch(alertShowVessels(data)),
     // // delete: (token, id) => dispatch(deleteEditDetailsUser(token, id)),
   };
 };
