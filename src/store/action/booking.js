@@ -2,58 +2,51 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
 //Booking
-// export const fetchBookingSuccess = (Booking) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_SUCCESS,
-//     Booking: Booking,
-//   };
-// };
+export const fetchBookingSuccess = (Booking) => {
+  return {
+    type: actionTypes.FETCH_BOOKING_LIST_SUCCESS,
+    Booking: Booking,
+  };
+};
 
-// export const fetchBookingFail = (error) => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST_FAIL,
-//     error: error,
-//   };
-// };
+export const fetchBookingFail = (error) => {
+  return {
+    type: actionTypes.FETCH_BOOKING_LIST_FAIL,
+    error: error,
+  };
+};
 
-// export const fetchBookingStart = () => {
-//   return {
-//     type: actionTypes.FETCH_VESSEL_LIST,
-//   };
-// };
+export const fetchBookingStart = () => {
+  return {
+    type: actionTypes.FETCH_BOOKING_LIST,
+  };
+};
 
-// export const fetchBooking = (access_token, code, query) => {
-//   return (dispatch) => {
-//     dispatch(fetchBookingStart());
+export const fetchBooking = (access_token, code) => {
+  return (dispatch) => {
+    dispatch(fetchBookingStart());
 
-//     let options = query
-//       ? {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//           params: {
-//             q: query,
-//           },
-//         }
-//       : {
-//           headers: {
-//             Authorization: `Bearer ${access_token}`,
-//           },
-//         };
-
-//     axios
-//       .post("http://localhost:5000/vessels/agent", { vessel_id: code }, options)
-//       .then((res) => {
-//         let fetchBooking = {};
-//         fetchBooking = res.data;
-//         dispatch(fetchBookingSuccess(fetchBooking));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         dispatch(fetchBookingFail(err));
-//       });
-//   };
-// };
+    axios
+      .post(
+        "/bookings/vessel",
+        { shipping_id: code },
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      )
+      .then((res) => {
+        let fetchBooking = {};
+        fetchBooking = res.data;
+        dispatch(fetchBookingSuccess(fetchBooking));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchBookingFail(err));
+      });
+  };
+};
 
 export const editBookingDetailsModal = (data) => {
   return {

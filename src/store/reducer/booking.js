@@ -15,20 +15,20 @@ const initialState = {
 
 //complist
 
-// const fetchBookingListStart = (state, action) => {
-//   return updateObject(state, { loadingBookings: true });
-// };
+const fetchBookingListStart = (state, action) => {
+  return updateObject(state, { loadingBookings: true });
+};
 
-// const fetchBookingListSuccess = (state, action) => {
-//   return updateObject(state, {
-//     BookingList: action.Booking,
-//     loadingBookings: false,
-//   });
-// };
+const fetchBookingListSuccess = (state, action) => {
+  return updateObject(state, {
+    BookingList: action.Booking,
+    loadingBookings: false,
+  });
+};
 
-// const fetchBookingListFail = (state, action) => {
-//   return updateObject(state, { loadingBookings: false });
-// };
+const fetchBookingListFail = (state, action) => {
+  return updateObject(state, { loadingBookings: false });
+};
 
 const openModalEditBookings = (state, action) => {
   return updateObject(state, {
@@ -90,12 +90,12 @@ const SaveEditDetailsFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.FETCH_VESSEL_LIST:
-    //   return fetchBookingListStart(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_SUCCESS:
-    //   return fetchBookingListSuccess(state, action);
-    // case actionTypes.FETCH_VESSEL_LIST_FAIL:
-    //   return fetchBookingListFail(state, action);
+    case actionTypes.FETCH_BOOKING_LIST:
+      return fetchBookingListStart(state, action);
+    case actionTypes.FETCH_BOOKING_LIST_SUCCESS:
+      return fetchBookingListSuccess(state, action);
+    case actionTypes.FETCH_BOOKING_LIST_FAIL:
+      return fetchBookingListFail(state, action);
 
     case actionTypes.EDIT_BOOKING_DETAIL_MODAL:
       return openModalEditBookings(state, action);

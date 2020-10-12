@@ -49,4 +49,8 @@ export {
   saveEditDetailsDeparture,
 } from "./departure";
 
-export { editBookingDetailsModal, saveEditDetailsBooking } from "./booking";
+export {
+  editBookingDetailsModal,
+  saveEditDetailsBooking,
+  fetchBooking,
+} from "./booking";

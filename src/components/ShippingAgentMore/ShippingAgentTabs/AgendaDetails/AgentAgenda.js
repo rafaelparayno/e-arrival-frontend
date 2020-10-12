@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchArrival, fetchDeparture } from "../../../../store/action/index";
+import {
+  auth,
+  fetchArrival,
+  fetchBooking,
+  fetchDeparture,
+} from "../../../../store/action/index";
 import CalendarUi from "../../../UI/Calendar/CalendarUi";
 import Spinner from "../../../UI/Spinner/Spinner";
 // import Pagination from "../../../UI/Pagination/Pagination";
@@ -29,15 +34,16 @@ const AgentAgenda = React.memo((props) => {
   useEffect(() => {
     async function loadData() {
       const code = props.code;
-
       await Promise.all([
         props.onFetchAr(props.userToken, code),
         props.onFetchDp(props.userToken, code),
+        props.onFetchBp(props.userToken, code),
       ]);
     }
-
     loadData();
   }, []);
+
+  useEffect(() => {});
 
   return (
     <>
@@ -67,6 +73,10 @@ const AgentAgenda = React.memo((props) => {
 
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
+  BookingList: state.booking.BookingList,
+  ArrivalList: state.arrival.ArrivalList,
+  DepartureList: state.departure.DepartureList,
+
   //   CrewList: state.crew.CrewList,
   //   loadingAgentAgenda: state.crew.loadingAgentAgenda,
   //   isSuccess: state.ship.isSuccess,
@@ -76,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchAr: (token, auth) => dispatch(fetchArrival(token, auth)),
     onFetchDp: (token, auth) => dispatch(fetchDeparture(token, auth)),
+    onFetchBp: (token, auth) => dispatch(fetchBooking(token, auth)),
   };
 };
 
