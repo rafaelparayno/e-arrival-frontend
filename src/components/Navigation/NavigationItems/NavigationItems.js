@@ -21,6 +21,11 @@ const navigationItems = (props) => {
             <i className="fa fa-lg fa-fw fa-table"></i>{" "}
             <span className="menu-item-parent">Shipping Agent</span>
           </NavigationItems>
+
+          <NavigationItems link="/arrivals">
+            <i className="fa fa-lg fa-fw fa-table"></i>{" "}
+            <span className="menu-item-parent">Arrivals</span>
+          </NavigationItems>
         </>
       )}
     </ul>
