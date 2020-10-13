@@ -32,18 +32,7 @@ const ShippingAgentOptions = React.memo((props) => {
                 <VesselDetails code={props.code} /> &nbsp; <Crews />
               </div>
 
-              <div
-                label={
-                  <>
-                    {" "}
-                    Agency Calendar &nbsp;{" "}
-                    <span className="badge bg-color-blue txt-color-white">
-                      0
-                    </span>
-                  </>
-                }
-                className="tab-pane"
-              >
+              <div label={<> Agency Calendar &nbsp; </>} className="tab-pane">
                 <AgentAgenda code={props.code} />
               </div>
             </NavTabs>

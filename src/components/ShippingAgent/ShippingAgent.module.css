@@ -3,6 +3,7 @@
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
   height: 80vh;
+  overflow: auto;
   margin: 10px auto;
   box-sizing: border-box;
 }
@@ -85,7 +86,7 @@
 }
 
 .ShippingAgent::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.4rem;
 }
 
 .ShippingAgent::-webkit-scrollbar-track {
@@ -93,5 +94,5 @@
 }
 
 .ShippingAgent::-webkit-scrollbar-thumb {
-  background: #3f7d88;
+  background: #364c66;
 }

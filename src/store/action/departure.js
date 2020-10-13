@@ -23,11 +23,11 @@ export const fetchDepartureStart = () => {
 };
 
 export const fetchDeparture = (access_token, code) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchDepartureStart());
 
-    axios
-      .post(
+    try {
+      const departureData = await axios.post(
         "/departure/vessel",
         { shipping_id: code },
         {
@@ -35,16 +35,18 @@ export const fetchDeparture = (access_token, code) => {
             Authorization: `Bearer ${access_token}`,
           },
         }
-      )
-      .then((res) => {
-        let fetchDeparture = {};
-        fetchDeparture = res.data;
-        dispatch(fetchDepartureSuccess(fetchDeparture));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(fetchDepartureFail(err));
-      });
+      );
+
+      let fetchDeparture = {};
+      fetchDeparture = departureData.data;
+
+      dispatch(fetchDepartureSuccess(fetchDeparture));
+
+      return fetchDeparture;
+    } catch (err) {
+      console.log(err);
+      dispatch(fetchDepartureFail(err));
+    }
   };
 };
 

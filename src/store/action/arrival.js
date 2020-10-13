@@ -23,11 +23,10 @@ export const fetchArrivalStart = () => {
 };
 
 export const fetchArrival = (access_token, code) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchArrivalStart());
-
-    axios
-      .post(
+    try {
+      let arrivalData = await axios.post(
         "/arrivals/vessel",
         { shipping_id: code },
         {
@@ -35,16 +34,36 @@ export const fetchArrival = (access_token, code) => {
             Authorization: `Bearer ${access_token}`,
           },
         }
-      )
-      .then((res) => {
-        let fetchArrival = {};
-        fetchArrival = res.data;
-        dispatch(fetchArrivalSuccess(fetchArrival));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(fetchArrivalFail(err));
-      });
+      );
+
+      let fetchArrival = {};
+      fetchArrival = arrivalData.data;
+      dispatch(fetchArrivalSuccess(fetchArrival));
+
+      return fetchArrival;
+    } catch (err) {
+      console.log(err);
+      dispatch(fetchArrivalFail(err));
+    }
+    // axios
+    //   .post(
+    //     "/arrivals/vessel",
+    //     { shipping_id: code },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${access_token}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     let fetchArrival = {};
+    //     fetchArrival = res.data;
+    //     dispatch(fetchArrivalSuccess(fetchArrival));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     dispatch(fetchArrivalFail(err));
+    //   });
   };
 };
 

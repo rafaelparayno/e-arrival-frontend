@@ -23,11 +23,10 @@ export const fetchBookingStart = () => {
 };
 
 export const fetchBooking = (access_token, code) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchBookingStart());
-
-    axios
-      .post(
+    try {
+      const bookingData = await axios.post(
         "/bookings/vessel",
         { shipping_id: code },
         {
@@ -35,16 +34,37 @@ export const fetchBooking = (access_token, code) => {
             Authorization: `Bearer ${access_token}`,
           },
         }
-      )
-      .then((res) => {
-        let fetchBooking = {};
-        fetchBooking = res.data;
-        dispatch(fetchBookingSuccess(fetchBooking));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(fetchBookingFail(err));
-      });
+      );
+
+      let fetchBooking = {};
+      fetchBooking = bookingData.data;
+      dispatch(fetchBookingSuccess(fetchBooking));
+
+      return fetchBooking;
+    } catch (err) {
+      console.log(err);
+      dispatch(fetchBookingFail(err));
+    }
+
+    // axios
+    //   .post(
+    //     "/bookings/vessel",
+    //     { shipping_id: code },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${access_token}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     let fetchBooking = {};
+    //     fetchBooking = res.data;
+    //     dispatch(fetchBookingSuccess(fetchBooking));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     dispatch(fetchBookingFail(err));
+    //   });
   };
 };
 
