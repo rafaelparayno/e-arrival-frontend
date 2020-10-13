@@ -44,6 +44,7 @@ const ArrivalsGrid = React.memo((props) => {
           />
         )} */}
         <Table
+          className="table table-striped table-bordered table-hover"
           columns={columns}
           data={[]}
           // selectedRows={props.selectedRows}

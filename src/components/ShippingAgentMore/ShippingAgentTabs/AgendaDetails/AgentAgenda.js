@@ -7,7 +7,7 @@ import {
   fetchDeparture,
 } from "../../../../store/action/index";
 import CalendarUi from "../../../UI/Calendar/CalendarUi";
-import Spinner from "../../../UI/Spinner/Spinner";
+// import Spinner from "../../../UI/Spinner/Spinner";
 // import Pagination from "../../../UI/Pagination/Pagination";
 // import SweetAlert from "react-bootstrap-sweetalert";
 

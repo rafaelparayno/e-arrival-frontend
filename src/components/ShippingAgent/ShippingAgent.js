@@ -149,6 +149,7 @@ const ShippingAgent = React.memo((props) => {
               <Spinner />
             ) : (
               <Table
+                className="table table-striped table-bordered table-hover"
                 columns={columns}
                 data={props.shippingAgentList}
                 // selectedRows={props.selectedRows}

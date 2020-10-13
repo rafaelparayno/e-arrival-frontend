@@ -149,6 +149,7 @@ const UserHeader = (props) => {
               <Spinner />
             ) : (
               <Table
+                className="table table-striped table-bordered table-hover"
                 columns={columns}
                 data={props.userList}
                 // selectedRows={props.selectedRows}

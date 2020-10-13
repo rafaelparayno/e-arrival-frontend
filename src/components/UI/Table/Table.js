@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable, useRowSelect } from "react-table";
 
-const Table = ({ columns, data, selectedRows, setSelectedRows }) => {
+const Table = ({ className, columns, data, selectedRows, setSelectedRows }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -23,10 +23,7 @@ const Table = ({ columns, data, selectedRows, setSelectedRows }) => {
   //  setSelectedRows(selectedRowPaths);
 
   return (
-    <table
-      className="table table-striped table-bordered table-hover"
-      {...getTableProps()}
-    >
+    <table className={className} {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
