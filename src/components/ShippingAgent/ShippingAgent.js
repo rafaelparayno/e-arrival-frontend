@@ -13,6 +13,7 @@ import Table from "../UI/Table/Table";
 import SweetAlert from "react-bootstrap-sweetalert";
 import classes from "./ShippingAgent.module.css";
 import ShippingAgentModal from "./ShippingAgentModal";
+import { NavLink } from "react-router-dom";
 
 const ShippingAgent = React.memo((props) => {
   const [deletingAgency, setDeletingAgency] = useState({ deleteMsg: false });
@@ -90,12 +91,18 @@ const ShippingAgent = React.memo((props) => {
                 >
                   Delete
                 </button>{" "}
-                <button
+                {/* <button
                   onClick={() => viewHome(original.id)}
                   className="btn btn-md btn-info"
                 >
                   View More
-                </button>
+                </button> */}
+                <NavLink
+                  to={`/agent/${original.id}`}
+                  className="btn btn-md btn-info"
+                >
+                  View More
+                </NavLink>
               </>
             );
           },

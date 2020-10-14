@@ -27,7 +27,7 @@ export const fetchArrival = (access_token, code) => {
     dispatch(fetchArrivalStart());
     try {
       let arrivalData = await axios.post(
-        "/arrivals/vessel",
+        "http://199.241.138.64/arrivals/vessel",
         { shipping_id: code },
         {
           headers: {
