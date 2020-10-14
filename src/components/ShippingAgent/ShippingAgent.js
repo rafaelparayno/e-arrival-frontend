@@ -41,7 +41,7 @@ const ShippingAgent = React.memo((props) => {
   };
 
   const viewHome = (id) => {
-    window.open(`/agent/${id}`, "_blank");
+    window.open(`/agent/${id}`);
   };
 
   const closeSuccess = () => {
