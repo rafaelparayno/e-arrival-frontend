@@ -42,7 +42,7 @@ export const fetchUserList = (access_token, query) => {
         };
 
     axios
-      .get("/users", options)
+      .get("http://199.241.138.64/users", options)
       .then((res) => {
         let fetchUserList = {};
         fetchUserList = res.data;
@@ -88,7 +88,7 @@ export const saveEditDetailsUser = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveUsersDetailSuccess());
 
-    const url = "/users/add";
+    const url = "http://199.241.138.64/users/add";
 
     axios
       .post(url, Datas, {
@@ -148,7 +148,7 @@ export const UpdateEditDetailsUser = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateUsersDetailStart());
 
-    const url = `/users/${Datas.u_id}`;
+    const url = `http://199.241.138.64/users/${Datas.u_id}`;
 
     axios
       .patch(url, Datas, {
@@ -202,7 +202,7 @@ export const deleteEditDetailsUser = (access_token, u_id) => {
   return (dispatch) => {
     dispatch(DeleteUsersDetailStart());
 
-    const url = `/users/${u_id}`;
+    const url = `http://199.241.138.64/users/${u_id}`;
 
     axios
       .delete(url, {

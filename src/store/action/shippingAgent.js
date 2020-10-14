@@ -42,7 +42,7 @@ export const fetchShippingAgent = (access_token, query) => {
         };
 
     axios
-      .get("/agents", options)
+      .get("http://199.241.138.64/agents", options)
       .then((res) => {
         let fetchShippingAgent = {};
         fetchShippingAgent = res.data;
@@ -88,7 +88,7 @@ export const saveEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveShippingAgentsDetailSuccess());
 
-    const url = "/agents";
+    const url = "http://199.241.138.64/agents";
 
     axios
       .post(url, Datas, {
@@ -148,7 +148,7 @@ export const UpdateEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateShippingAgentsDetailStart());
 
-    const url = `/agents/${Datas.id}`;
+    const url = `http://199.241.138.64/agents/${Datas.id}`;
 
     axios
       .patch(url, Datas, {
@@ -204,7 +204,7 @@ export const deleteEditDetailsShippingAgent = (access_token, u_id) => {
   return (dispatch) => {
     dispatch(DeleteShippingAgentsDetailStart());
 
-    const url = `/agents/${u_id}`;
+    const url = `http://199.241.138.64/agents/${u_id}`;
 
     axios
       .delete(url, {

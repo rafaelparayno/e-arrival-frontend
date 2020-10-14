@@ -100,7 +100,7 @@ export const saveEditDetailsArrival = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveArrivalDetailStart());
 
-    const url = "/arrivals";
+    const url = "http://199.241.138.64/arrivals";
 
     axios
       .post(url, Datas, {
