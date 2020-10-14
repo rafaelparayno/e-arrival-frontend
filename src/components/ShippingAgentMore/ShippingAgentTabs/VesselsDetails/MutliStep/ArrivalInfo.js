@@ -159,6 +159,7 @@ const ArrivalInfo = (props) => {
             Previous
           </button>
           <button
+            disabled={!arrivalEditDetails.date || !arrivalEditDetails.time}
             onClick={() => goToThird()}
             className="btn btn-lg btn-primary"
           >

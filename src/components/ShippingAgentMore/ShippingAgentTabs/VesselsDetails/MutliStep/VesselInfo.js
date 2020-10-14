@@ -61,7 +61,7 @@ const VesselInfo = (props) => {
               className="form-control"
               name="vessel_flag"
               value={vesselEditDetails.vessel_flag}
-              type="text"
+              type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
             />
@@ -149,7 +149,7 @@ const VesselInfo = (props) => {
               className="form-control"
               name="breadth"
               value={vesselEditDetails.breadth}
-              type="text"
+              type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
             />
@@ -189,7 +189,11 @@ const VesselInfo = (props) => {
             disabled={
               !vesselEditDetails.vessel_name ||
               !vesselEditDetails.vessel_flag ||
-              !vesselEditDetails.imonumber
+              !vesselEditDetails.imonumber ||
+              !vesselEditDetails.DWT ||
+              !vesselEditDetails.GRT ||
+              !vesselEditDetails.LOA ||
+              !vesselEditDetails.NRT
             }
             onClick={(e) => goToSecond()}
             className="btn btn-lg btn-primary"
