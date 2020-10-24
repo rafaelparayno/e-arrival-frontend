@@ -31,6 +31,7 @@ const CalendarUi = React.memo((props) => {
         selectable
         toolbar
         popup={true}
+        views={props.views}
         eventPropGetter={props.eventStyle}
         events={props.eventCalendar}
         localizer={localizer}

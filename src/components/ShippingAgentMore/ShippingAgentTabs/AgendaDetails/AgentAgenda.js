@@ -190,6 +190,7 @@ const AgentAgenda = React.memo((props) => {
         className="row"
       >
         <CalendarUi
+          views={["month", "week"]}
           eventCalendar={eventsCalendar}
           eventStyle={eventStyleGetter}
         />
