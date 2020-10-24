@@ -33,8 +33,8 @@ const Layout = (props) => {
       <main className={classes.Content}>
         <Switch>
           <AdminRoute path="/users" exact component={Users} />
-          <Route path="/agent/:id" exact component={ShippingAgentMore} />
-          <Route path="/agent" exact component={ShippingAgentCon} />
+          {/* <Route path="/agent/:id" exact component={ShippingAgentMore} />
+          <Route path="/agent" exact component={ShippingAgentCon} /> */}
           <Route path="/newdata" exact component={AddData} />
           <Route path="/arrivals" exact component={ArrivalView} />
           <Route path="/logout" component={Logout} />

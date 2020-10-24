@@ -17,10 +17,10 @@ const navigationItems = (props) => {
         </NavigationItems>
       ) : (
         <>
-          <NavigationItems link="/agent">
+          {/* <NavigationItems link="/agent">
             <i className="fa fa-lg fa-fw fa-table"></i>{" "}
             <span className="menu-item-parent">Shipping Agent</span>
-          </NavigationItems>
+          </NavigationItems> */}
 
           <NavigationItems link="/arrivals">
             <i className="fa fa-lg fa-fw fa-table"></i>{" "}
