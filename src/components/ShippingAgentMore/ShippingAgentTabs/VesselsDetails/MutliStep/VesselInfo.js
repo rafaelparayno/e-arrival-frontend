@@ -22,7 +22,7 @@ const VesselInfo = (props) => {
 
     setVesselEditDetails({ ...vesselEditDetails, [name]: value });
   };
-2
+
   const goToSecond = () => {
     props.openModal(vesselEditDetails);
     next();
