@@ -26,6 +26,11 @@ const navigationItems = (props) => {
             <i className="fa fa-lg fa-fw fa-table"></i>{" "}
             <span className="menu-item-parent">Arrivals</span>
           </NavigationItems>
+
+          <NavigationItems link="/newdata">
+            <i className="fa fa-lg fa-fw fa-table"></i>{" "}
+            <span className="menu-item-parent">Add</span>
+          </NavigationItems>
         </>
       )}
     </ul>

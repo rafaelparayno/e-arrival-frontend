@@ -11,6 +11,7 @@ import Users from "../../containers/Users/Users";
 import ShippingAgentCon from "../../containers/ShippingAgentCon/ShippingAgentCon";
 import ShippingAgentMore from "../../containers/ShippingAgentMore/ShippingAgentMore";
 import ArrivalView from "../../containers/ArrivalView/ArrivalView";
+import AddData from "../../containers/NewInputCon/AddData";
 // import CalendarCon from "../../containers/CalendarCon/CalendarCon"
 // import AddressBook from "../../containers/AddressBook/AddressBook"
 
@@ -34,6 +35,7 @@ const Layout = (props) => {
           <AdminRoute path="/users" exact component={Users} />
           <Route path="/agent/:id" exact component={ShippingAgentMore} />
           <Route path="/agent" exact component={ShippingAgentCon} />
+          <Route path="/newdata" exact component={AddData} />
           <Route path="/arrivals" exact component={ArrivalView} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={dashboard} />
