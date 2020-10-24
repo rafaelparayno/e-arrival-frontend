@@ -13,7 +13,7 @@ const ArrivalsGrid = React.memo((props) => {
       const today = format(new Date(), "yyyy-MM-dd");
 
       const result = await axios.post(
-        "http://199.241.138.64/arrivals/today",
+        "http://localhost:5000/arrivals/today",
         { date: today },
         {
           headers: {
