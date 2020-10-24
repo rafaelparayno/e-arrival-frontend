@@ -1,60 +1,161 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import Table from "../UI/Table/Table";
+
 import classes from "./MultiForm.module.css";
 
 const MultiForm = React.memo((props) => {
-  // const multistepform = (stepFormProps) => {
-  //   switch (stepFormProps) {
-  //     case 1: {
-  //       return (
-  //         <>
-  //           <VesselInfo prev={previous} next={next} />
-  //         </>
-  //       );
-  //     }
-  //     case 2: {
-  //       return <ArrivalInfo prev={previous} next={next} />;
-  //     }
+  const [data, setData] = useState([]);
 
-  //     case 3: {
-  //       return <Departure next={next} prev={previous} />;
-  //     }
-  //     case 4: {
-  //       return <BookingInfo code={props.code} next={next} prev={previous} />;
-  //     }
-  //   }
-  // };
+  const columns = [
+    {
+      Header: " ",
+      columns: [
+        {
+          Header: "VESSEL NAME",
+          accessor: "vessel_name",
+        },
+        {
+          Header: "DATE OF ARRIVAL",
+          accessor: "date_arrival",
+        },
+        {
+          Header: "TIME OF ARRIVAL",
+          accessor: "time_arrival",
+        },
+        {
+          Header: "NO. OF FIL SIGN IN.",
+          accessor: "no_fil_signin",
+        },
+        {
+          Header: "NO. OF FOR SIGN IN.",
+          accessor: "no_for_signin",
+        },
+        {
+          Header: "NO. OF FOR SIGN OFF.",
+          accessor: "no_fil_signoff",
+        },
+        {
+          Header: "NO. OF FOR SIGN OFF.",
+          accessor: "no_for_signoff",
+        },
+        {
+          Header: "Quarantine Facility.",
+          accessor: "quarantine_facility",
+        },
+        {
+          Header: "CREW SERVICE VESSEL.",
+          accessor: "crew_service_vessel",
+        },
+        {
+          Header: "DEPARTURE DATE.",
+          accessor: "dep_date",
+        },
+        {
+          Header: "DEPARTURE TIME.",
+          accessor: "dep_time",
+        },
+        {
+          Header: "NEXT PORT OF CALL.",
+          accessor: "nextport",
+        },
+        // {
+        //   width: 150,
+        //   Header: "Edit",
+        //   Cell: (data) => {
+        //     let {
+        //       row: { original },
+        //     } = data;
 
-  // const headerNumberDetail = (stepFormProps) => {
-  //   switch (stepFormProps) {
-  //     case 1: {
-  //       return `${stepFormProps}. Vessel Detail`;
-  //     }
-  //     case 2: {
-  //       return `${stepFormProps}. Arrival Detail`;
-  //     }
-
-  //     case 3: {
-  //       return `${stepFormProps}. Departure Details`;
-  //     }
-  //     case 4: {
-  //       return `${stepFormProps}. Booking Details`;
-  //     }
-  //   }
-  // }
+        //     return (
+        //       <>
+        //         <button
+        //           onClick={() => props.openModal(original)}
+        //           className="btn btn-md btn-primary"
+        //         >
+        //           Edit
+        //         </button>{" "}
+        //         <button
+        //           onClick={() => warningDeleting(original.id)}
+        //           className="btn btn-md btn-danger"
+        //         >
+        //           Delete
+        //         </button>{" "}
+        //         {/* <button
+        //           onClick={() => viewHome(original.id)}
+        //           className="btn btn-md btn-info"
+        //         >
+        //           View More
+        //         </button> */}
+        //         <NavLink
+        //           to={`/agent/${original.id}`}
+        //           className="btn btn-md btn-info"
+        //         >
+        //           View More
+        //         </NavLink>
+        //       </>
+        //     );
+        //   },
+        // },
+      ],
+    },
+  ];
 
   return (
     <div className={classes.MultiForm}>
-      <header>
-        <h3 style={{ marginLeft: "20px" }}>Arrival Form</h3>
-      </header>
+      <div className={classes.searchBar}>
+        <div className={classes.Input}>
+          <label className={classes.Label}>Search:</label>
+          <input
+            placeholder="Type here...."
+            className={classes.InputElement}
+            name="searchKey"
+            // value={searchHeader.searchKey}
+            // onChange={editSearchHeaderHandler}
+            style={{ width: "100%" }}
+            type="text"
+          />
+        </div>
+        <button
+          // onClick={(e) => searchQuery(e)}
+          className={classes.btn}
+        >
+          <i className="fa fa-search"></i>
+        </button>
+
+        <button onClick={() => props.openModal({})} className={classes.btnAdd}>
+          <i className="fa fa-plus"></i>&nbsp; New Data
+        </button>
+      </div>
       <div
         style={{
           margin: "10px 5px",
           padding: "0px 5px",
-          overflow: "auto",
         }}
         className="row"
-      ></div>
+      >
+        <div className="table-responsive">
+          {/* {props.loadingshippingAgents ? (
+              <Spinner />
+            ) : (
+              <Table
+                className="table table-striped table-bordered table-hover"
+                columns={columns}
+                data={props.shippingAgentList}
+                // selectedRows={props.selectedRows}
+                // setSelectedRows={props.setSelectedRows}
+              />
+            )} */}
+
+          <Table
+            className="table table-striped table-bordered table-hover"
+            columns={columns}
+            data={data}
+            // selectedRows={props.selectedRows}
+            // setSelectedRows={props.setSelectedRows}
+          />
+        </div>
+      </div>
     </div>
   );
 });
