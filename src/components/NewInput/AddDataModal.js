@@ -5,6 +5,7 @@ import BasicInfo from "./MultiStep/BasicInfo";
 import NewArrivalInfo from "./MultiStep/NewArrivalInfo";
 import NewCrewInfo from "./MultiStep/NewCrewInfo";
 import NewDeparture from "./MultiStep/NewDeparture";
+import NewBookingInfo from "./MultiStep/NewBookingInfo";
 import Modal from "../UI/Modal/Modal";
 
 const AddDataModal = React.memo((props) => {
@@ -45,6 +46,9 @@ const AddDataModal = React.memo((props) => {
       }
       case 5: {
         return <NewDeparture code={props.code} next={next} prev={previous} />;
+      }
+      case 6: {
+        return <NewBookingInfo code={props.code} next={next} prev={previous} />;
       }
     }
   };
