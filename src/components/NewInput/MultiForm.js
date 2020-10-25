@@ -15,9 +15,9 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import classes from "./MultiForm.module.css";
 
 const MultiForm = React.memo((props) => {
-  useEffect(() => {
-    props.onFetchData(props.userToken);
-  }, []);
+  // useEffect(() => {
+  //   props.onFetchData(props.userToken);
+  // }, []);
 
   useEffect(() => {
     props.onFetchData(props.userToken);
@@ -25,6 +25,10 @@ const MultiForm = React.memo((props) => {
 
   const closeSuccess = () => {
     props.alertConfirm(false);
+  };
+
+  const viewHome = (id) => {
+    window.open(`/data/${id}`);
   };
 
   const columns = [
@@ -79,44 +83,39 @@ const MultiForm = React.memo((props) => {
           Header: "NEXT PORT OF CALL.",
           accessor: "nextport",
         },
-        // {
-        //   width: 150,
-        //   Header: "Edit",
-        //   Cell: (data) => {
-        //     let {
-        //       row: { original },
-        //     } = data;
+        {
+          width: 150,
+          Header: "Action",
+          Cell: (data) => {
+            let {
+              row: { original },
+            } = data;
 
-        //     return (
-        //       <>
-        //         <button
-        //           onClick={() => props.openModal(original)}
-        //           className="btn btn-md btn-primary"
-        //         >
-        //           Edit
-        //         </button>{" "}
-        //         <button
-        //           onClick={() => warningDeleting(original.id)}
-        //           className="btn btn-md btn-danger"
-        //         >
-        //           Delete
-        //         </button>{" "}
-        //         {/* <button
-        //           onClick={() => viewHome(original.id)}
-        //           className="btn btn-md btn-info"
-        //         >
-        //           View More
-        //         </button> */}
-        //         <NavLink
-        //           to={`/agent/${original.id}`}
-        //           className="btn btn-md btn-info"
-        //         >
-        //           View More
-        //         </NavLink>
-        //       </>
-        //     );
-        //   },
-        // },
+            return (
+              <>
+                <button
+                  onClick={() => viewHome(original.id)}
+                  className="btn btn-md btn-primary"
+                >
+                  Edit
+                </button>{" "}
+                <button
+                  // onClick={() => warningDeleting(original.id)}
+                  className="btn btn-md btn-danger"
+                >
+                  Delete
+                </button>{" "}
+                &nbsp;
+                {/* <button
+                  onClick={() => viewHome(original.id)}
+                  className="btn btn-md btn-info"
+                >
+                  View More
+                </button> */}
+              </>
+            );
+          },
+        },
       ],
     },
   ];
@@ -223,7 +222,6 @@ const mapStateToProps = (state) => ({
   editDataDetails: state.multiform.editDataDetails,
   loadingDatas: state.multiform.loadingDatas,
   isSuccess: state.multiform.isSuccess,
-  //   isSuccess: state.ship.isSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => {
