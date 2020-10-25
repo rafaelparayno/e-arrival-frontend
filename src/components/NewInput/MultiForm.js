@@ -4,6 +4,7 @@ import {
   editDataDetailsModal,
   fetchBasicDetail,
   alertShowDatas,
+  deleteEditDetailsBasic,
 } from "../../store/action/index";
 import Table from "../UI/Table/Table";
 import AddDataModal from "./AddDataModal";
@@ -18,6 +19,7 @@ const MultiForm = React.memo((props) => {
   // useEffect(() => {
   //   props.onFetchData(props.userToken);
   // }, []);
+  const [deletingData, setDeletingData] = useState({ deleteMsg: false });
 
   useEffect(() => {
     props.onFetchData(props.userToken);
@@ -29,6 +31,15 @@ const MultiForm = React.memo((props) => {
 
   const viewHome = (id) => {
     window.open(`/data/${id}`);
+  };
+
+  const warningDeleting = (id) => {
+    setDeletingData({ deleteMsg: true, id: id });
+  };
+
+  const deleteData = () => {
+    props.deleteData(props.userToken, deletingData.id);
+    setDeletingData({ deleteMsg: false });
   };
 
   const columns = [
@@ -97,15 +108,15 @@ const MultiForm = React.memo((props) => {
                   onClick={() => viewHome(original.id)}
                   className="btn btn-md btn-primary"
                 >
-                  Edit
+                  View More Detail
                 </button>{" "}
+                &nbsp;
                 <button
-                  // onClick={() => warningDeleting(original.id)}
+                  onClick={() => warningDeleting(original.id)}
                   className="btn btn-md btn-danger"
                 >
                   Delete
                 </button>{" "}
-                &nbsp;
                 {/* <button
                   onClick={() => viewHome(original.id)}
                   className="btn btn-md btn-info"
@@ -188,6 +199,20 @@ const MultiForm = React.memo((props) => {
       >
         {"Success Updating Data"}
       </SweetAlert>
+
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText="Confirm"
+        confirmBtnBsStyle="danger"
+        cancelBtnBsStyle="default"
+        title="Deleting Data"
+        show={deletingData.deleteMsg}
+        onConfirm={() => deleteData()}
+        onCancel={() => setDeletingData({ deleteMsg: false })}
+      >
+        {"Do you want to delete this Data"}
+      </SweetAlert>
     </>
   );
 });
@@ -229,6 +254,7 @@ const mapDispatchToProps = (dispatch) => {
     openModal: (data) => dispatch(editDataDetailsModal(data)),
     onFetchData: (token, data) => dispatch(fetchBasicDetail(token, data)),
     alertConfirm: (data) => dispatch(alertShowDatas(data)),
+    deleteData: (token, id) => dispatch(deleteEditDetailsBasic(token, id)),
   };
 };
 

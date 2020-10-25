@@ -117,3 +117,54 @@ export const fetchBasicDetail = (access_token, query) => {
       });
   };
 };
+
+export const DeleteBasicDetailSuccess = (DeleteMessage) => {
+  return {
+    type: actionTypes.DELETE_BASIC_INFO_SUCCESS,
+    DeleteMessage: DeleteMessage,
+  };
+};
+
+export const DeleteBasicDetailFail = (error) => {
+  return {
+    type: actionTypes.DELETE_BASIC_INFO_FAIL,
+    error: error,
+  };
+};
+
+export const DeleteBasicDetailStart = () => {
+  return {
+    type: actionTypes.DELETE_BASIC_INFO,
+  };
+};
+
+export const deleteEditDetailsBasic = (access_token, id) => {
+  return (dispatch) => {
+    dispatch(DeleteBasicDetailStart());
+
+    const url = `http://199.241.138.64/basicinfo/${id}`;
+
+    axios
+      .delete(url, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        let DeleteBasicDetails = "";
+
+        if (!res.data.error) {
+          DeleteBasicDetails = res.data.msg;
+        } else {
+          DeleteBasicDetails = "";
+        }
+
+        dispatch(DeleteBasicDetailSuccess(DeleteBasicDetails));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(DeleteBasicDetailFail(err));
+      });
+  };
+};

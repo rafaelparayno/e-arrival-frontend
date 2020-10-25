@@ -60,4 +60,5 @@ export {
   saveEditBasicDetail,
   fetchBasicDetail,
   alertShowDatas,
+  deleteEditDetailsBasic,
 } from "./multiform";

@@ -53,6 +53,21 @@ const closeSuccessAlert = (state, action) => {
   return updateObject(state, { isSuccess: action.CloseAlert });
 };
 
+const DeleteEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingDeleting: true });
+};
+
+const DeleteEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingDeleting: false,
+    isSuccess: true,
+  });
+};
+
+const DeleteEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingDeleting: false });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_DATAS_LIST:
@@ -71,6 +86,13 @@ const reducer = (state = initialState, action) => {
       return SaveEditDetailsSuccess(state, action);
     case actionTypes.SAVE_BASIC_INFO_FAIL:
       return SaveEditDetailsFail(state, action);
+
+    case actionTypes.DELETE_BASIC_INFO:
+      return DeleteEditDetailsStart(state, action);
+    case actionTypes.DELETE_BASIC_INFO_SUCCESS:
+      return DeleteEditDetailsSuccess(state, action);
+    case actionTypes.DELETE_BASIC_INFO_FAIL:
+      return DeleteEditDetailsFail(state, action);
 
     case actionTypes.ALERT_MODALS_DATA_DETAILS:
       return closeSuccessAlert(state, action);
