@@ -49,6 +49,10 @@ const SaveEditDetailsFail = (state, action) => {
   return updateObject(state, { loadingSaving: false });
 };
 
+const closeSuccessAlert = (state, action) => {
+  return updateObject(state, { isSuccess: action.CloseAlert });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_DATAS_LIST:
@@ -68,8 +72,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SAVE_BASIC_INFO_FAIL:
       return SaveEditDetailsFail(state, action);
 
-    // case actionTypes.ALERT_MODALS_DATA_DETAILS:
-    //   return closeSuccessAlert(state, action);
+    case actionTypes.ALERT_MODALS_DATA_DETAILS:
+      return closeSuccessAlert(state, action);
 
     default:
       return state;

@@ -3,19 +3,29 @@ import { connect } from "react-redux";
 import {
   editDataDetailsModal,
   fetchBasicDetail,
+  alertShowDatas,
 } from "../../store/action/index";
 import Table from "../UI/Table/Table";
 import AddDataModal from "./AddDataModal";
+import Spinner from "../UI/Spinner/Spinner";
 import { format } from "date-fns";
+
+import SweetAlert from "react-bootstrap-sweetalert";
 
 import classes from "./MultiForm.module.css";
 
 const MultiForm = React.memo((props) => {
-  const [data, setData] = useState([]);
+  useEffect(() => {
+    props.onFetchData(props.userToken);
+  }, []);
 
   useEffect(() => {
-    props.onFetchData();
-  }, []);
+    props.isSuccess && props.onFetchData(props.userToken);
+  }, [props.isSuccess]);
+
+  const closeSuccess = () => {
+    props.alertConfirm(false);
+  };
 
   const columns = [
     {
@@ -149,25 +159,17 @@ const MultiForm = React.memo((props) => {
           className="row"
         >
           <div className="table-responsive">
-            {/* {props.loadingshippingAgents ? (
+            {props.loadingDatas ? (
               <Spinner />
             ) : (
               <Table
                 className="table table-striped table-bordered table-hover"
                 columns={columns}
-                data={props.shippingAgentList}
+                data={props.DataList}
                 // selectedRows={props.selectedRows}
                 // setSelectedRows={props.setSelectedRows}
               />
-            )} */}
-
-            <Table
-              className="table table-striped table-bordered table-hover"
-              columns={columns}
-              data={props.DataList}
-              // selectedRows={props.selectedRows}
-              // setSelectedRows={props.setSelectedRows}
-            />
+            )}
           </div>
         </div>
       </div>
@@ -178,12 +180,21 @@ const MultiForm = React.memo((props) => {
           // close={closeModal}
         />
       )}
+
+      <SweetAlert
+        success
+        title="Success!"
+        show={props.isSuccess}
+        onConfirm={closeSuccess}
+      >
+        {"Success Updating Data"}
+      </SweetAlert>
     </>
   );
 });
 
 const mapStateToProps = (state) => ({
-  // userToken: state.auth.token,
+  userToken: state.auth.token,
   DataList: state.multiform.DataList.map((data) => ({
     ...data,
     vessel_name: data.vessel_infos[0] && data.vessel_infos[0].name,
@@ -210,7 +221,8 @@ const mapStateToProps = (state) => ({
     nextport: data.vessel_departures[0] && data.vessel_departures[0].portcall,
   })),
   editDataDetails: state.multiform.editDataDetails,
-
+  loadingDatas: state.multiform.loadingDatas,
+  isSuccess: state.multiform.isSuccess,
   //   isSuccess: state.ship.isSuccess,
 });
 
@@ -218,6 +230,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editDataDetailsModal(data)),
     onFetchData: (token, data) => dispatch(fetchBasicDetail(token, data)),
+    alertConfirm: (data) => dispatch(alertShowDatas(data)),
   };
 };
 

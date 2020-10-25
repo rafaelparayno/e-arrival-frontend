@@ -59,4 +59,5 @@ export {
   editDataDetailsModal,
   saveEditBasicDetail,
   fetchBasicDetail,
+  alertShowDatas,
 } from "./multiform";

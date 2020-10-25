@@ -105,7 +105,7 @@ export const fetchBasicDetail = (access_token, query) => {
         };
 
     axios
-      .get("http://localhost:5000/basicinfo", options)
+      .get("http://199.241.138.64/basicinfo", options)
       .then((res) => {
         let fetchDataList = [];
         fetchDataList = res.data;
