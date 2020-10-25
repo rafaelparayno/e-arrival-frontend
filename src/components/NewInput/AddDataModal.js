@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "../UI/Modal/Modal";
 
 const AddDataModal = React.memo((props) => {
+  const { close } = props;
+
   return (
     <Modal
       title={
@@ -10,7 +12,7 @@ const AddDataModal = React.memo((props) => {
         </span>
       }
       show={props.show}
-      // modalClosed={close}
+      modalClosed={close}
     >
       {/* <div style={{ padding: "5px 15px" }} className="row">
         <h3>{headerNumberDetail(stepForm)}</h3>

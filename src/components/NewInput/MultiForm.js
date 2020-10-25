@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import { connect } from "react-redux";
+import { editDataDetailsModal } from "../../store/action/index";
 import Table from "../UI/Table/Table";
+import AddDataModal from "./AddDataModal";
 
 import classes from "./MultiForm.module.css";
 
 const MultiForm = React.memo((props) => {
   const [data, setData] = useState([]);
+
+  const closeModal = () => {
+    props.openModal(null);
+  };
 
   const columns = [
     {
@@ -102,40 +108,44 @@ const MultiForm = React.memo((props) => {
   ];
 
   return (
-    <div className={classes.MultiForm}>
-      <div className={classes.searchBar}>
-        <div className={classes.Input}>
-          <label className={classes.Label}>Search:</label>
-          <input
-            placeholder="Type here...."
-            className={classes.InputElement}
-            name="searchKey"
-            // value={searchHeader.searchKey}
-            // onChange={editSearchHeaderHandler}
-            style={{ width: "100%" }}
-            type="text"
-          />
-        </div>
-        <button
-          // onClick={(e) => searchQuery(e)}
-          className={classes.btn}
-        >
-          <i className="fa fa-search"></i>
-        </button>
+    <>
+      <div className={classes.MultiForm}>
+        <div className={classes.searchBar}>
+          <div className={classes.Input}>
+            <label className={classes.Label}>Search:</label>
+            <input
+              placeholder="Type here...."
+              className={classes.InputElement}
+              name="searchKey"
+              // value={searchHeader.searchKey}
+              // onChange={editSearchHeaderHandler}
+              style={{ width: "100%" }}
+              type="text"
+            />
+          </div>
+          <button
+            // onClick={(e) => searchQuery(e)}
+            className={classes.btn}
+          >
+            <i className="fa fa-search"></i>
+          </button>
 
-        <button onClick={() => props.openModal({})} className={classes.btnAdd}>
-          <i className="fa fa-plus"></i>&nbsp; New Data
-        </button>
-      </div>
-      <div
-        style={{
-          margin: "10px 5px",
-          padding: "0px 5px",
-        }}
-        className="row"
-      >
-        <div className="table-responsive">
-          {/* {props.loadingshippingAgents ? (
+          <button
+            onClick={() => props.openModal({})}
+            className={classes.btnAdd}
+          >
+            <i className="fa fa-plus"></i>&nbsp; New Data
+          </button>
+        </div>
+        <div
+          style={{
+            margin: "10px 5px",
+            padding: "0px 5px",
+          }}
+          className="row"
+        >
+          <div className="table-responsive">
+            {/* {props.loadingshippingAgents ? (
               <Spinner />
             ) : (
               <Table
@@ -147,17 +157,37 @@ const MultiForm = React.memo((props) => {
               />
             )} */}
 
-          <Table
-            className="table table-striped table-bordered table-hover"
-            columns={columns}
-            data={data}
-            // selectedRows={props.selectedRows}
-            // setSelectedRows={props.setSelectedRows}
-          />
+            <Table
+              className="table table-striped table-bordered table-hover"
+              columns={columns}
+              data={data}
+              // selectedRows={props.selectedRows}
+              // setSelectedRows={props.setSelectedRows}
+            />
+          </div>
         </div>
       </div>
-    </div>
+
+      {props.editDataDetails && (
+        <AddDataModal
+          show={props.editDataDetails ? true : false}
+          close={closeModal}
+        />
+      )}
+    </>
   );
 });
 
-export default MultiForm;
+const mapStateToProps = (state) => ({
+  // userToken: state.auth.token,
+  editDataDetails: state.multiform.editDataDetails,
+  //   isSuccess: state.ship.isSuccess,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: (data) => dispatch(editDataDetailsModal(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MultiForm);
