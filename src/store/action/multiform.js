@@ -38,7 +38,7 @@ export const SaveBasicDetailStart = () => {
 export const saveEditBasicDetail = (access_token, Datas) => {
   return async (dispatch) => {
     dispatch(SaveBasicDetailStart());
-    const url = "/basicinfo";
+    const url = "http://199.241.138.64/basicinfo";
 
     try {
       const basicinfo = await axios.post(url, Datas, {

@@ -53,7 +53,7 @@ export const auth = (username, password) => {
       password: password,
     };
 
-    const url = "/users/login";
+    const url = "http://199.241.138.64/users/login";
     axios
       .post(url, authData)
       .then((response) => {

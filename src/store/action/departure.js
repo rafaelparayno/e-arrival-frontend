@@ -28,7 +28,7 @@ export const fetchDeparture = (access_token, code) => {
 
     try {
       const departureData = await axios.post(
-        "/departure/vessel",
+        "http://199.241.138.64/departure/vessel",
         { shipping_id: code },
         {
           headers: {
@@ -83,7 +83,7 @@ export const saveEditDetailsDeparture = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveDepartureDetailStart());
 
-    const url = "/departure";
+    const url = "http://199.241.138.64/departure";
 
     axios
       .post(url, Datas, {
