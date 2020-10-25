@@ -27,6 +27,30 @@ const NewVesselInfo = (props) => {
     props.editCrewDetails && setCrewEditDetails(props.editCrewDetails);
   }, [props.editCrewDetails]);
 
+  useEffect(() => {
+    crewEditDetails.crews_signingin &&
+      crewEditDetails.crews_signingin.value === "NO" &&
+      setCrewEditDetails({
+        ...crewEditDetails,
+        no_fil_singin: 0,
+        no_for_singin: 0,
+        names_fil_singin: "none",
+        names_for_singin: "none",
+      });
+  }, [crewEditDetails.crews_signingin]);
+
+  useEffect(() => {
+    crewEditDetails.crews_signingoff &&
+      crewEditDetails.crews_signingoff.value === "NO" &&
+      setCrewEditDetails({
+        ...crewEditDetails,
+        no_fil_singoff: 0,
+        no_for_signoff: 0,
+        names_fil_singoff: "none",
+        names_for_singoff: "none",
+      });
+  }, [crewEditDetails.crews_signingoff]);
+
   const editCrewDetailsHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
     const value = e.target.value;
