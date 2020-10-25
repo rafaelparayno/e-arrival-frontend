@@ -13,6 +13,7 @@ import crewReducer from "./store/reducer/crew";
 import arrivalReducer from "./store/reducer/arrival";
 import departureReducer from "./store/reducer/departure";
 import bookingReducer from "./store/reducer/booking";
+import multiFormReducer from "./store/reducer/multiform";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   arrival: arrivalReducer,
   departure: departureReducer,
   booking: bookingReducer,
+  multiform: multiFormReducer,
 });
 
 const store = createStore(
