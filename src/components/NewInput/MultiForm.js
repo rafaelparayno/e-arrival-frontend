@@ -9,10 +9,6 @@ import classes from "./MultiForm.module.css";
 const MultiForm = React.memo((props) => {
   const [data, setData] = useState([]);
 
-  const closeModal = () => {
-    props.openModal(null);
-  };
-
   const columns = [
     {
       Header: " ",
@@ -171,7 +167,7 @@ const MultiForm = React.memo((props) => {
       {props.editDataDetails && (
         <AddDataModal
           show={props.editDataDetails ? true : false}
-          close={closeModal}
+          // close={closeModal}
         />
       )}
     </>
