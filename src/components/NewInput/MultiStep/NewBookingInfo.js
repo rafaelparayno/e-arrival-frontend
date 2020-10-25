@@ -6,6 +6,7 @@ import {
   saveEditDetailsBooking,
   saveEditDetailsDeparture,
   saveEditBasicDetail,
+  saveEditDetailsCrew,
 } from "../../../store/action/index";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -46,23 +47,32 @@ const BookingInfo = (props) => {
     try {
       const basicDetail = await props.onSaveBasic(props.userToken, {
         ...props.editDataDetails,
-        shipping_agent_id: code,
       });
 
-      // await Promise.all([
-      //   props.onSaveArrival(props.userToken, {
-      //     ...props.editArrivalDetails,
-      //     vessels_id: vessels.vessels_id,
-      //   }),
-      //   props.onSaveDeparture(props.userToken, {
-      //     ...props.editDepartureDetails,
-      //     vessels_id: vessels.vessels_id,
-      //   }),
-      //   props.onSaveBooking(props.userToken, {
-      //     ...bookingEditDetails,
-      //     vessels_id: vessels.vessels_id,
-      //   }),
-      // ]);
+      await Promise.all([
+        props.onSaveArrival(props.userToken, {
+          ...props.editArrivalDetails,
+          basic_info_id: basicDetail.id,
+          purpose: props.editArrivalDetails.purpose_call.value,
+        }),
+        props.onSaveDeparture(props.userToken, {
+          ...props.editDepartureDetails,
+          basic_info_id: basicDetail.id,
+        }),
+        props.onSaveBooking(props.userToken, {
+          ...bookingEditDetails,
+          basic_info_id: basicDetail.id,
+          date: bookingEditDetails.book_date,
+        }),
+        props.onSaveVessel(props.userToken, {
+          ...props.editVesselDetails,
+          basic_info_id: basicDetail.id,
+        }),
+        props.onSaveCrew(props.userToken, {
+          ...props.editCrewDetails,
+          basic_info_id: basicDetail.id,
+        }),
+      ]);
     } catch (err) {
       console.log(err.message);
     }
@@ -71,7 +81,6 @@ const BookingInfo = (props) => {
   return (
     <>
       {" "}
-      {console.log(openSelectDateModal)}
       <div className="row">
         <div className="col-lg-5">
           <label className="font-size">Vessel Name</label>
@@ -151,11 +160,13 @@ const mapStateToProps = (state) => ({
   editVesselDetails: state.vessels.editVesselDetails,
   editArrivalDetails: state.arrival.editArrivalDetails,
   editDepartureDetails: state.departure.editDepartureDetails,
+  editCrewDetails: state.crew.editCrewDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSaveBasic: (token, data) => dispatch(saveEditBasicDetail(token, data)),
+    onSaveCrew: (token, data) => dispatch(saveEditDetailsCrew(token, data)),
     onSaveVessel: (token, data) => dispatch(saveEditDetailsVessel(token, data)),
     onSaveArrival: (token, data) =>
       dispatch(saveEditDetailsArrival(token, data)),

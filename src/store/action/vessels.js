@@ -94,7 +94,7 @@ export const SaveVesselsDetailStart = () => {
 export const saveEditDetailsVessel = (access_token, Datas) => {
   return async (dispatch) => {
     dispatch(SaveVesselsDetailStart());
-    const url = "http://199.241.138.64/vessels";
+    const url = "http://localhost:5000/vesselinfo";
 
     try {
       const vessel = await axios.post(url, Datas, {

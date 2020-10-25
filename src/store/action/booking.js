@@ -27,7 +27,7 @@ export const fetchBooking = (access_token, code) => {
     dispatch(fetchBookingStart());
     try {
       const bookingData = await axios.post(
-        "http://199.241.138.64/bookings/vessel",
+        "http://localhost:5000/bookings/vessel",
         { shipping_id: code },
         {
           headers: {
@@ -101,7 +101,7 @@ export const saveEditDetailsBooking = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveBookingDetailStart());
 
-    const url = "http://199.241.138.64/bookings";
+    const url = "http://localhost:5000/bookings";
 
     axios
       .post(url, Datas, {
