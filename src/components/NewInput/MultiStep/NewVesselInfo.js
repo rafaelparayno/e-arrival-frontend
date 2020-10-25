@@ -185,15 +185,15 @@ const NewVesselInfo = (props) => {
             Previous
           </button>
           <button
-            // disabled={
-            //   !vesselEditDetails.vessel_name ||
-            //   !vesselEditDetails.flag_registry ||
-            //   !vesselEditDetails.voyage_no ||
-            //   !vesselEditDetails.dwt ||
-            //   !vesselEditDetails.grt ||
-            //   !vesselEditDetails.loa ||
-            //   !vesselEditDetails.nrt
-            // }
+            disabled={
+              !vesselEditDetails.vessel_name ||
+              !vesselEditDetails.flag_registry ||
+              !vesselEditDetails.voyage_no ||
+              !vesselEditDetails.dwt ||
+              !vesselEditDetails.grt ||
+              !vesselEditDetails.loa ||
+              !vesselEditDetails.nrt
+            }
             onClick={(e) => goToThird()}
             className="btn btn-lg btn-primary"
           >

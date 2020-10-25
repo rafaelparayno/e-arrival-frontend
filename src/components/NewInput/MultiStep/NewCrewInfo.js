@@ -311,6 +311,13 @@ const NewVesselInfo = (props) => {
             Previous
           </button>
           <button
+            disabled={
+              !crewEditDetails.name_master ||
+              !crewEditDetails.no_fil_crews ||
+              !crewEditDetails.no_for_crews ||
+              !crewEditDetails.crews_signingin ||
+              !crewEditDetails.crews_signingoff
+            }
             onClick={(e) => goToSecond()}
             className="btn btn-lg btn-primary"
           >

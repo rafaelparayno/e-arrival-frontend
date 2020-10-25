@@ -194,7 +194,15 @@ const NewArrivalInfo = (props) => {
             Previous
           </button>
           <button
-            // disabled={!arrivalEditDetails.date || !arrivalEditDetails.time}
+            disabled={
+              !arrivalEditDetails.date ||
+              !arrivalEditDetails.time ||
+              !arrivalEditDetails.draft ||
+              !arrivalEditDetails.berth ||
+              !arrivalEditDetails.discharged ||
+              !arrivalEditDetails.purpose_call ||
+              !arrivalEditDetails.loaded
+            }
             onClick={() => goToThird()}
             className="btn btn-lg btn-primary"
           >

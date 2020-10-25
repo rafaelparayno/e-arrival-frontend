@@ -145,7 +145,10 @@ const BookingInfo = (props) => {
           <button onClick={(e) => prev()} className="btn btn-lg btn-default">
             Previous
           </button>
-          <SaveButton onClick={() => saveData()} />
+          <SaveButton
+            disabled={!bookingEditDetails.book_date || !bookingEditDetails.time}
+            onClick={() => saveData()}
+          />
         </div>
       </div>
       {openSelectDateModal && (

@@ -101,6 +101,11 @@ const Departure = (props) => {
             Previous
           </button>
           <button
+            disabled={
+              !departureEditDetails.date ||
+              !departureEditDetails.time ||
+              !departureEditDetails.portcall
+            }
             onClick={(e) => goToFourth()}
             className="btn btn-lg btn-primary"
           >
