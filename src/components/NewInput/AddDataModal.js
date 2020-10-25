@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import NewVesselInfo from "./MultiStep/NewVesselInfo";
 import BasicInfo from "./MultiStep/BasicInfo";
+import NewArrivalInfo from "./MultiStep/NewArrivalInfo";
 import Modal from "../UI/Modal/Modal";
 
 const AddDataModal = React.memo((props) => {
@@ -34,9 +35,9 @@ const AddDataModal = React.memo((props) => {
         return <NewVesselInfo prev={previous} next={next} />;
       }
 
-      // case 3: {
-      //   return <Departure next={next} prev={previous} />;
-      // }
+      case 3: {
+        return <NewArrivalInfo next={next} prev={previous} />;
+      }
       // case 4: {
       //   return <BookingInfo code={props.code} next={next} prev={previous} />;
       // }
@@ -49,11 +50,11 @@ const AddDataModal = React.memo((props) => {
         return `${stepFormProps}. Basic Detail`;
       }
       case 2: {
-        return `${stepFormProps}. Arrival Detail`;
+        return `${stepFormProps}. Vessel Detail`;
       }
 
       case 3: {
-        return `${stepFormProps}. Departure Details`;
+        return `${stepFormProps}. Arrival Details`;
       }
       case 4: {
         return `${stepFormProps}. Booking Details`;

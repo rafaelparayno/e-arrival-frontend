@@ -46,27 +46,27 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Vessel Flag </label>
+          <label className="font-size">Registry Flag </label>
 
           <div>
             <input
               className="form-control"
-              name="vessel_flag"
-              value={vesselEditDetails.vessel_flag}
-              type="number"
+              name="flag_registry"
+              value={vesselEditDetails.flag_registry}
+              type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
             />
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">IMO Number</label>
+          <label className="font-size">Voyage Number</label>
 
           <div>
             <input
               className="form-control"
-              name="imonumber"
-              value={vesselEditDetails.imonumber}
+              name="voyage_no"
+              value={vesselEditDetails.voyage_no}
               type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -76,13 +76,13 @@ const NewVesselInfo = (props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-3">
-          <label className="font-size">GRT</label>
+          <label className="font-size"> Gross Registered Tonnage (GRT)</label>
 
           <div>
             <input
               className="form-control"
-              name="GRT"
-              value={vesselEditDetails.GRT}
+              name="grt"
+              value={vesselEditDetails.grt}
               type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -90,13 +90,13 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">DWT</label>
+          <label className="font-size">Deadweight Tonnage (DWT)</label>
 
           <div>
             <input
               className="form-control"
-              name="DWT"
-              value={vesselEditDetails.DWT}
+              name="dwt"
+              value={vesselEditDetails.dwt}
               type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -104,13 +104,13 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">NRT</label>
+          <label className="font-size">Net Registred Tonnage (NRT)</label>
 
           <div>
             <input
               className="form-control"
-              name="NRT"
-              value={vesselEditDetails.NRT}
+              name="nrt"
+              value={vesselEditDetails.nrt}
               type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -118,13 +118,13 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">LOA</label>
+          <label className="font-size">Length Overall (LOA)</label>
 
           <div>
             <input
               className="form-control"
-              name="LOA"
-              value={vesselEditDetails.LOA}
+              name="loa"
+              value={vesselEditDetails.loa}
               type="number"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -132,8 +132,8 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
       </div>
-      <div style={{ marginBottom: "10px" }} className="row">
-        <div className="col-lg-6">
+      <div style={{ marginTop: "10px", marginBottom: "10px" }} className="row">
+        <div className="col-lg-4">
           <label className="font-size">Breadth</label>
 
           <div>
@@ -147,14 +147,28 @@ const NewVesselInfo = (props) => {
             />
           </div>
         </div>
-        <div className="col-lg-6">
-          <label className="font-size">Call Sign</label>
+        <div className="col-lg-4">
+          <label className="font-size">Name of Last Port</label>
 
           <div>
             <input
               className="form-control"
-              name="callsign"
-              value={vesselEditDetails.callsign}
+              name="name_last_port"
+              value={vesselEditDetails.name_last_port}
+              type="text"
+              onChange={editVesselDetailsHandler}
+              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <label className="font-size">Date of Departure from Last Port:</label>
+
+          <div>
+            <input
+              className="form-control"
+              name="departure_last_port"
+              value={vesselEditDetails.departure_last_port}
               type="text"
               onChange={editVesselDetailsHandler}
               style={{ width: "100%" }}
@@ -177,12 +191,12 @@ const NewVesselInfo = (props) => {
           <button
             disabled={
               !vesselEditDetails.vessel_name ||
-              !vesselEditDetails.vessel_flag ||
-              !vesselEditDetails.imonumber ||
-              !vesselEditDetails.DWT ||
-              !vesselEditDetails.GRT ||
-              !vesselEditDetails.LOA ||
-              !vesselEditDetails.NRT
+              !vesselEditDetails.flag_registry ||
+              !vesselEditDetails.voyage_no ||
+              !vesselEditDetails.dwt ||
+              !vesselEditDetails.grt ||
+              !vesselEditDetails.loa ||
+              !vesselEditDetails.nrt
             }
             onClick={(e) => goToSecond()}
             className="btn btn-lg btn-primary"
