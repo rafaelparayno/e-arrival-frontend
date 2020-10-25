@@ -37,10 +37,6 @@ const BookingInfo = (props) => {
 
   registerLocale(locales);
 
-  const dateArrivalHandler = (date, name) => {
-    setBookingEditDetails({ ...bookingEditDetails, [name]: date });
-  };
-
   const timeArrivalHandler = (time) => {
     setBookingEditDetails({ ...bookingEditDetails, ["time"]: time });
   };
@@ -96,7 +92,7 @@ const BookingInfo = (props) => {
             <input
               className="form-control"
               readOnly
-              //   value={vessel_name}
+              value={bookingEditDetails.book_date}
               type="text"
             />
             <button
@@ -137,7 +133,12 @@ const BookingInfo = (props) => {
         </div>
       </div>
       {openSelectDateModal && (
-        <SelectMonthModal show={openSelectDateModal} close={close} />
+        <SelectMonthModal
+          dateDetails={bookingEditDetails}
+          setDateDetails={setBookingEditDetails}
+          show={openSelectDateModal}
+          close={close}
+        />
       )}
     </>
   );

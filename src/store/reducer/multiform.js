@@ -5,7 +5,6 @@ import { updateObject } from "../utility";
 const initialState = {
   DataList: [],
   loadingDatas: false,
-
   editDataDetails: null,
   loadingSaving: false,
   loadingDeleting: false,

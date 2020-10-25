@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  editDataDetailsModal,
-  editDepartureDetailsModal,
-  editArrivalDetailsModal,
-} from "../../../store/action/index";
+import { editVesselDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
 
 const NewVesselInfo = (props) => {
@@ -22,8 +18,8 @@ const NewVesselInfo = (props) => {
     setVesselEditDetails({ ...vesselEditDetails, [name]: value });
   };
 
-  const goToSecond = () => {
-    props.openModal(vesselEditDetails);
+  const goToThird = () => {
+    props.setDataVessel(vesselEditDetails);
     next();
   };
 
@@ -198,7 +194,7 @@ const NewVesselInfo = (props) => {
             //   !vesselEditDetails.loa ||
             //   !vesselEditDetails.nrt
             // }
-            onClick={(e) => goToSecond()}
+            onClick={(e) => goToThird()}
             className="btn btn-lg btn-primary"
           >
             Next
@@ -215,9 +211,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openModal: (data) => dispatch(editDataDetailsModal(data)),
-    setDataArrival: (data) => dispatch(editArrivalDetailsModal(data)),
-    setDataDeparture: (data) => dispatch(editDepartureDetailsModal(data)),
+    setDataVessel: (data) => dispatch(editVesselDetailsModal(data)),
   };
 };
 

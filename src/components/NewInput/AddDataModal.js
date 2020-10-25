@@ -71,6 +71,9 @@ const AddDataModal = React.memo((props) => {
       case 5: {
         return `${stepFormProps}. Departure Details`;
       }
+      case 6: {
+        return `${stepFormProps}. Booking Details`;
+      }
     }
   };
 

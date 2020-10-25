@@ -133,7 +133,7 @@ const BasicInfo = (props) => {
               className="form-control"
               name="callsign"
               value={basicInfoEditDetails.callsign}
-              type="number"
+              type="text"
               onChange={editBasicInfoHandler}
               style={{ width: "100%" }}
             />
@@ -191,8 +191,8 @@ const BasicInfo = (props) => {
           <div>
             <input
               className="form-control"
-              name="vehicle_type"
-              value={basicInfoEditDetails.vehicle_type}
+              name="vehicle_model"
+              value={basicInfoEditDetails.vehicle_model}
               type="text"
               onChange={editBasicInfoHandler}
               style={{ width: "100%" }}
@@ -294,7 +294,7 @@ const BasicInfo = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  editBasicInfo: state.vessels.editBasicInfo,
+  editDataDetails: state.multiform.editDataDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {

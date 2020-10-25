@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../UI/Modal/Modal";
 import CalendarUi from "../../UI/Calendar/CalendarUi";
-import SweetAlert from "react-bootstrap-sweetalert";
 import { format } from "date-fns";
 
 const SelectMonthModal = (props) => {
@@ -19,6 +18,11 @@ const SelectMonthModal = (props) => {
       setSelectedDate(selectedFormat);
     }
   };
+
+  const selectEvent = () => {
+    props.setDateDetails({ ...props.dateDetails, book_date: selectedDate });
+    props.close();
+  };
   return (
     <>
       <Modal
@@ -28,7 +32,7 @@ const SelectMonthModal = (props) => {
           </span>
         }
         show={props.show}
-        modalClosed={close}
+        // modalClosed={close}
       >
         <div
           style={{
@@ -57,7 +61,15 @@ const SelectMonthModal = (props) => {
             readOnly
             style={{ width: "100%" }}
           />
-          <button className="btn btn-md btn-primary">SELECT</button>
+          <button
+            onClick={() => selectEvent()}
+            className="btn btn-md btn-primary"
+          >
+            SELECT
+          </button>
+          <button onClick={() => close()} className="btn btn-md btn-danger">
+            Cancel
+          </button>
         </div>
       </Modal>
     </>
