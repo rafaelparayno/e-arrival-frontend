@@ -20,7 +20,7 @@ const MultiForm = React.memo((props) => {
   }, []);
 
   useEffect(() => {
-    props.isSuccess && props.onFetchData(props.userToken);
+    props.onFetchData(props.userToken);
   }, [props.isSuccess]);
 
   const closeSuccess = () => {
