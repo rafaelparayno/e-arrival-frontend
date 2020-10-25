@@ -33,6 +33,22 @@ const openModalEditDatas = (state, action) => {
   });
 };
 
+const SaveEditDetailsStart = (state, action) => {
+  return updateObject(state, { loadingSaving: true });
+};
+
+const SaveEditDetailsSuccess = (state, action) => {
+  return updateObject(state, {
+    loadingSaving: false,
+    editDataDetails: null,
+    isSuccess: true,
+  });
+};
+
+const SaveEditDetailsFail = (state, action) => {
+  return updateObject(state, { loadingSaving: false });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_DATAS_LIST:
@@ -44,6 +60,13 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.EDIT_DATA_DETAILS_MODAL:
       return openModalEditDatas(state, action);
+
+    case actionTypes.SAVE_BASIC_INFO:
+      return SaveEditDetailsStart(state, action);
+    case actionTypes.SAVE_BASIC_INFO_SUCCESS:
+      return SaveEditDetailsSuccess(state, action);
+    case actionTypes.SAVE_BASIC_INFO_FAIL:
+      return SaveEditDetailsFail(state, action);
 
     // case actionTypes.ALERT_MODALS_DATA_DETAILS:
     //   return closeSuccessAlert(state, action);

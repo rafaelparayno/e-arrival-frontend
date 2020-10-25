@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select, { createFilter } from "react-select";
-// import {
-
-//   editDepartureDetailsModal,
-//   editArrivalDetailsModal,
-// } from "../../../store/action/index";
+import { editCrewDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
 
 const NewVesselInfo = (props) => {
@@ -27,9 +23,9 @@ const NewVesselInfo = (props) => {
     setCrewEditDetails({ ...crewEditDetails, [name]: e });
   };
 
-  //   useEffect(() => {
-  //     props.editCrewDetails && setCrewEditDetails(props.editCrewDetails);
-  //   }, [props.editCrewDetails]);
+  useEffect(() => {
+    props.editCrewDetails && setCrewEditDetails(props.editCrewDetails);
+  }, [props.editCrewDetails]);
 
   const editCrewDetailsHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
@@ -39,6 +35,7 @@ const NewVesselInfo = (props) => {
   };
 
   const goToSecond = () => {
+    props.setCrewDetails(crewEditDetails);
     next();
   };
 
@@ -114,8 +111,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="dwt"
-                    value={crewEditDetails.dwt}
+                    name="no_fil_singin"
+                    value={crewEditDetails.no_fil_singin}
                     type="number"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -131,8 +128,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="no_for_singin"
+                    value={crewEditDetails.no_for_singin}
                     type="number"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -157,8 +154,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="names_fil_singin"
+                    value={crewEditDetails.names_fil_singin}
                     type="text"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -171,8 +168,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="names_for_singin"
+                    value={crewEditDetails.names_for_singin}
                     type="text"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -209,8 +206,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="dwt"
-                    value={crewEditDetails.dwt}
+                    name="no_fil_singoff"
+                    value={crewEditDetails.no_fil_singoff}
                     type="number"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -225,8 +222,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="no_for_signoff"
+                    value={crewEditDetails.no_for_signoff}
                     type="number"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -251,8 +248,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="names_fil_singoff"
+                    value={crewEditDetails.names_fil_singoff}
                     type="text"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -265,8 +262,8 @@ const NewVesselInfo = (props) => {
                 <div>
                   <input
                     className="form-control"
-                    name="nrt"
-                    value={crewEditDetails.nrt}
+                    name="names_for_singoff"
+                    value={crewEditDetails.names_for_singoff}
                     type="text"
                     onChange={editCrewDetailsHandler}
                     style={{ width: "100%" }}
@@ -302,11 +299,12 @@ const NewVesselInfo = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  editCrewDetails: state.vessels.editCrewDetails,
+  editCrewDetails: state.crew.editCrewDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setCrewDetails: (data) => dispatch(editCrewDetailsModal(data)),
     // setDataArrival: (data) => dispatch(editArrivalDetailsModal(data)),
     // setDataDeparture: (data) => dispatch(editDepartureDetailsModal(data)),
   };

@@ -5,6 +5,7 @@ import {
   saveEditDetailsArrival,
   saveEditDetailsBooking,
   saveEditDetailsDeparture,
+  saveEditBasicDetail,
 } from "../../../store/action/index";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -31,9 +32,9 @@ const BookingInfo = (props) => {
     setOpenSelectDateModal(false);
   };
 
-  //   const {
-  //     editVesselDetails: { vessel_name },
-  //   } = props;
+  const {
+    editVesselDetails: { vessel_name },
+  } = props;
 
   registerLocale(locales);
 
@@ -43,25 +44,25 @@ const BookingInfo = (props) => {
 
   const saveData = async () => {
     try {
-      const vessels = await props.onSaveVessel(props.userToken, {
-        ...props.editVesselDetails,
+      const basicDetail = await props.onSaveBasic(props.userToken, {
+        ...props.editDataDetails,
         shipping_agent_id: code,
       });
 
-      await Promise.all([
-        props.onSaveArrival(props.userToken, {
-          ...props.editArrivalDetails,
-          vessels_id: vessels.vessels_id,
-        }),
-        props.onSaveDeparture(props.userToken, {
-          ...props.editDepartureDetails,
-          vessels_id: vessels.vessels_id,
-        }),
-        props.onSaveBooking(props.userToken, {
-          ...bookingEditDetails,
-          vessels_id: vessels.vessels_id,
-        }),
-      ]);
+      // await Promise.all([
+      //   props.onSaveArrival(props.userToken, {
+      //     ...props.editArrivalDetails,
+      //     vessels_id: vessels.vessels_id,
+      //   }),
+      //   props.onSaveDeparture(props.userToken, {
+      //     ...props.editDepartureDetails,
+      //     vessels_id: vessels.vessels_id,
+      //   }),
+      //   props.onSaveBooking(props.userToken, {
+      //     ...bookingEditDetails,
+      //     vessels_id: vessels.vessels_id,
+      //   }),
+      // ]);
     } catch (err) {
       console.log(err.message);
     }
@@ -79,7 +80,7 @@ const BookingInfo = (props) => {
             <input
               className="form-control"
               readOnly
-              //   value={vessel_name}
+              value={vessel_name}
               type="text"
               style={{ width: "100%" }}
             />
@@ -146,6 +147,7 @@ const BookingInfo = (props) => {
 
 const mapStateToProps = (state) => ({
   userToken: state.auth.token,
+  editDataDetails: state.multiform.editDataDetails,
   editVesselDetails: state.vessels.editVesselDetails,
   editArrivalDetails: state.arrival.editArrivalDetails,
   editDepartureDetails: state.departure.editDepartureDetails,
@@ -153,6 +155,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onSaveBasic: (token, data) => dispatch(saveEditBasicDetail(token, data)),
     onSaveVessel: (token, data) => dispatch(saveEditDetailsVessel(token, data)),
     onSaveArrival: (token, data) =>
       dispatch(saveEditDetailsArrival(token, data)),
