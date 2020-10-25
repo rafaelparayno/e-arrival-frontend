@@ -42,7 +42,7 @@ export const fetchVessel = (access_token, code, query) => {
         };
 
     axios
-      .post("http://199.241.138.64/vessels/agent", { vessel_id: code }, options)
+      .post("/agent", { vessel_id: code }, options)
       .then((res) => {
         let fetchVessel = {};
         fetchVessel = res.data;
@@ -94,7 +94,7 @@ export const SaveVesselsDetailStart = () => {
 export const saveEditDetailsVessel = (access_token, Datas) => {
   return async (dispatch) => {
     dispatch(SaveVesselsDetailStart());
-    const url = "http://localhost:5000/vesselinfo";
+    const url = "/vesselinfo";
 
     try {
       const vessel = await axios.post(url, Datas, {
@@ -177,7 +177,7 @@ export const UpdateEditDetailsVessel = async (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateVesselsDetailStart());
 
-    const url = `http://199.241.138.64/patch/${Datas.vessel_id}`;
+    const url = `/patch/${Datas.vessel_id}`;
     try {
       const vessel = axios.patch(url, Datas, {
         headers: {
@@ -229,7 +229,7 @@ export const deleteEditDetailsVessel = (access_token, u_id) => {
   return (dispatch) => {
     dispatch(DeleteVesselsDetailStart());
 
-    const url = `http://199.241.138.64/vessels/${u_id}`;
+    const url = `/vessels/${u_id}`;
 
     axios
       .delete(url, {

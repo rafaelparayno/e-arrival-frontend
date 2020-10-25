@@ -87,7 +87,7 @@ export const saveEditDetailsCrew = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveCrewDetailSuccess());
 
-    const url = "http://localhost:5000/newcrew";
+    const url = "/newcrew";
 
     axios
       .post(url, Datas, {

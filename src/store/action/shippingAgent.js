@@ -42,7 +42,7 @@ export const fetchShippingAgent = (access_token, query) => {
         };
 
     axios
-      .get("http://199.241.138.64/agents", options)
+      .get("/agents", options)
       .then((res) => {
         let fetchShippingAgent = {};
         fetchShippingAgent = res.data;
@@ -88,7 +88,7 @@ export const saveEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(SaveShippingAgentsDetailSuccess());
 
-    const url = "http://199.241.138.64/agents";
+    const url = "/agents";
 
     axios
       .post(url, Datas, {
@@ -148,7 +148,7 @@ export const UpdateEditDetailsShippingAgent = (access_token, Datas) => {
   return (dispatch) => {
     dispatch(UpdateShippingAgentsDetailStart());
 
-    const url = `http://199.241.138.64/agents/${Datas.id}`;
+    const url = `/agents/${Datas.id}`;
 
     axios
       .patch(url, Datas, {
