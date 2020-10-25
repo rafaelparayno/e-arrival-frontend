@@ -260,15 +260,18 @@ const BasicInfo = (props) => {
             Exit
           </button>
           <button
-            // disabled={
-            //   !basicInfoEditDetails.vessel_name ||
-            //   !basicInfoEditDetails.vessel_flag ||
-            //   !basicInfoEditDetails.imotext ||
-            //   !basicInfoEditDetails.DWT ||
-            //   !basicInfoEditDetails.GRT ||
-            //   !basicInfoEditDetails.LOA ||
-            //   !basicInfoEditDetails.NRT
-            // }
+            disabled={
+              !basicInfoEditDetails.shipping_license_no ||
+              !basicInfoEditDetails.contact_person ||
+              !basicInfoEditDetails.quaratine_facility ||
+              !basicInfoEditDetails.quaratine_address ||
+              !basicInfoEditDetails.shipping_agency_name ||
+              !basicInfoEditDetails.quaratine_cno ||
+              !basicInfoEditDetails.shipping_agency_name ||
+              !basicInfoEditDetails.callsign ||
+              !basicInfoEditDetails.crew_service_boat ||
+              !basicInfoEditDetails.vehicle_type
+            }
             onClick={(e) => goToSecond()}
             className="btn btn-lg btn-primary"
           >

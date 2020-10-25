@@ -120,7 +120,13 @@ const BookingInfo = (props) => {
           <div className="input-group">
             <TimePicker
               onChange={timeArrivalHandler}
-              clockIcon={null}
+              disableClock={true}
+              hourPlaceholder={"hh"}
+              minutePlaceholder={"mm"}
+              maxDetail={"minute"}
+              minTime={"8:00:00"}
+              required={true}
+              maxTime={"16:00:00"}
               value={bookingEditDetails.time}
               style={{ width: "100%", fontSize: "1.5rem" }}
             />
