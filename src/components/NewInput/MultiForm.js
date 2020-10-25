@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { editDataDetailsModal } from "../../store/action/index";
+import {
+  editDataDetailsModal,
+  fetchBasicDetail,
+} from "../../store/action/index";
 import Table from "../UI/Table/Table";
 import AddDataModal from "./AddDataModal";
+import { format } from "date-fns";
 
 import classes from "./MultiForm.module.css";
 
 const MultiForm = React.memo((props) => {
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    props.onFetchData();
+  }, []);
 
   const columns = [
     {
@@ -31,7 +39,7 @@ const MultiForm = React.memo((props) => {
         },
         {
           Header: "NO. OF FOR SIGN IN.",
-          accessor: "no_for_signin",
+          accessor: "no_for_singin",
         },
         {
           Header: "NO. OF FOR SIGN OFF.",
@@ -43,11 +51,11 @@ const MultiForm = React.memo((props) => {
         },
         {
           Header: "Quarantine Facility.",
-          accessor: "quarantine_facility",
+          accessor: "quaratine_facility",
         },
         {
           Header: "CREW SERVICE VESSEL.",
-          accessor: "crew_service_vessel",
+          accessor: "crew_service_boat",
         },
         {
           Header: "DEPARTURE DATE.",
@@ -156,7 +164,7 @@ const MultiForm = React.memo((props) => {
             <Table
               className="table table-striped table-bordered table-hover"
               columns={columns}
-              data={data}
+              data={props.DataList}
               // selectedRows={props.selectedRows}
               // setSelectedRows={props.setSelectedRows}
             />
@@ -176,13 +184,40 @@ const MultiForm = React.memo((props) => {
 
 const mapStateToProps = (state) => ({
   // userToken: state.auth.token,
+  DataList: state.multiform.DataList.map((data) => ({
+    ...data,
+    vessel_name: data.vessel_infos[0] && data.vessel_infos[0].name,
+    date_arrival: data.arrivals[0] && data.arrivals[0].date,
+    time_arrival:
+      data.arrivals[0] &&
+      format(
+        new Date(`${data.arrivals[0].date} ${data.arrivals[0].time}`),
+        "h:mm a"
+      ),
+    no_fil_signin: data.new_crews[0] && data.new_crews[0].no_fil_singin,
+    no_for_singin: data.new_crews[0] && data.new_crews[0].no_for_singin,
+    no_fil_signoff: data.new_crews[0] && data.new_crews[0].no_fil_singoff,
+    no_for_signoff: data.new_crews[0] && data.new_crews[0].no_for_signoff,
+    dep_date: data.vessel_departures[0] && data.vessel_departures[0].date,
+    dep_time:
+      data.vessel_departures[0] &&
+      format(
+        new Date(
+          `${data.vessel_departures[0].date} ${data.vessel_departures[0].time}`
+        ),
+        "h:mm a"
+      ),
+    nextport: data.vessel_departures[0] && data.vessel_departures[0].portcall,
+  })),
   editDataDetails: state.multiform.editDataDetails,
+
   //   isSuccess: state.ship.isSuccess,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     openModal: (data) => dispatch(editDataDetailsModal(data)),
+    onFetchData: (token, data) => dispatch(fetchBasicDetail(token, data)),
   };
 };
 

@@ -64,3 +64,56 @@ export const saveEditBasicDetail = (access_token, Datas) => {
     }
   };
 };
+
+export const fetchBasicDetailSuccess = (BasicDetail) => {
+  return {
+    type: actionTypes.FETCH_DATAS_LIST_SUCCESS,
+    BasicDetail: BasicDetail,
+  };
+};
+
+export const fetchBasicDetailFail = (error) => {
+  return {
+    type: actionTypes.FETCH_DATAS_LIST_FAIL,
+    error: error,
+  };
+};
+
+export const fetchBasicDetailStart = () => {
+  return {
+    type: actionTypes.FETCH_DATAS_LIST,
+  };
+};
+
+export const fetchBasicDetail = (access_token, query) => {
+  return (dispatch) => {
+    dispatch(fetchBasicDetailStart());
+
+    let options = query
+      ? {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+          params: {
+            q: query,
+          },
+        }
+      : {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        };
+
+    axios
+      .get("http://localhost:5000/basicinfo", options)
+      .then((res) => {
+        let fetchDataList = [];
+        fetchDataList = res.data;
+        dispatch(fetchBasicDetailSuccess(fetchDataList));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchBasicDetailFail(err));
+      });
+  };
+};

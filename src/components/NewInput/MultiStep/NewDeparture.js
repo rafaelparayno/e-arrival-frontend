@@ -74,7 +74,7 @@ const Departure = (props) => {
           </div>
         </div>
         <div className="col-lg-7">
-          <label className="font-size">Port of call</label>
+          <label className="font-size">Next Port of call</label>
 
           <div>
             <input

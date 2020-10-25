@@ -55,4 +55,8 @@ export {
   fetchBooking,
 } from "./booking";
 
-export { editDataDetailsModal, saveEditBasicDetail } from "./multiform";
+export {
+  editDataDetailsModal,
+  saveEditBasicDetail,
+  fetchBasicDetail,
+} from "./multiform";

@@ -17,7 +17,7 @@ const fetchDataListStart = (state, action) => {
 
 const fetchDataListSuccess = (state, action) => {
   return updateObject(state, {
-    DataList: action.Data,
+    DataList: action.BasicDetail,
     loadingDatas: false,
   });
 };
