@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import NavTabs from "../UI/NavTabs/Navtabs";
-import { connect } from "react-redux";
-// import VesselDetails from "./ShippingAgentTabs/VesselsDetails/VesselsDetails";
+
+import BasicInfoTab from "./NewTabs/BasicInfoTab";
+import VesselInfoTab from "./NewTabs/VesselInfoTab";
+import ArrivalDetailsTab from "./NewTabs/ArrivalDetailsTab";
+import CrewDetailsTab from "./NewTabs/CrewDetailsTab";
+import DepartureDetailsTab from "./NewTabs/DepartureDetailsTab";
+import BookingDetailTab from "./NewTabs/BookingDetailTab";
+// // import VesselDetails from "./ShippingAgentTabs/VesselsDetails/VesselsDetails";
 // import Crews from "./ShippingAgentTabs/CrewDetails/Crews";
-// import AgentAgenda from "./ShippingAgentTabs/AgendaDetails/AgentAgenda";
+// // import AgentAgenda from "./ShippingAgentTabs/AgendaDetails/AgentAgenda";
+
 import classes from "./ShippingAgentOption.module.css";
 
 const ShippingAgentOptions = React.memo((props) => {
@@ -29,33 +36,34 @@ const ShippingAgentOptions = React.memo((props) => {
                 }
                 className="tab-pane"
               >
-                {/* <VesselDetails code={props.code} /> &nbsp; <Crews /> */}
+                <BasicInfoTab />
+                {/* Basic Information */}
               </div>
 
               <div
                 label={<> Vessel Information &nbsp; </>}
                 className="tab-pane"
               >
-                {/* <AgentAgenda code={props.code} /> */}
+                <VesselInfoTab />
               </div>
 
               <div label={<> Arrival Details &nbsp; </>} className="tab-pane">
-                {/* <AgentAgenda code={props.code} /> */}
+                <ArrivalDetailsTab />
               </div>
 
               <div label={<> Crew Information &nbsp; </>} className="tab-pane">
-                {/* <AgentAgenda code={props.code} /> */}
+                <CrewDetailsTab />
               </div>
 
               <div label={<> Departure Details &nbsp; </>} className="tab-pane">
-                {/* <AgentAgenda code={props.code} /> */}
+                <DepartureDetailsTab />
               </div>
 
               <div
                 label={<> Booking Information &nbsp; </>}
                 className="tab-pane"
               >
-                {/* <AgentAgenda code={props.code} /> */}
+                <BookingDetailTab />
               </div>
             </NavTabs>
           </div>

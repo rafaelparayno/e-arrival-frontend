@@ -50,33 +50,6 @@ const Crews = React.memo((props) => {
         <header>
           <h3 style={{ marginLeft: "5px" }}>Crew Mates</h3>
         </header>
-        <div className={classes.searchBar}>
-          <div className={classes.Input}>
-            <label className={classes.Label}>Search:</label>
-            <input
-              placeholder="Type here...."
-              className={classes.InputElement}
-              name="searchKey"
-              // value={searchHeader.searchKey}
-              // onChange={editSearchHeaderHandler}
-              style={{ width: "100%" }}
-              type="text"
-            />
-          </div>
-          <button
-            // onClick={(e) => searchQuery(e)}
-            className={classes.btn}
-          >
-            <i className="fa fa-search"></i>
-          </button>
-          <button
-            disabled={!props.selectedVessel}
-            onClick={() => props.openModal({})}
-            className={classes.btnAdd}
-          >
-            <i className="fa fa-plus"></i>&nbsp; Add Crewmate
-          </button>
-        </div>
         <div
           style={{
             margin: "10px 5px",
@@ -85,29 +58,16 @@ const Crews = React.memo((props) => {
             height: "20vh",
           }}
           className="row"
-        >
-          {props.loadingCrews ? (
-            <Spinner />
-          ) : (
-            currentRows.map((crew) => <Crew key={crew.id} details={crew} />)
-          )}
-        </div>
-        <div style={{ zIndex: 0, background: "#f0f0f0" }}>
-          <Pagination
-            rowsPerPage={rowsPerPage}
-            total={props.CrewList.length}
-            paginate={paginate}
-          />
-        </div>
+        ></div>
       </div>
 
-      {props.editCrewDetails && (
+      {/* {props.editCrewDetails && (
         <CrewModal
           vesselsid={props.selectedVessel.vessels_id}
           show={props.editCrewDetails ? true : false}
           close={closeModal}
         />
-      )}
+      )} */}
 
       <SweetAlert
         success
