@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { editDepartureDetailsModal } from "../../../store/action/index";
+import axios from "axios";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -14,6 +14,27 @@ const DepartureDetailsTab = (props) => {
     eo: eo,
     // ...
   };
+  const { code } = props;
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/departure/basic/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
+
+      result.data &&
+        setDepartureEditDetails({
+          ...result.data,
+          date: result.data.date && new Date(result.data.date),
+        });
+    };
+
+    fetchData();
+  }, []);
   //   useEffect(() => {
   //     props.editDepartureDetails &&
   //       setDepartureEditDetails(props.editDepartureDetails);

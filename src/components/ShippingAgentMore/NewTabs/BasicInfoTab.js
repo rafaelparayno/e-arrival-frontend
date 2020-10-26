@@ -4,15 +4,33 @@ import React, { useState, useEffect } from "react";
 //   editDepartureDetailsModal,
 //   editArrivalDetailsModal,
 // } from "../../../store/action/index";
+import axios from "axios";
 import { connect } from "react-redux";
 import SweetAlert from "react-bootstrap-sweetalert";
 
 const BasicInfoTab = (props) => {
   const [basicInfoEditDetails, setBasicInfoEditDetails] = useState({});
-
+  const { code } = props;
   //   useEffect(() => {
   //     props.editDataDetails && setBasicInfoEditDetails(props.editDataDetails);
   //   }, [props.editDataDetails]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/basicinfo/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
+
+      result.data && setBasicInfoEditDetails(result.data);
+    };
+
+    fetchData();
+  }, []);
 
   const editBasicInfoHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
@@ -270,6 +288,7 @@ const BasicInfoTab = (props) => {
 
 const mapStateToProps = (state) => ({
   //   editDataDetails: state.multiform.editDataDetails,
+  userToken: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch) => {

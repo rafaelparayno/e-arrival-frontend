@@ -36,7 +36,7 @@ const ShippingAgentOptions = React.memo((props) => {
                 }
                 className="tab-pane"
               >
-                <BasicInfoTab />
+                <BasicInfoTab code={props.code} />
                 {/* Basic Information */}
               </div>
 
@@ -44,26 +44,26 @@ const ShippingAgentOptions = React.memo((props) => {
                 label={<> Vessel Information &nbsp; </>}
                 className="tab-pane"
               >
-                <VesselInfoTab />
+                <VesselInfoTab code={props.code} />
               </div>
 
               <div label={<> Arrival Details &nbsp; </>} className="tab-pane">
-                <ArrivalDetailsTab />
+                <ArrivalDetailsTab code={props.code} />
               </div>
 
               <div label={<> Crew Information &nbsp; </>} className="tab-pane">
-                <CrewDetailsTab />
+                <CrewDetailsTab code={props.code} />
               </div>
 
               <div label={<> Departure Details &nbsp; </>} className="tab-pane">
-                <DepartureDetailsTab />
+                <DepartureDetailsTab code={props.code} />
               </div>
 
               <div
                 label={<> Booking Information &nbsp; </>}
                 className="tab-pane"
               >
-                <BookingDetailTab />
+                <BookingDetailTab code={props.code} />
               </div>
             </NavTabs>
           </div>

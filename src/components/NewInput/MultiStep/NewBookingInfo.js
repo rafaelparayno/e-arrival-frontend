@@ -8,12 +8,10 @@ import {
   saveEditBasicDetail,
   saveEditDetailsCrew,
 } from "../../../store/action/index";
-import { eo, es, enUS } from "date-fns/locale";
-import DatePicker, { registerLocale } from "react-datepicker";
+import SelectMonthModal from "./SelectMonthModal";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import SaveButton from "../../UI/SaveButton/SaveButton";
-import SelectMonthModal from "./SelectMonthModal";
 import "./ArrivalInfo.css";
 
 const BookingInfo = (props) => {
@@ -22,13 +20,6 @@ const BookingInfo = (props) => {
 
   const { prev, code } = props;
 
-  const locales = {
-    "en-US": enUS,
-    es: es,
-    eo: eo,
-    // ...
-  };
-
   const close = () => {
     setOpenSelectDateModal(false);
   };
@@ -36,8 +27,6 @@ const BookingInfo = (props) => {
   const {
     editVesselDetails: { vessel_name },
   } = props;
-
-  registerLocale(locales);
 
   const timeArrivalHandler = (time) => {
     setBookingEditDetails({ ...bookingEditDetails, ["time"]: time });

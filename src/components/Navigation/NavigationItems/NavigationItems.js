@@ -29,7 +29,7 @@ const navigationItems = (props) => {
 
           <NavigationItems link="/data">
             <i className="fa fa-lg fa-fw fa-table"></i>{" "}
-            <span className="menu-item-parent">Add</span>
+            <span className="menu-item-parent">Data</span>
           </NavigationItems>
         </>
       )}

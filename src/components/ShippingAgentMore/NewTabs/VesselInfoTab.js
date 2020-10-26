@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 // import { editVesselDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
 
 const VesselInfoTab = (props) => {
   const [vesselEditDetails, setVesselEditDetails] = useState({});
-
+  const { code } = props;
   //   const { next, prev } = props;
 
   //   useEffect(() => {
   //     props.editVesselDetails && setVesselEditDetails(props.editVesselDetails);
   //   }, [props.editVesselDetails]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/vesselinfo/basic/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
+
+      result.data &&
+        setVesselEditDetails({ ...result.data, vessel_name: result.data.name });
+    };
+
+    fetchData();
+  }, []);
 
   const editVesselDetailsHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
@@ -207,7 +225,7 @@ const VesselInfoTab = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ userToken: state.auth.token });
 
 const mapDispatchToProps = (dispatch) => {
   return {};

@@ -2,9 +2,28 @@ import React, { useState, useEffect } from "react";
 import Select, { createFilter } from "react-select";
 import { editCrewDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const CrewDetailsTab = (props) => {
   const [crewEditDetails, setCrewEditDetails] = useState({});
+  const { code } = props;
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/newcrew/basic/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
+
+      result.data &&
+        setCrewEditDetails({ ...result.data, vessel_name: result.data.name });
+    };
+
+    fetchData();
+  }, []);
 
   const yesAndNoForm = [
     {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { editArrivalDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
+import axios from "axios";
 import { eo, es, enUS } from "date-fns/locale";
 import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -15,6 +16,32 @@ const ArrivalDetailsTab = (props) => {
     eo: eo,
     // ...
   };
+  const { code } = props;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/arrivals/basic/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
+
+      result.data &&
+        setArrivalEditDetails({
+          ...result.data,
+          date: result.data.date && new Date(result.data.date),
+          purpose_call: {
+            label: result.data.purpose,
+            value: result.data.purpose,
+          },
+        });
+    };
+
+    fetchData();
+  }, []);
 
   const purposeCallData = [
     {

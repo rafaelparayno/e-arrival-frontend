@@ -1,24 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
-import { eo, es, enUS } from "date-fns/locale";
-import DatePicker, { registerLocale } from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import SaveButton from "../../UI/SaveButton/SaveButton";
+import SelectMonthModal from "../../NewInput/MultiStep/SelectMonthModal";
 
 const BookingDetailTab = (props) => {
   const [bookingEditDetails, setBookingEditDetails] = useState({});
   const [openSelectDateModal, setOpenSelectDateModal] = useState(false);
-
-  const locales = {
-    "en-US": enUS,
-    es: es,
-    eo: eo,
-    // ...
+  const { code } = props;
+  const close = () => {
+    setOpenSelectDateModal(false);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://199.241.138.64/bookings/basic/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.userToken}`,
+          },
+        }
+      );
 
-  registerLocale(locales);
+      result.data &&
+        setBookingEditDetails({
+          ...result.data,
+          book_date: result.data.date,
+          vesselname: result.data.basic_info.vessel_infos[0].name,
+        });
+    };
+
+    fetchData();
+  }, []);
 
   const timeArrivalHandler = (time) => {
     setBookingEditDetails({ ...bookingEditDetails, ["time"]: time });
@@ -42,7 +58,7 @@ const BookingDetailTab = (props) => {
               <input
                 className="form-control"
                 readOnly
-                //  value={vessel_name}
+                value={bookingEditDetails.vesselname}
                 type="text"
                 style={{ width: "100%" }}
               />
@@ -103,14 +119,14 @@ const BookingDetailTab = (props) => {
           </div>
         </div>
       </div>
-      {/* {openSelectDateModal && (
+      {openSelectDateModal && (
         <SelectMonthModal
           dateDetails={bookingEditDetails}
           setDateDetails={setBookingEditDetails}
           show={openSelectDateModal}
           close={close}
         />
-      )} */}
+      )}
     </>
   );
 };
