@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { editVesselDetailsModal } from "../../../store/action/index";
 import { connect } from "react-redux";
+import DatePicker from "react-datepicker";
 
 const NewVesselInfo = (props) => {
   const [vesselEditDetails, setVesselEditDetails] = useState({});
@@ -18,6 +19,10 @@ const NewVesselInfo = (props) => {
     setVesselEditDetails({ ...vesselEditDetails, [name]: value });
   };
 
+  const dateHandler = (date, name) => {
+    setVesselEditDetails({ ...vesselEditDetails, [name]: date });
+  };
+
   const goToThird = () => {
     props.setDataVessel(vesselEditDetails);
     next();
@@ -28,7 +33,10 @@ const NewVesselInfo = (props) => {
       {" "}
       <div className="row">
         <div className="col-lg-4">
-          <label className="font-size">Vessel Name</label>
+          <label className="font-size ">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Vessel
+            Name
+          </label>
 
           <div>
             <input
@@ -42,7 +50,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Registry Flag </label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Registry
+            Flag{" "}
+          </label>
 
           <div>
             <input
@@ -56,7 +67,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Voyage Number</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Voyage
+            Number
+          </label>
 
           <div>
             <input
@@ -72,7 +86,10 @@ const NewVesselInfo = (props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-3">
-          <label className="font-size"> Gross Registered Tonnage (GRT)</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Gross
+            Registered Tonnage (GRT)
+          </label>
 
           <div>
             <input
@@ -86,7 +103,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Deadweight Tonnage (DWT)</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span>{" "}
+            Deadweight Tonnage (DWT)
+          </label>
 
           <div>
             <input
@@ -100,7 +120,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Net Registred Tonnage (NRT)</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Net
+            Registred Tonnage (NRT)
+          </label>
 
           <div>
             <input
@@ -114,7 +137,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Length Overall (LOA)</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Length
+            Overall (LOA)
+          </label>
 
           <div>
             <input
@@ -130,7 +156,9 @@ const NewVesselInfo = (props) => {
       </div>
       <div style={{ marginTop: "10px", marginBottom: "10px" }} className="row">
         <div className="col-lg-4">
-          <label className="font-size">Breadth</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Breadth
+          </label>
 
           <div>
             <input
@@ -144,7 +172,10 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Name of Last Port</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Name of
+            Last Port
+          </label>
 
           <div>
             <input
@@ -158,6 +189,21 @@ const NewVesselInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Date of
+            Departure from Last Port:
+          </label>
+          <div className="input-group">
+            <DatePicker
+              dateFormat="dd/MM/yyyy"
+              selected={vesselEditDetails.departure_last_port}
+              onChange={(date) => dateHandler(date, "departure_last_port")}
+              style={{ width: "400px" }}
+              className="form-control"
+            />
+          </div>
+        </div>
+        {/* <div className="col-lg-4">
           <label className="font-size">Date of Departure from Last Port:</label>
 
           <div>
@@ -170,7 +216,7 @@ const NewVesselInfo = (props) => {
               style={{ width: "100%" }}
             />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="row">
         <div

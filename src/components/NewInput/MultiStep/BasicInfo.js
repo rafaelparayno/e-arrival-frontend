@@ -3,8 +3,12 @@ import {
   editDataDetailsModal,
   editDepartureDetailsModal,
   editArrivalDetailsModal,
+  editCrewDetailsModal,
+  editVesselDetailsModal,
+  editBookingDetailsModal,
 } from "../../../store/action/index";
 import { connect } from "react-redux";
+
 import SweetAlert from "react-bootstrap-sweetalert";
 
 const BasicInfo = (props) => {
@@ -32,6 +36,9 @@ const BasicInfo = (props) => {
     props.openModal(null);
     props.setDataDeparture(null);
     props.setDataArrival(null);
+    props.setDataCrew(null);
+    props.setDataBooking(null);
+    props.setDataVessel(null);
     setEditExitModal(false);
   };
 
@@ -39,8 +46,28 @@ const BasicInfo = (props) => {
     <>
       {" "}
       <div className="row">
-        <div className="col-lg-4">
-          <label className="font-size">Shipping License No</label>
+        <div className="col-lg-3">
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Email
+            Add
+          </label>
+
+          <div>
+            <input
+              className="form-control"
+              name="e_add"
+              value={basicInfoEditDetails.e_add}
+              type="text"
+              onChange={editBasicInfoHandler}
+              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+        <div className="col-lg-3">
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Shipping
+            License No
+          </label>
 
           <div>
             <input
@@ -53,8 +80,11 @@ const BasicInfo = (props) => {
             />
           </div>
         </div>
-        <div className="col-lg-4">
-          <label className="font-size">Contact Person</label>
+        <div className="col-lg-3">
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Contact
+            Person
+          </label>
 
           <div>
             <input
@@ -67,8 +97,11 @@ const BasicInfo = (props) => {
             />
           </div>
         </div>
-        <div className="col-lg-4">
-          <label className="font-size">Contact Number</label>
+        <div className="col-lg-3">
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Contact
+            Number
+          </label>
 
           <div>
             <input
@@ -84,7 +117,10 @@ const BasicInfo = (props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-3">
-          <label className="font-size">Quarantine Facility</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span>
+            Quarantine Facility
+          </label>
 
           <div>
             <input
@@ -98,7 +134,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Quarantine Address</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span>
+            Quarantine Facility Address
+          </label>
 
           <div>
             <input
@@ -112,7 +151,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Quarantine Contact Number</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span>{" "}
+            Quarantine Facility Contact Number
+          </label>
 
           <div>
             <input
@@ -126,7 +168,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-3">
-          <label className="font-size">Call Sign</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Call
+            Sign
+          </label>
 
           <div>
             <input
@@ -142,7 +187,11 @@ const BasicInfo = (props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-6">
-          <label className="font-size">Shipping Agency Name</label>
+          <label className="font-size">
+            {" "}
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Shipping
+            Agency Name
+          </label>
 
           <div>
             <input
@@ -156,7 +205,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-6">
-          <label className="font-size">Crew Service Boat</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Crew
+            Service Boat
+          </label>
 
           <div>
             <input
@@ -172,7 +224,10 @@ const BasicInfo = (props) => {
       </div>
       <div style={{ marginTop: "20px" }} className="row">
         <div className="col-lg-4">
-          <label className="font-size">Vehicle Type</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Vehicle
+            Type
+          </label>
 
           <div>
             <input
@@ -186,7 +241,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Vehicle Model</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Vehicle
+            Model
+          </label>
 
           <div>
             <input
@@ -200,7 +258,10 @@ const BasicInfo = (props) => {
           </div>
         </div>
         <div className="col-lg-4">
-          <label className="font-size">Vehicle Plate No</label>
+          <label className="font-size">
+            <span style={{ color: "red", fontSize: "1.25em" }}>*</span> Vehicle
+            Plate No
+          </label>
 
           <div>
             <input
@@ -305,6 +366,9 @@ const mapDispatchToProps = (dispatch) => {
     openModal: (data) => dispatch(editDataDetailsModal(data)),
     setDataArrival: (data) => dispatch(editArrivalDetailsModal(data)),
     setDataDeparture: (data) => dispatch(editDepartureDetailsModal(data)),
+    setDataCrew: (data) => dispatch(editCrewDetailsModal(data)),
+    setDataVessel: (data) => dispatch(editVesselDetailsModal(data)),
+    setDataBooking: (data) => dispatch(editBookingDetailsModal(data)),
   };
 };
 

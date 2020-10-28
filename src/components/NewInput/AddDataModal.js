@@ -92,6 +92,11 @@ const AddDataModal = React.memo((props) => {
           <h3>{headerNumberDetail(stepForm)}</h3>
         </div>
         <div style={{ padding: "5px 15px" }} className="row">
+          <h3>
+            Required <span style={{ color: "red" }}>*</span>
+          </h3>
+        </div>
+        <div style={{ padding: "5px 15px" }} className="row">
           {multistepform(stepForm)}
         </div>
       </Modal>

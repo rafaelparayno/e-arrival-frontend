@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { editDepartureDetailsModal } from "../../../store/action/index";
-import { eo, es, enUS } from "date-fns/locale";
-import DatePicker, { registerLocale } from "react-datepicker";
+
+import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./ArrivalInfo.css";
@@ -10,19 +10,11 @@ import "./ArrivalInfo.css";
 const Departure = (props) => {
   const [departureEditDetails, setDepartureEditDetails] = useState({});
   const { next, prev } = props;
-  const locales = {
-    "en-US": enUS,
-    es: es,
-    eo: eo,
-    // ...
-  };
 
   useEffect(() => {
     props.editDepartureDetails &&
       setDepartureEditDetails(props.editDepartureDetails);
   }, [props.editDepartureDetails]);
-
-  registerLocale(locales);
 
   const departureEditDetailsHandler = (e) => {
     const name = e.target.name ? e.target.name : e.target.props.name;
@@ -55,7 +47,6 @@ const Departure = (props) => {
               dateFormat="dd/MM/yyyy"
               selected={departureEditDetails.date}
               onChange={(date) => dateArrivalHandler(date, "date")}
-              locale={es}
               style={{ width: "400px" }}
               className="form-control"
             />

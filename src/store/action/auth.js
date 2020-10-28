@@ -57,7 +57,7 @@ export const auth = (username, password) => {
     axios
       .post(url, authData)
       .then((response) => {
-        const expiry = 7200;
+        const expiry = 3600;
         //1800
         const expirationDate = new Date(new Date().getTime() + expiry * 1000);
         localStorage.setItem("accessToken", response.data.accessToken);

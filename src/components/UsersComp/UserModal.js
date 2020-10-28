@@ -12,7 +12,7 @@ import classes from "./UserModal.module.css";
 
 const UserModal = React.memo((props) => {
   const [userDetailEdit, setUserDetailEdit] = useState({});
-  const { close, code } = props;
+  const { close } = props;
 
   useEffect(() => {
     props.editUserDetails && setUserDetailEdit(props.editUserDetails);
