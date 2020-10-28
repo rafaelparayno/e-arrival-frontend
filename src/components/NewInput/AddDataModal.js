@@ -6,6 +6,7 @@ import NewArrivalInfo from "./MultiStep/NewArrivalInfo";
 import NewCrewInfo from "./MultiStep/NewCrewInfo";
 import NewDeparture from "./MultiStep/NewDeparture";
 import NewBookingInfo from "./MultiStep/NewBookingInfo";
+import NewCrewNameDetails from "./MultiStep/NewCrewNameDetails";
 import Modal from "../UI/Modal/Modal";
 
 const AddDataModal = React.memo((props) => {
@@ -45,9 +46,14 @@ const AddDataModal = React.memo((props) => {
         return <NewCrewInfo code={props.code} next={next} prev={previous} />;
       }
       case 5: {
-        return <NewDeparture code={props.code} next={next} prev={previous} />;
+        return (
+          <NewCrewNameDetails code={props.code} next={next} prev={previous} />
+        );
       }
       case 6: {
+        return <NewDeparture code={props.code} next={next} prev={previous} />;
+      }
+      case 7: {
         return <NewBookingInfo code={props.code} next={next} prev={previous} />;
       }
     }
@@ -89,7 +95,7 @@ const AddDataModal = React.memo((props) => {
         modalClosed={close}
       >
         <div style={{ padding: "5px 15px" }} className="row">
-          <h3>{headerNumberDetail(stepForm)}</h3>
+          {stepForm !== 5 && <h3>{headerNumberDetail(stepForm)}</h3>}
         </div>
         <div style={{ padding: "5px 15px" }} className="row">
           <h3>

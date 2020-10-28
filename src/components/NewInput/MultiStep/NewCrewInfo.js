@@ -163,46 +163,6 @@ const NewVesselInfo = (props) => {
             </>
           )}
       </div>
-      {crewEditDetails.crews_signingin &&
-        crewEditDetails.crews_signingin.value === "YES" && (
-          <>
-            <div
-              style={{ marginBottom: "10px", marginTop: "10px" }}
-              className="row"
-            >
-              <div className="col-lg-6">
-                <label className="font-size">
-                  Names of Filipino Signing In
-                </label>
-
-                <div>
-                  <input
-                    className="form-control"
-                    name="names_fil_singin"
-                    value={crewEditDetails.names_fil_singin}
-                    type="text"
-                    onChange={editCrewDetailsHandler}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <label className="font-size">Names of Foreign Signin In</label>
-
-                <div>
-                  <input
-                    className="form-control"
-                    name="names_for_singin"
-                    value={crewEditDetails.names_for_singin}
-                    type="text"
-                    onChange={editCrewDetailsHandler}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
 
       <div style={{ marginBottom: "10px", marginTop: "10px" }} className="row">
         <div className="col-lg-6">
@@ -257,46 +217,6 @@ const NewVesselInfo = (props) => {
             </>
           )}
       </div>
-      {crewEditDetails.crews_signingoff &&
-        crewEditDetails.crews_signingoff.value === "YES" && (
-          <>
-            <div
-              style={{ marginBottom: "10px", marginTop: "10px" }}
-              className="row"
-            >
-              <div className="col-lg-6">
-                <label className="font-size">
-                  Names of Filipino Signing off
-                </label>
-
-                <div>
-                  <input
-                    className="form-control"
-                    name="names_fil_singoff"
-                    value={crewEditDetails.names_fil_singoff}
-                    type="text"
-                    onChange={editCrewDetailsHandler}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <label className="font-size">Names of Foreign Signin off</label>
-
-                <div>
-                  <input
-                    className="form-control"
-                    name="names_for_singoff"
-                    value={crewEditDetails.names_for_singoff}
-                    type="text"
-                    onChange={editCrewDetailsHandler}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
 
       <div className="row">
         <div
